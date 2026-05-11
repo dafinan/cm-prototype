@@ -1,0 +1,5 @@
+# Covet & Mane prototype — stakeholder review only.
+# Block all crawlers from indexing this prototype.
+
+User-agent: *
+Disallow: /
