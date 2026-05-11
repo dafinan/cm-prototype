@@ -2,10 +2,10 @@
    COVET & MANE — SHARED NAV + FOOTER INJECTION
    Injects the promo bar, primary nav, mobile drawer, and footer into every
    page. To set the active nav link, give <body> a data-page attribute:
-     <body data-page="home">     /* index.html              */
-     <body data-page="academy">  /* academy.html            */
-     <body data-page="consumer"> /* find-a-stylist.html     */
-     <body data-page="portal">   /* portal.html             */
+          - index.html         uses  data-page="home"
+               - academy.html       uses  data-page="academy"
+                    - find-a-stylist.html uses  data-page="coveted"
+                         - portal.html        uses  data-page="portal"
    Active state is computed from data-page. Edit copy in this file once and
    it propagates to all four pages.
    ========================================================================= */
