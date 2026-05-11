@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Design System — Covet &amp; Mane Prototype</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,300;1,400;1,500&family=Nunito+Sans:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+
+  <style>
+    /* Design-system page only — visual scaffolding for the showcase */
+
+    .ds-header {
+      padding: var(--space-16) var(--container-pad) var(--space-12);
+      max-width: var(--container-wide);
+      margin: 0 auto;
+      border-bottom: var(--border-thin);
+    }
+
+    .ds-header__eyebrow {
+      font-family: var(--font-sans);
+      font-size: var(--fs-micro);
+      font-weight: var(--fw-semibold);
+      letter-spacing: var(--ls-widest);
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: var(--space-3);
+    }
+
+    .ds-header__title {
+      font-family: var(--font-serif);
+      font-size: var(--fs-display);
+      font-weight: var(--fw-light);
+      font-style: italic;
+      color: var(--color-text);
+      margin-bottom: var(--space-4);
+    }
+
+    .ds-header__sub {
+      font-size: var(--fs-body-lg);
+      color: var(--color-text-muted);
+      max-width: 60ch;
+    }
+
+    .ds-section {
+      max-width: var(--container-wide);
+      margin: 0 auto;
+      padding: var(--space-16) var(--container-pad);
+      border-bottom: var(--border-thin);
+    }
+
+    .ds-section__heading {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-4);
+      margin-bottom: var(--space-10);
+    }
+
+    .ds-section__heading h2 {
+      font-family: var(--font-serif);
+      font-size: 36px;
+      font-weight: var(--fw-light);
+    }
+
+    .ds-section__heading .ds-section__num {
+      font-family: var(--font-sans);
+      font-size: var(--fs-micro);
+      font-weight: var(--fw-semibold);
+      letter-spacing: var(--ls-widest);
+      text-transform: uppercase;
+      color: var(--color-accent);
+    }
+
+    .ds-grid {
+      display: grid;
+      gap: var(--space-4);
+    }
+
+    /* Color swatches */
+    .ds-swatch-grid {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+
+    .ds-swatch {
+      border: var(--border-thin);
+      background: var(--color-surface);
+    }
+
+    .ds-swatch__chip {
+      height: 120px;
+      border-bottom: var(--border-thin);
+    }
+
+    .ds-swatch__body {
+      padding: var(--space-4);
+    }
+
+    .ds-swatch__name {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: var(--fw-regular);
+      margin-bottom: 2px;
+    }
+
+    .ds-swatch__var {
+      font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+      font-size: 11px;
+      color: var(--color-text-muted);
+      display: block;
+      line-height: 1.5;
+    }
+
+    .ds-swatch__hex {
+      font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+      font-size: 11px;
+      color: var(--color-text);
+      display: block;
+      font-weight: var(--fw-bold);
+      margin-top: 4px;
+    }
+
+    .ds-swatch__role {
+      font-family: var(--font-sans);
+      font-size: var(--fs-tiny);
+      font-weight: var(--fw-semibold);
+      letter-spacing: var(--ls-wide);
+      text-transform: uppercase;
+      color: var(--color-text-subtle);
+      margin-top: var(--space-2);
+      padding-top: var(--space-2);
+      border-top: 1px dashed var(--color-border);
+    }
+
+    /* Type samples */
+    .ds-type-row {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      align-items: baseline;
+      gap: var(--space-8);
+      padding-block: var(--space-5);
+      border-bottom: var(--border-thin);
+    }
+
+    .ds-type-row:last-child { border-bottom: none; }
+
+    .ds-type-row__meta {
+      font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+      font-size: 11px;
+      color: var(--color-text-muted);
+      line-height: 1.7;
+    }
+
+    .ds-type-row__meta strong {
+      display: block;
+      font-family: var(--font-sans);
+      font-weight: var(--fw-semibold);
+      color: var(--color-text);
+      font-size: var(--fs-micro);
+      letter-spacing: var(--ls-wide);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    /* Spacing scale */
+    .ds-space-row {
+      display: grid;
+      grid-template-columns: 100px 1fr 100px;
+      align-items: center;
+      gap: var(--space-4);
+      padding-block: var(--space-3);
+      border-bottom: var(--border-thin);
+    }
+
+    .ds-space-bar {
+      background: var(--color-accent);
+      height: 12px;
+    }
+
+    .ds-space-row code {
+      font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+      font-size: 12px;
+      color: var(--color-text-muted);
+    }
+
+    /* Component demo block */
+    .ds-demo {
+      background: var(--color-surface-soft);
+      padding: var(--space-10);
+      border: var(--border-thin);
+    }
+
+    .ds-demo--dark {
+      background: var(--color-surface-dark);
+      color: var(--color-text-inverse);
+    }
+
+    .ds-demo__row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+      align-items: center;
+      margin-bottom: var(--space-6);
+    }
+
+    .ds-demo__row:last-child { margin-bottom: 0; }
+
+    .ds-demo__label {
+      font-family: var(--font-sans);
+      font-size: var(--fs-tiny);
+      font-weight: var(--fw-semibold);
+      letter-spacing: var(--ls-widest);
+      text-transform: uppercase;
+      color: var(--color-text-subtle);
+      width: 100%;
+      margin-bottom: var(--space-2);
+    }
+
+    .ds-input {
+      width: 100%;
+      max-width: 360px;
+      padding: 12px 14px;
+      font-family: var(--font-sans);
+      font-size: var(--fs-body);
+      color: var(--color-text);
+      background: var(--color-surface);
+      border: var(--border-thin);
+      border-radius: var(--radius-sm);
+      transition: border-color var(--dur-fast) var(--ease-out);
+    }
+
+    .ds-input:focus {
+      border-color: var(--color-accent);
+      outline: none;
+    }
+
+    .ds-shadow-grid {
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: var(--space-6);
+    }
+
+    .ds-shadow-cell {
+      background: var(--color-surface);
+      padding: var(--space-8);
+      text-align: center;
+    }
+
+    .ds-shadow-cell--soft   { box-shadow: var(--shadow-soft); }
+    .ds-shadow-cell--card   { box-shadow: var(--shadow-card); }
+    .ds-shadow-cell--lifted { box-shadow: var(--shadow-lifted); }
+
+    .ds-shadow-cell code {
+      display: block;
+      margin-top: var(--space-3);
+      font-family: ui-monospace, monospace;
+      font-size: 11px;
+      color: var(--color-text-muted);
+    }
+
+    .ds-prose {
+      max-width: 65ch;
+    }
+
+    .ds-prose p { margin-bottom: var(--space-4); }
+
+    .ds-breakpoint-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-3);
+    }
+
+    .ds-bp {
+      background: var(--color-surface-soft);
+      border: var(--border-thin);
+      padding: var(--space-5);
+    }
+
+    .ds-bp__name {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+
+    .ds-bp__range {
+      font-family: ui-monospace, monospace;
+      font-size: 12px;
+      color: var(--color-text-muted);
+    }
+
+    .ds-foot {
+      padding: var(--space-12) var(--container-pad);
+      max-width: var(--container-wide);
+      margin: 0 auto;
+      text-align: center;
+      color: var(--color-text-muted);
+      font-size: var(--fs-body-sm);
+    }
+  </style>
+</head>
+<body>
+
+  <header class="ds-header">
+    <div class="ds-header__eyebrow">CM Prototype · Internal Reference</div>
+    <h1 class="ds-header__title">The Design System.</h1>
+    <p class="ds-header__sub">
+      Every token in <code>css/tokens.css</code>, rendered. This page is the
+      visual contract between the brand book and the prototype — if a value
+      changes in tokens.css, it changes here, and propagates everywhere.
+      For internal review only; not linked from any production page.
+    </p>
+  </header>
+
+
+  <!-- ── 01 · COLOR ────────────────────────────────────────────────── -->
+  <section class="ds-section">
+    <div class="ds-section__heading">
+      <span class="ds-section__num">01</span>
+      <h2>Color</h2>
+    </div>
+
+    <h3 class="t-eyebrow mb-6" style="color: var(--color-text-muted);">Raw Palette · named by hue</h3>
+    <div class="ds-grid ds-swatch-grid mb-16">
+
+      <div class="ds-swatch">
+        <div class="ds-swatch__chip" style="background: var(--c-black);"></div>
+        <div class="ds-swatch__body">
+          <div class="ds-swatch__name">Black</div>
+          <code class="ds-swatch__var">--c-black</code>
+          <code class="ds-swatch__hex">#0E0E0E</code>
+        </div>
+      </div>
+
+      <div class="ds-swatch">
+        <div class="ds-swatch__chip" style="background: var(--c-warm-dark);"></div>
+        <div class="ds-swatch__body">
+          <div class="ds-swatch__name">Warm Dark</div>
+          <code class="ds-swatch__var">--c-warm-dark</code>
+          <code class="ds-swatch__hex">#1A1510</code>
+        </div>
+      </div>
+
+      <div class="ds-swatch">
+        <div class="ds-swatch__chip" style="background: var(--c-charcoal);"></div>
+        <div class="ds-swatch__body">
+          <div class="ds-swatch__name">Charcoal</div>
+          <code class="ds-swatch__var">--c-charcoal</code>
+          <code class="ds-swatch__hex">#3A3530</code>
+        </div>
+      </div>
+
+      <div class="ds-swatch">
+        <div class="ds-swatch__chip" style="background: var(--c-mid-grey);"></div>
+        <div class="ds-swatch__body">
+          <div class="ds-swatch__name">Mid Grey</div>
+          <code class="ds-swatch__var">--c-mid-grey</code>
+          <code class="ds-swatch__hex">#9A9490</code>
+        </div>
+      </div>
+
+      <div class="ds-swatch">
+        <div class="ds-swatch__chip" style="background: var(--c-warm-grey);"></div>
+        <div class="ds-swatch__body">
+          <div class="ds-swatch__name">Warm Grey</div>
+          <code class="ds-swatch__var">--c-warm-grey</code>
+          <code class="ds-swatch__hex">#E8E2D8</code>
+        </div>
+      </div>
+
+      <div class="ds-swatch">
+        <div class="ds-swatch__chip" style="background: var(--c-cream);"></div>
+        <div class="ds-swatch__body">
+          <div class="ds-swatch__name">Cream</div>
+          <code class="ds-swatch__var">--c-cream</code>
+          <code class="ds-swatch__hex">#F5F0E8</code>
+        </div>
+      </div>
+
+      <div class="ds-swatch">
+        <div class="ds-swatch__chip" style="background: var(--c-cream-soft);"></div>
+        <div class="ds-swatch__body">
+          <div class="ds-swatch__name">Cream Soft</div>
+          <code class="ds-swatch__var">--c-cream-soft</code>
+          <code class="ds-swatch__hex">#FAF6EF</code>
+        </div>
+      </div>
+
+      <div class="ds-swatch">
+        <div class="ds-swatch__chip" style="background: var(--c-white); border-bottom-color: var(--color-border);"></div>
+        <div class="ds-swatch__body">
+          <div class="ds-swatch__name">White</div>
+          <code class="ds-swatch__var">--c-white</code>
+          <code class="ds-swatch__hex">#FFFFFF</code>
+        </div>
+      </div>
+
+      <div class="ds-swatch">
+        <div class="ds-swatch__chip" style="background: var(--c-gold);"></div>
+        <div class="ds-swatch__body">
+          <div class="ds-swatch__name">Gold</div>
+          <code class="ds-swatch__var">--c-gold</code>
+          <code class="ds-swatch__hex">#B89A6A</code>
+        </div>
+      </div>
+
+      <div class="ds-swatch">
+        <div class="ds-swatch__chip" style="background: var(--c-gold-light);"></div>
+        <div class="ds-swatch__body">
+          <div class="ds-swatch__name">Gold Light</div>
+          <code class="ds-swatch__var">--c-gold-light</code>
+          <code class="ds-swatch__hex">#D4B98A</code>
+        </div>
+      </div>
+
+      <div class="ds-swatch">
+        <div class="ds-swatch__chip" style="background: var(--c-gold-deep);"></div>
+        <div class="ds-swatch__body">
+          <div class="ds-swatch__name">Gold Deep</div>
+          <code class="ds-swatch__var">--c-gold-deep</code>
+          <code class="ds-swatch__hex">#8E7448</code>
+        </div>
+      </div>
+
+    </div>
+
+    <h3 class="t-eyebrow mb-6" style="color: var(--color-text-muted);">Semantic Tokens · named by role</h3>
+    <div class="ds-grid ds-swatch-grid">
+
+      <div class="ds-swatch">
+        <div class="ds-swatch__chip" style="background: var(--color-text);"></div>
+        <div class="ds-swatch__body">
+          <div class="ds-swatch__name">Text — primary</div>
+          <code class="ds-swatch__var">--color-text</code>
+          <div class="ds-swatch__role">→ --c-black</div>
+        </div>
+      </div>
+
+      <div class="ds-swatch">
+        <div class="ds-swatch__chip" style="background: var(--color-text-muted);"></div>
+        <div class="ds-swatch__body">
+          <div class="ds-swatch__name">Text — muted</div>
+          <code class="ds-swatch__var">--color-text-muted</code>
+          <div class="ds-swatch__role">→ --c-charcoal</div>
+        </div>
+      </div>
+
+      <div class="ds-swatch">
+        <div class="ds-swatch__chip" style="background: var(--color-text-subtle);"></div>
+        <div class="ds-swatch__body">
+          <div class="ds-swatch__name">Text — subtle</div>
+          <code class="ds-swatch__var">--color-text-subtle</code>
+          <div class="ds-swatch__role">→ --c-mid-grey</div>
+        </div>
+      </div>
+
+      <div class="ds-swatch">
+        <div class="ds-swatch__chip" style="background: var(--color-surface); border-bottom-color: var(--color-border);"></div>
+        <div class="ds-swatch__body">
+          <div class="ds-swatch__name">Surface — primary</div>
+          <code class="ds-swatch__var">--color-surface</code>
+          <div class="ds-swatch__role">→ --c-white</div>
+        </div>
+      </div>
+
+      <div class="ds-swatch">
+        <div class="ds-swatch__chip" style="background: var(--color-surface-soft);"></div>
+        <div class="ds-swatch__body">
+          <div class="ds-swatch__name">Surface — soft</div>
+          <code class="ds-swatch__var">--color-surface-soft</code>
+          <div class="ds-swatch__role">→ --c-cream-soft</div>
+        </div>
+      </div>
+
+      <div class="ds-swatch">
+        <div class="ds-swatch__chip" style="background: var(--color-surface-warm);"></div>
+        <div class="ds-swatch__body">
+          <div class="ds-swatch__name">Surface — warm</div>
+          <code class="ds-swatch__var">--color-surface-warm</code>
+          <div class="ds-swatch__role">→ --c-cream</div>
+        </div>
+      </div>
+
+      <div class="ds-swatch">
+        <div class="ds-swatch__chip" style="background: var(--color-surface-dark);"></div>
+        <div class="ds-swatch__body">
+          <div class="ds-swatch__name">Surface — dark</div>
+          <code class="ds-swatch__var">--color-surface-dark</code>
+          <div class="ds-swatch__role">→ --c-warm-dark</div>
+        </div>
+      </div>
+
+      <div class="ds-swatch">
+        <div class="ds-swatch__chip" style="background: var(--color-accent);"></div>
+        <div class="ds-swatch__body">
+          <div class="ds-swatch__name">Accent</div>
+          <code class="ds-swatch__var">--color-accent</code>
+          <div class="ds-swatch__role">→ --c-gold</div>
+        </div>
+      </div>
+
+      <div class="ds-swatch">
+        <div class="ds-swatch__chip" style="background: var(--color-border);"></div>
+        <div class="ds-swatch__body">
+          <div class="ds-swatch__name">Border</div>
+          <code class="ds-swatch__var">--color-border</code>
+          <div class="ds-swatch__role">→ --c-warm-grey</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ── 02 · TYPOGRAPHY ──────────────────────────────────────────── -->
+  <section class="ds-section">
+    <div class="ds-section__heading">
+      <span class="ds-section__num">02</span>
+      <h2>Typography</h2>
+    </div>
+
+    <p class="ds-prose mb-12" style="color: var(--color-text-muted);">
+      Two families. <strong style="color: var(--color-text);">EB Garamond italic</strong>
+      is the stand-in for licensed Adobe Caslon Pro Italic — used for headlines,
+      eyebrows of italic emphasis, and editorial pull quotes.
+      <strong style="color: var(--color-text);">Nunito Sans</strong> is the stand-in for
+      licensed Avenir — used for body copy, nav, labels, and CTAs. When the
+      production rebuild lands, swap the <code style="background: var(--color-surface-soft); padding: 2px 6px;">--font-serif</code>
+      and <code style="background: var(--color-surface-soft); padding: 2px 6px;">--font-sans</code> declarations in tokens.css.
+    </p>
+
+    <div class="ds-type-row">
+      <div class="t-hero">Hero italic display</div>
+      <div class="ds-type-row__meta">
+        <strong>.t-hero</strong>
+        family: EB Garamond italic<br>
+        size: clamp(48px, 7vw, 96px)<br>
+        weight: 300 · line: 1.1
+      </div>
+    </div>
+
+    <div class="ds-type-row">
+      <div class="t-display">Display headline</div>
+      <div class="ds-type-row__meta">
+        <strong>.t-display</strong>
+        family: EB Garamond<br>
+        size: clamp(36px, 4.5vw, 64px)<br>
+        weight: 300 · line: 1.1
+      </div>
+    </div>
+
+    <div class="ds-type-row">
+      <div class="t-h1">Section headline — H1</div>
+      <div class="ds-type-row__meta">
+        <strong>.t-h1</strong>
+        family: EB Garamond<br>
+        size: clamp(32px, 3.5vw, 56px)<br>
+        weight: 300 · line: 1.25
+      </div>
+    </div>
+
+    <div class="ds-type-row">
+      <div class="t-h2">Sub-section — H2</div>
+      <div class="ds-type-row__meta">
+        <strong>.t-h2</strong>
+        family: EB Garamond<br>
+        size: clamp(24px, 2.5vw, 40px)<br>
+        weight: 400 · line: 1.25
+      </div>
+    </div>
+
+    <div class="ds-type-row">
+      <div class="t-h3">Body heading — H3</div>
+      <div class="ds-type-row__meta">
+        <strong>.t-h3</strong>
+        family: EB Garamond<br>
+        size: 22px · weight: 400
+      </div>
+    </div>
+
+    <div class="ds-type-row">
+      <div class="t-eyebrow">Eyebrow Label</div>
+      <div class="ds-type-row__meta">
+        <strong>.t-eyebrow</strong>
+        family: Nunito Sans<br>
+        size: 10px · weight: 600<br>
+        spacing: 0.2em uppercase
+      </div>
+    </div>
+
+    <div class="ds-type-row">
+      <div class="t-eyebrow-gold">Gold Eyebrow Label</div>
+      <div class="ds-type-row__meta">
+        <strong>.t-eyebrow-gold</strong>
+        same as eyebrow,<br>
+        color: --color-accent
+      </div>
+    </div>
+
+    <div class="ds-type-row">
+      <div class="t-body-lg">
+        Body large — used in section intros and editorial leads. Sits comfortably
+        at 16px with a relaxed 1.7 line height for paragraph-density copy.
+      </div>
+      <div class="ds-type-row__meta">
+        <strong>.t-body-lg</strong>
+        family: Nunito Sans<br>
+        size: 16px · line: 1.7
+      </div>
+    </div>
+
+    <div class="ds-type-row">
+      <div class="t-body">
+        Body default — 15px, the workhorse type for run-of-page paragraphs.
+        Set in Nunito Sans with a 1.7 line-height to keep editorial pacing.
+      </div>
+      <div class="ds-type-row__meta">
+        <strong>.t-body</strong>
+        family: Nunito Sans<br>
+        size: 15px · line: 1.7
+      </div>
+    </div>
+
+    <div class="ds-type-row">
+      <div class="t-body-sm t-muted">
+        Body small — for captions, meta text, footer items. Muted by default.
+      </div>
+      <div class="ds-type-row__meta">
+        <strong>.t-body-sm</strong>
+        family: Nunito Sans<br>
+        size: 14px · color: muted
+      </div>
+    </div>
+
+    <div class="ds-type-row">
+      <div class="t-label">CTA / Button Label</div>
+      <div class="ds-type-row__meta">
+        <strong>.t-label · button</strong>
+        family: Nunito Sans<br>
+        size: 11px · weight: 500–600<br>
+        spacing: 0.12em uppercase
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ── 03 · SPACING ─────────────────────────────────────────────── -->
+  <section class="ds-section">
+    <div class="ds-section__heading">
+      <span class="ds-section__num">03</span>
+      <h2>Spacing</h2>
+    </div>
+    <p class="ds-prose mb-10" style="color: var(--color-text-muted);">
+      Eight-point base. Use scale tokens, never raw pixels.
+    </p>
+
+    <div>
+      <div class="ds-space-row"><code>--space-1</code><div class="ds-space-bar" style="width: 4px;"></div><span>4px</span></div>
+      <div class="ds-space-row"><code>--space-2</code><div class="ds-space-bar" style="width: 8px;"></div><span>8px</span></div>
+      <div class="ds-space-row"><code>--space-3</code><div class="ds-space-bar" style="width: 12px;"></div><span>12px</span></div>
+      <div class="ds-space-row"><code>--space-4</code><div class="ds-space-bar" style="width: 16px;"></div><span>16px</span></div>
+      <div class="ds-space-row"><code>--space-5</code><div class="ds-space-bar" style="width: 20px;"></div><span>20px</span></div>
+      <div class="ds-space-row"><code>--space-6</code><div class="ds-space-bar" style="width: 24px;"></div><span>24px</span></div>
+      <div class="ds-space-row"><code>--space-8</code><div class="ds-space-bar" style="width: 32px;"></div><span>32px</span></div>
+      <div class="ds-space-row"><code>--space-10</code><div class="ds-space-bar" style="width: 40px;"></div><span>40px</span></div>
+      <div class="ds-space-row"><code>--space-12</code><div class="ds-space-bar" style="width: 48px;"></div><span>48px</span></div>
+      <div class="ds-space-row"><code>--space-16</code><div class="ds-space-bar" style="width: 64px;"></div><span>64px</span></div>
+      <div class="ds-space-row"><code>--space-20</code><div class="ds-space-bar" style="width: 80px;"></div><span>80px</span></div>
+      <div class="ds-space-row"><code>--space-24</code><div class="ds-space-bar" style="width: 96px;"></div><span>96px</span></div>
+    </div>
+  </section>
+
+
+  <!-- ── 04 · BUTTONS ─────────────────────────────────────────────── -->
+  <section class="ds-section">
+    <div class="ds-section__heading">
+      <span class="ds-section__num">04</span>
+      <h2>Buttons</h2>
+    </div>
+
+    <div class="ds-demo">
+      <div class="ds-demo__row">
+        <span class="ds-demo__label">Primary · default</span>
+        <a class="btn btn--primary">Apply for Account</a>
+        <a class="btn btn--primary btn--sm">Sm Primary</a>
+        <a class="btn btn--primary btn--lg">Lg Primary</a>
+      </div>
+      <div class="ds-demo__row">
+        <span class="ds-demo__label">Ghost</span>
+        <a class="btn btn--ghost">Find a Stylist</a>
+        <a class="btn btn--ghost btn--sm">Sm Ghost</a>
+      </div>
+      <div class="ds-demo__row">
+        <span class="ds-demo__label">Gold (solid &amp; outline)</span>
+        <a class="btn btn--gold">Enroll Now</a>
+        <a class="btn btn--gold-outline">Apply to Advance</a>
+        <a class="btn btn--gold-outline btn--lg">Lg Outline</a>
+      </div>
+    </div>
+
+    <div class="ds-demo ds-demo--dark mt-6">
+      <div class="ds-demo__row">
+        <span class="ds-demo__label" style="color: var(--color-accent-light);">On dark backgrounds</span>
+        <a class="btn btn--on-dark">Continue to Portal</a>
+        <a class="btn btn--gold">Reserve →</a>
+        <a class="btn btn--gold-outline">Browse →</a>
+      </div>
+    </div>
+
+    <div class="ds-demo mt-6">
+      <div class="ds-demo__row">
+        <span class="ds-demo__label">Inline link arrows</span>
+        <a class="link-arrow">Explore the Academy →</a>
+        <a class="link-arrow link-arrow--gold">Read more →</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── 05 · FORM INPUTS ─────────────────────────────────────────── -->
+  <section class="ds-section">
+    <div class="ds-section__heading">
+      <span class="ds-section__num">05</span>
+      <h2>Forms</h2>
+    </div>
+
+    <div class="ds-demo">
+      <div class="ds-demo__row">
+        <span class="ds-demo__label">Text input</span>
+        <input class="ds-input" type="text" placeholder="Enter ZIP code or city">
+      </div>
+      <div class="ds-demo__row">
+        <span class="ds-demo__label">Email input · with focus state</span>
+        <input class="ds-input" type="email" placeholder="email@studio.com">
+      </div>
+      <div class="ds-demo__row">
+        <span class="ds-demo__label">Combined search</span>
+        <form class="coveted-directory__search" style="margin-top: 0; max-width: 540px;" onsubmit="event.preventDefault();">
+          <input type="text" placeholder="Find a stylist near you" aria-label="Find a stylist">
+          <button class="btn btn--primary btn--sm" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── 06 · PARAGRAPH / PROSE ───────────────────────────────────── -->
+  <section class="ds-section">
+    <div class="ds-section__heading">
+      <span class="ds-section__num">06</span>
+      <h2>Editorial Prose</h2>
+    </div>
+
+    <div class="ds-prose">
+      <p class="t-body-lg">
+        Covet &amp; Mane is a luxury, invitation-only brand for stylists who are
+        masters of their technique. From ethically sourced, double-drawn Remy
+        hair to a 3-tier certification path, every part of the business is
+        designed to set a higher standard — and hold it.
+      </p>
+      <p class="t-body">
+        The Coveted is the consumer side of the same world: a directory of
+        certified stylists, plus the discovery and aftercare content clients
+        need to make extensions a sustainable part of their hair routine.
+      </p>
+      <p class="t-body-sm">
+        Caption / meta type — set in body-sm and muted by default. Used for
+        timestamps, attributions, image captions, and footnotes.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ── 07 · SHADOWS & RADIUS ────────────────────────────────────── -->
+  <section class="ds-section">
+    <div class="ds-section__heading">
+      <span class="ds-section__num">07</span>
+      <h2>Surfaces — Radius &amp; Shadow</h2>
+    </div>
+
+    <div class="ds-grid ds-shadow-grid">
+      <div class="ds-shadow-cell ds-shadow-cell--soft">
+        Soft
+        <code>--shadow-soft</code>
+      </div>
+      <div class="ds-shadow-cell ds-shadow-cell--card">
+        Card
+        <code>--shadow-card</code>
+      </div>
+      <div class="ds-shadow-cell ds-shadow-cell--lifted">
+        Lifted
+        <code>--shadow-lifted</code>
+      </div>
+    </div>
+
+    <p class="t-body-sm mt-8">
+      Radius tokens are deliberately tight — luxury brand reads with sharper
+      edges than rounded.
+      <code style="background: var(--color-surface-soft); padding: 2px 6px;">--radius-sm = 2px</code>,
+      <code style="background: var(--color-surface-soft); padding: 2px 6px;">--radius-md = 4px</code>,
+      <code style="background: var(--color-surface-soft); padding: 2px 6px;">--radius-pill = 999px</code>
+      (badges only).
+    </p>
+  </section>
+
+
+  <!-- ── 08 · BREAKPOINTS ─────────────────────────────────────────── -->
+  <section class="ds-section">
+    <div class="ds-section__heading">
+      <span class="ds-section__num">08</span>
+      <h2>Breakpoints</h2>
+    </div>
+
+    <p class="ds-prose mb-8" style="color: var(--color-text-muted);">
+      Mobile-first. Media queries use <code style="background: var(--color-surface-soft); padding: 2px 6px;">min-width</code>.
+    </p>
+
+    <div class="ds-breakpoint-strip">
+      <div class="ds-bp">
+        <div class="ds-bp__name">sm</div>
+        <div class="ds-bp__range">≥ 480px</div>
+      </div>
+      <div class="ds-bp">
+        <div class="ds-bp__name">md</div>
+        <div class="ds-bp__range">≥ 768px</div>
+      </div>
+      <div class="ds-bp">
+        <div class="ds-bp__name">lg</div>
+        <div class="ds-bp__range">≥ 1024px</div>
+      </div>
+      <div class="ds-bp">
+        <div class="ds-bp__name">xl</div>
+        <div class="ds-bp__range">≥ 1280px</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ── 09 · IMG-ZONE & ANNOTATION SYSTEM ────────────────────────── -->
+  <section class="ds-section">
+    <div class="ds-section__heading">
+      <span class="ds-section__num">09</span>
+      <h2>Image Annotations</h2>
+    </div>
+
+    <div class="ds-grid" style="grid-template-columns: 1fr 1fr; gap: var(--space-6);">
+      <div class="img-zone" style="aspect-ratio: 4/3;">
+        <img src="https://covetandmane.com/cdn/shop/files/1196-thecutpointsilkystraight-general.jpg" alt="Real C&M photo">
+        <span class="img-label">Real C&amp;M photo — production-ready</span>
+      </div>
+      <div class="img-zone img-zone--placeholder" style="aspect-ratio: 4/3;">
+        <span class="img-label img-label--placeholder">PLACEHOLDER — Drop a real photo here</span>
+      </div>
+    </div>
+
+    <p class="t-body-sm mt-6">
+      Every image slot uses <code>.img-zone</code>. Real photos get the camera
+      📷 label; placeholders get the warning ⚠ label and the warm gradient +
+      gold pinstripe texture so they stay on-brand during review.
+    </p>
+  </section>
+
+
+  <footer class="ds-foot">
+    Design system v0.1 · Updated for the CM Prototype build, May 2026
+  </footer>
+
+</body>
+</html>

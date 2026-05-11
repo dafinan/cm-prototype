@@ -1,0 +1,377 @@
+/* =========================================================================
+   COVET & MANE — BASE LAYER
+   Reset, root typography, container, utilities, annotation overlay system.
+   ========================================================================= */
+
+/* ── RESET ──────────────────────────────────────────────────────────── */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-relaxed);
+  color: var(--color-text);
+  background: var(--color-surface);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, svg, video {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+input, textarea, select {
+  font: inherit;
+  color: inherit;
+}
+
+/* Focus rings — visible but on-brand */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* ── ROOT TYPOGRAPHY ────────────────────────────────────────────────── */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: var(--fw-light);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  color: var(--color-text);
+}
+
+p {
+  line-height: var(--lh-relaxed);
+}
+
+/* Type style utilities — use these as class names in HTML */
+
+.t-hero {
+  font-family: var(--font-serif);
+  font-size: var(--fs-hero);
+  font-weight: var(--fw-light);
+  font-style: italic;
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+}
+
+.t-display {
+  font-family: var(--font-serif);
+  font-size: var(--fs-display);
+  font-weight: var(--fw-light);
+  line-height: var(--lh-tight);
+}
+
+.t-h1 {
+  font-family: var(--font-serif);
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-light);
+  line-height: var(--lh-snug);
+}
+
+.t-h2 {
+  font-family: var(--font-serif);
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-snug);
+}
+
+.t-h3 {
+  font-family: var(--font-serif);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-snug);
+}
+
+.t-eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--fs-micro);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-widest);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.t-eyebrow-gold {
+  font-family: var(--font-sans);
+  font-size: var(--fs-micro);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-widest);
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.t-label {
+  font-family: var(--font-sans);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+}
+
+.t-body-lg {
+  font-size: var(--fs-body-lg);
+  line-height: var(--lh-relaxed);
+}
+
+.t-body {
+  font-size: var(--fs-body);
+  line-height: var(--lh-relaxed);
+}
+
+.t-body-sm {
+  font-size: var(--fs-body-sm);
+  line-height: var(--lh-relaxed);
+  color: var(--color-text-muted);
+}
+
+.t-italic { font-style: italic; }
+.t-serif  { font-family: var(--font-serif); }
+.t-sans   { font-family: var(--font-sans); }
+
+.t-muted   { color: var(--color-text-muted); }
+.t-subtle  { color: var(--color-text-subtle); }
+.t-inverse { color: var(--color-text-inverse); }
+.t-gold    { color: var(--color-accent); }
+
+/* ── LAYOUT — CONTAINER & GRID ──────────────────────────────────────── */
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+.container-wide {
+  width: 100%;
+  max-width: var(--container-wide);
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+.section {
+  padding-block: var(--section-pad-y);
+}
+
+.section--tight {
+  padding-block: clamp(40px, 6vw, 80px);
+}
+
+.section--dark {
+  background: var(--color-surface-dark);
+  color: var(--color-text-inverse);
+}
+
+.section--dark h1,
+.section--dark h2,
+.section--dark h3,
+.section--dark h4 {
+  color: var(--color-text-inverse);
+}
+
+.section--black {
+  background: var(--color-surface-black);
+  color: var(--color-text-inverse);
+}
+
+.section--black h1,
+.section--black h2,
+.section--black h3,
+.section--black h4 {
+  color: var(--color-text-inverse);
+}
+
+.section--cream {
+  background: var(--color-surface-warm);
+}
+
+.section--cream-soft {
+  background: var(--color-surface-soft);
+}
+
+/* ── UTILITY ────────────────────────────────────────────────────────── */
+
+.flex   { display: flex; }
+.grid   { display: grid; }
+.block  { display: block; }
+.hidden { display: none !important; }
+
+.items-center { align-items: center; }
+.items-end    { align-items: flex-end; }
+.justify-center  { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.gap-2  { gap: var(--space-2); }
+.gap-4  { gap: var(--space-4); }
+.gap-6  { gap: var(--space-6); }
+.gap-8  { gap: var(--space-8); }
+.gap-12 { gap: var(--space-12); }
+
+.text-center { text-align: center; }
+.text-left   { text-align: left; }
+.text-right  { text-align: right; }
+
+.uppercase   { text-transform: uppercase; }
+.italic      { font-style: italic; }
+
+.mt-2  { margin-top: var(--space-2); }
+.mt-4  { margin-top: var(--space-4); }
+.mt-6  { margin-top: var(--space-6); }
+.mt-8  { margin-top: var(--space-8); }
+.mt-12 { margin-top: var(--space-12); }
+.mt-16 { margin-top: var(--space-16); }
+
+.mb-2  { margin-bottom: var(--space-2); }
+.mb-4  { margin-bottom: var(--space-4); }
+.mb-6  { margin-bottom: var(--space-6); }
+.mb-8  { margin-bottom: var(--space-8); }
+.mb-12 { margin-bottom: var(--space-12); }
+.mb-16 { margin-bottom: var(--space-16); }
+
+.max-w-prose { max-width: 60ch; }
+.max-w-narrow { max-width: 48ch; }
+
+/* Screen-reader only */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── IMG-ZONE ANNOTATION SYSTEM ─────────────────────────────────────────
+   Every image area is wrapped in .img-zone. .img-label flags either:
+     • "REAL IMAGE — <description>"   when we have a real C&M photo
+     • "PLACEHOLDER — <description>"  when the production photo is TBD
+   Use class .img-label--placeholder for the warmer warning treatment.
+   ────────────────────────────────────────────────────────────────────── */
+
+.img-zone {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--c-warm-dark) 0%, #2a2218 100%);
+}
+
+.img-zone img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* The placeholder texture for img-zones without a real photo */
+.img-zone--placeholder {
+  background:
+    repeating-linear-gradient(
+      135deg,
+      rgba(184, 154, 106, 0.04) 0 2px,
+      transparent 2px 12px
+    ),
+    linear-gradient(135deg, var(--c-warm-dark) 0%, #2a2218 100%);
+}
+
+.img-label {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0,0,0,0.78);
+  color: var(--c-gold-light);
+  font-family: var(--font-sans);
+  font-size: var(--fs-tiny);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-left: 2px solid var(--color-accent);
+  pointer-events: none;
+  z-index: 2;
+  max-width: 92%;
+  line-height: 1.4;
+}
+
+.img-label::before {
+  content: "📷";
+  font-size: 10px;
+}
+
+.img-label--placeholder {
+  background: rgba(46, 34, 20, 0.92);
+  border-left-color: var(--c-gold-light);
+}
+
+.img-label--placeholder::before {
+  content: "⚠";
+  color: var(--c-gold-light);
+}
+
+/* ── SCROLL REVEAL ──────────────────────────────────────────────────────
+   Apply .reveal to any element. reveal.js adds .is-visible when in view.
+   ────────────────────────────────────────────────────────────────────── */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity var(--dur-slower) var(--ease-out),
+    transform var(--dur-slower) var(--ease-out);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 80ms; }
+.reveal-delay-2 { transition-delay: 160ms; }
+.reveal-delay-3 { transition-delay: 240ms; }
+.reveal-delay-4 { transition-delay: 320ms; }
+
+/* ── LOGGED-IN / LOGGED-OUT STATE SWAP ──────────────────────────────────
+   toggle.js adds .logged-in to <body>. Elements decide visibility via:
+     <... class="logged-out-only">   → hidden when logged in
+     <... class="logged-in-only">    → hidden when logged out
+   Default display flavor matches the element type.
+   ────────────────────────────────────────────────────────────────────── */
+
+.logged-in-only { display: none; }
+body.logged-in .logged-out-only { display: none; }
+body.logged-in .logged-in-only  { display: revert; }

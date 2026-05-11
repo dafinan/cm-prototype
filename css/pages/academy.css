@@ -1,0 +1,624 @@
+/* =========================================================================
+   COVET & MANE — ACADEMY PAGE STYLES
+   The marquee page. Centerpiece is the certification path journey.
+   ========================================================================= */
+
+/* ── ACADEMY HERO ───────────────────────────────────────────────────── */
+
+.academy-hero {
+  position: relative;
+  min-height: calc(100vh - var(--nav-height) - var(--promo-height));
+  display: flex;
+  align-items: flex-end;
+  color: var(--color-text-inverse);
+  overflow: hidden;
+  background: var(--color-surface-black);
+}
+
+.academy-hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.academy-hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+}
+
+.academy-hero__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(14,14,14,0.2) 0%, rgba(14,14,14,0.45) 55%, rgba(14,14,14,0.92) 100%);
+}
+
+.academy-hero__inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--container-wide);
+  margin-inline: auto;
+  padding: 0 var(--container-pad) var(--space-24);
+}
+
+.academy-hero__eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--fs-micro);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-widest);
+  text-transform: uppercase;
+  color: var(--color-accent-light);
+  margin-bottom: var(--space-5);
+}
+
+.academy-hero__title {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: var(--fw-light);
+  font-size: var(--fs-hero);
+  line-height: 1.05;
+  color: var(--color-text-inverse);
+  max-width: 18ch;
+  margin-bottom: var(--space-6);
+}
+
+.academy-hero__sub {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-lg);
+  font-weight: var(--fw-light);
+  line-height: var(--lh-relaxed);
+  color: var(--c-warm-grey);
+  max-width: 50ch;
+  margin-bottom: var(--space-10);
+}
+
+/* ── INTRO BAND — required-to-open framing ──────────────────────────── */
+
+.academy-intro {
+  background: var(--color-surface-warm);
+  padding-block: var(--section-pad-y);
+}
+
+.academy-intro__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: var(--space-20);
+  align-items: center;
+}
+
+@media (max-width: 960px) {
+  .academy-intro__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+  }
+}
+
+.academy-intro h2 {
+  font-family: var(--font-serif);
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-light);
+  line-height: 1.1;
+  max-width: 14ch;
+}
+
+.academy-intro h2 em {
+  font-style: italic;
+  color: var(--color-accent);
+}
+
+.academy-intro__body {
+  font-size: var(--fs-body-lg);
+  color: var(--color-text-muted);
+  line-height: var(--lh-relaxed);
+  max-width: 56ch;
+  margin-bottom: var(--space-6);
+}
+
+/* ── CERT PATH JOURNEY — centerpiece ────────────────────────────────── */
+
+.cert-path {
+  background: var(--color-surface);
+  padding-block: var(--section-pad-y);
+  overflow: hidden;
+  position: relative;
+}
+
+.cert-path__header {
+  text-align: center;
+  margin-bottom: var(--space-16);
+}
+
+.cert-path__header h2 {
+  font-family: var(--font-serif);
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-light);
+  margin-block: var(--space-4) var(--space-6);
+}
+
+.cert-path__header h2 em {
+  font-style: italic;
+  color: var(--color-accent);
+}
+
+.cert-path__header p {
+  font-size: var(--fs-body-lg);
+  color: var(--color-text-muted);
+  max-width: 56ch;
+  margin: 0 auto;
+  line-height: var(--lh-relaxed);
+}
+
+.cert-path__journey {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+@media (max-width: 960px) {
+  .cert-path__journey { grid-template-columns: 1fr; }
+}
+
+/* Connecting line between tiers (desktop only) */
+.cert-path__journey::before {
+  content: "";
+  position: absolute;
+  top: 56px;
+  left: 12%;
+  right: 12%;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent,
+    var(--color-accent) 15%,
+    var(--color-accent) 85%,
+    transparent);
+  z-index: 0;
+}
+
+@media (max-width: 960px) {
+  .cert-path__journey::before { display: none; }
+}
+
+.cert-path__step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-10) var(--space-6);
+  background: var(--color-surface);
+  border: var(--border-thin);
+  min-height: 480px;
+  z-index: 1;
+  transition: transform var(--dur-slow) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out),
+              border-color var(--dur-base) var(--ease-out);
+}
+
+.cert-path__step:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lifted);
+  border-color: var(--color-accent);
+}
+
+/* Step badges — color-coded per tier per handoff */
+.cert-path__step--foundations {
+  background: var(--color-surface-warm);
+}
+
+.cert-path__step--advanced {
+  background: var(--color-surface-dark);
+  border-color: var(--c-charcoal);
+  color: var(--color-text-inverse);
+}
+.cert-path__step--advanced .cert-path__step-num,
+.cert-path__step--advanced .cert-path__step-name { color: var(--color-text-inverse); }
+.cert-path__step--advanced .cert-path__step-tagline,
+.cert-path__step--advanced .cert-path__step-detail { color: var(--c-warm-grey); }
+.cert-path__step--advanced .cert-path__step-meta-label { color: var(--c-mid-grey); }
+.cert-path__step--advanced .cert-path__step-meta-value { color: var(--color-text-inverse); }
+
+.cert-path__step--master {
+  background: var(--color-surface-black);
+  border-color: var(--c-charcoal);
+  color: var(--color-text-inverse);
+}
+.cert-path__step--master .cert-path__step-num,
+.cert-path__step--master .cert-path__step-name { color: var(--color-text-inverse); }
+.cert-path__step--master .cert-path__step-tagline,
+.cert-path__step--master .cert-path__step-detail { color: var(--c-warm-grey); }
+.cert-path__step--master .cert-path__step-num { color: var(--color-accent-light); }
+.cert-path__step--master .cert-path__step-meta-label { color: var(--c-mid-grey); }
+.cert-path__step--master .cert-path__step-meta-value { color: var(--color-text-inverse); }
+
+.cert-path__step-num {
+  font-family: var(--font-serif);
+  font-size: 88px;
+  font-weight: var(--fw-light);
+  font-style: italic;
+  line-height: 1;
+  color: var(--color-accent);
+  margin-bottom: var(--space-5);
+}
+
+.cert-path__step-name {
+  font-family: var(--font-serif);
+  font-size: 36px;
+  font-weight: var(--fw-regular);
+  line-height: 1;
+  margin-bottom: var(--space-3);
+}
+
+.cert-path__step-tagline {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--color-accent);
+  margin-bottom: var(--space-6);
+}
+
+.cert-path__step--foundations .cert-path__step-tagline { color: var(--color-accent-deep); }
+
+.cert-path__step-detail {
+  font-size: var(--fs-body);
+  color: var(--color-text-muted);
+  line-height: var(--lh-relaxed);
+  margin-bottom: var(--space-6);
+  flex-grow: 1;
+}
+
+.cert-path__step-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3) var(--space-4);
+  padding-block: var(--space-5);
+  border-top: 1px solid currentColor;
+  margin-bottom: var(--space-6);
+  opacity: 0.85;
+}
+
+.cert-path__step-meta-cell { display: flex; flex-direction: column; gap: 2px; }
+
+.cert-path__step-meta-label {
+  font-family: var(--font-sans);
+  font-size: var(--fs-tiny);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-widest);
+  text-transform: uppercase;
+  color: var(--color-text-subtle);
+}
+
+.cert-path__step-meta-value {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-sm);
+  font-weight: var(--fw-medium);
+}
+
+/* ── WHY EDUCATION FIRST — pull quote ───────────────────────────────── */
+
+.why-education {
+  background: var(--color-surface-black);
+  color: var(--color-text-inverse);
+  padding-block: var(--section-pad-y);
+}
+
+.why-education__grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: var(--space-16);
+  align-items: center;
+}
+
+@media (max-width: 960px) {
+  .why-education__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+  }
+}
+
+.why-education__quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: var(--fw-light);
+  font-size: clamp(28px, 3.2vw, 44px);
+  line-height: 1.2;
+  color: var(--color-text-inverse);
+  margin-bottom: var(--space-8);
+  position: relative;
+  padding-left: var(--space-8);
+}
+
+.why-education__quote::before {
+  content: "“";
+  position: absolute;
+  left: -8px;
+  top: -28px;
+  font-size: 96px;
+  color: var(--color-accent);
+  font-style: italic;
+  line-height: 1;
+}
+
+.why-education__quote em {
+  color: var(--color-accent-light);
+}
+
+.why-education__attr {
+  font-family: var(--font-sans);
+  font-size: var(--fs-micro);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-widest);
+  text-transform: uppercase;
+  color: var(--color-accent);
+  padding-left: var(--space-8);
+}
+
+.why-education__roi {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.why-education__roi-item {
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid rgba(184, 154, 106, 0.25);
+}
+
+.why-education__roi-item:last-child { border-bottom: none; }
+
+.why-education__roi-num {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 44px;
+  color: var(--color-accent-light);
+  line-height: 1;
+  margin-bottom: var(--space-2);
+}
+
+.why-education__roi-label {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-sm);
+  color: var(--c-warm-grey);
+}
+
+/* ── UPCOMING EVENTS GRID ───────────────────────────────────────────── */
+
+.events {
+  background: var(--color-surface-warm);
+  padding-block: var(--section-pad-y);
+}
+
+.events__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-8);
+  margin-bottom: var(--space-12);
+}
+
+@media (max-width: 768px) {
+  .events__header { flex-direction: column; align-items: flex-start; }
+}
+
+.events__header h2 {
+  font-family: var(--font-serif);
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-light);
+  font-style: italic;
+}
+
+.events__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+}
+
+@media (max-width: 960px) {
+  .events__grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 600px) {
+  .events__grid { grid-template-columns: 1fr; }
+}
+
+.event-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-surface);
+  border: var(--border-thin);
+  transition: border-color var(--dur-base) var(--ease-out),
+              box-shadow var(--dur-base) var(--ease-out);
+}
+
+.event-card:hover {
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-card);
+}
+
+.event-card__date {
+  padding: var(--space-5) var(--space-6) 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.event-card__month {
+  font-family: var(--font-sans);
+  font-size: var(--fs-micro);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-widest);
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.event-card__day {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 40px;
+  font-weight: var(--fw-light);
+  color: var(--color-text);
+  line-height: 1;
+}
+
+.event-card__body {
+  padding: var(--space-4) var(--space-6) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  flex-grow: 1;
+}
+
+.event-card__tier {
+  font-family: var(--font-sans);
+  font-size: var(--fs-tiny);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-widest);
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.event-card__title {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: var(--fw-regular);
+  line-height: 1.25;
+  margin-block: 4px var(--space-2);
+}
+
+.event-card__where {
+  font-size: var(--fs-body-sm);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-4);
+}
+
+.event-card__footer {
+  padding: var(--space-4) var(--space-6);
+  border-top: var(--border-thin);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.event-card__status {
+  font-family: var(--font-sans);
+  font-size: var(--fs-tiny);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+}
+
+.event-card__status--available { color: var(--color-accent-deep); }
+.event-card__status--soldout   { color: var(--color-text-subtle); }
+.event-card__status--waitlist  { color: var(--c-charcoal); }
+
+/* ── EDUCATOR PROFILES ──────────────────────────────────────────────── */
+
+.educators {
+  background: var(--color-surface);
+  padding-block: var(--section-pad-y);
+}
+
+.educators__header {
+  text-align: center;
+  max-width: 50ch;
+  margin: 0 auto var(--space-12);
+}
+
+.educators__header h2 {
+  font-family: var(--font-serif);
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-light);
+  margin-block: var(--space-4) var(--space-4);
+}
+
+.educators__header p {
+  font-size: var(--fs-body-lg);
+  color: var(--color-text-muted);
+}
+
+.educators__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-6);
+}
+
+@media (max-width: 960px) {
+  .educators__grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 480px) {
+  .educators__grid { grid-template-columns: 1fr; }
+}
+
+.educator {
+  display: flex;
+  flex-direction: column;
+}
+
+.educator__media {
+  aspect-ratio: 4 / 5;
+  margin-bottom: var(--space-4);
+  overflow: hidden;
+}
+
+.educator__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--dur-slower) var(--ease-out);
+}
+
+.educator:hover .educator__media img {
+  transform: scale(1.04);
+}
+
+.educator__tier {
+  font-family: var(--font-sans);
+  font-size: var(--fs-tiny);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-widest);
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: 4px;
+}
+
+.educator__name {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: var(--fw-regular);
+  line-height: 1.2;
+  margin-bottom: 2px;
+}
+
+.educator__specialty {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-sm);
+  color: var(--color-text-muted);
+}
+
+/* ── FAQ ACCORDION ──────────────────────────────────────────────────── */
+
+.academy-faq {
+  background: var(--color-surface-warm);
+  padding-block: var(--section-pad-y);
+}
+
+.academy-faq__inner {
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.academy-faq__header {
+  text-align: center;
+  margin-bottom: var(--space-12);
+}
+
+.academy-faq__header h2 {
+  font-family: var(--font-serif);
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-light);
+  font-style: italic;
+}

@@ -1,0 +1,215 @@
+/* =========================================================================
+   COVET & MANE — APPLY PAGE STYLES
+   The conversion page. Hero reads as invitation, not transaction.
+   ========================================================================= */
+
+/* ── APPLY HERO ─────────────────────────────────────────────────────── */
+
+.apply-hero {
+  position: relative;
+  background: var(--color-surface-warm);
+  overflow: hidden;
+  border-bottom: var(--border-thin);
+}
+
+.apply-hero__inner {
+  max-width: var(--container-wide);
+  margin: 0 auto;
+  padding: clamp(64px, 9vw, 120px) var(--container-pad) clamp(56px, 8vw, 100px);
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: var(--space-16);
+  align-items: center;
+}
+
+@media (max-width: 960px) {
+  .apply-hero__inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+  }
+}
+
+.apply-hero__copy { position: relative; z-index: 1; }
+
+.apply-hero__eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--fs-micro);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-widest);
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-5);
+}
+
+.apply-hero__title {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: var(--fw-light);
+  font-size: clamp(44px, 6vw, 84px);
+  line-height: 1.02;
+  letter-spacing: var(--ls-tight);
+  color: var(--color-text);
+  margin-bottom: var(--space-6);
+  max-width: 14ch;
+}
+
+.apply-hero__sub {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-lg);
+  font-weight: var(--fw-light);
+  line-height: var(--lh-relaxed);
+  color: var(--color-text-muted);
+  max-width: 50ch;
+  margin-bottom: var(--space-8);
+}
+
+.apply-hero__meta {
+  display: flex;
+  gap: var(--space-8);
+  margin-bottom: var(--space-10);
+  padding-block: var(--space-5);
+  border-block: 1px solid rgba(58, 53, 48, 0.18);
+}
+
+@media (max-width: 480px) {
+  .apply-hero__meta {
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+}
+
+.apply-hero__meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.apply-hero__meta-num {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 28px;
+  font-weight: var(--fw-light);
+  color: var(--color-accent);
+  line-height: 1;
+}
+
+.apply-hero__meta-label {
+  font-family: var(--font-sans);
+  font-size: var(--fs-tiny);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-widest);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* Actionable tip — what speeds up review */
+.apply-hero__tip {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  margin-bottom: var(--space-8);
+  background: var(--color-surface);
+  border: var(--border-thin);
+  border-left: 3px solid var(--color-accent);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-sm);
+  color: var(--color-text-muted);
+  line-height: var(--lh-relaxed);
+  max-width: 56ch;
+}
+
+.apply-hero__tip-mark {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 18px;
+  font-weight: var(--fw-light);
+  color: var(--color-accent);
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.apply-hero__tip strong {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text);
+  letter-spacing: var(--ls-wide);
+  text-transform: uppercase;
+  font-size: var(--fs-tiny);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.apply-hero__ctas {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.apply-hero__already {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body-sm);
+  color: var(--color-text-muted);
+}
+
+.apply-hero__already a {
+  color: var(--color-text);
+  border-bottom: 1px solid var(--color-accent);
+  padding-bottom: 1px;
+  margin-left: 6px;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.apply-hero__already a:hover {
+  color: var(--color-accent);
+}
+
+/* Right-side editorial image */
+.apply-hero__media {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  min-height: 460px;
+  overflow: hidden;
+}
+
+@media (max-width: 960px) {
+  .apply-hero__media { min-height: 380px; aspect-ratio: 16 / 11; }
+}
+
+.apply-hero__media .img-zone {
+  position: absolute;
+  inset: 0;
+}
+
+.apply-hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Floating "invitation" mark on the editorial image */
+.apply-hero__mark {
+  position: absolute;
+  top: var(--space-6);
+  left: var(--space-6);
+  z-index: 2;
+  padding: var(--space-3) var(--space-4);
+  background: rgba(14, 14, 14, 0.78);
+  color: var(--color-accent-light);
+  font-family: var(--font-sans);
+  font-size: var(--fs-tiny);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-widest);
+  text-transform: uppercase;
+  border-left: 2px solid var(--color-accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.apply-hero__mark::before {
+  content: "✦";
+  font-size: 14px;
+  color: var(--color-accent);
+}

@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Coveted — Find a Covet &amp; Mane Stylist</title>
+  <meta name="description" content="The Coveted is the consumer directory of certified Covet & Mane stylists. Find a stylist who was trained for this.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,300;1,400;1,500&family=Nunito+Sans:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages/find-a-stylist.css">
+</head>
+<body data-page="coveted">
+
+  <div id="site-nav-mount"></div>
+
+  <main id="MainContent">
+
+    <!-- ════════════════════════════════════════════════════════════
+         HERO — lighter, cream-based, with directory search
+         ════════════════════════════════════════════════════════════ -->
+    <section class="coveted-hero">
+
+      <div class="coveted-hero__copy reveal">
+        <div class="coveted-hero__eyebrow">The Coveted · Certified Stylist Directory</div>
+        <h1 class="coveted-hero__title">
+          Hair extensions done <em>right</em>, by someone who was trained for it.
+        </h1>
+        <p class="coveted-hero__sub">
+          The Coveted is our consumer-facing directory of Covet &amp; Mane
+          certified stylists. Every name on this list completed Foundations
+          and holds the standard behind the chair.
+        </p>
+
+        <form class="coveted-hero__search" onsubmit="event.preventDefault();">
+          <input type="text" placeholder="Enter ZIP code or city" aria-label="Find a stylist by location">
+          <button class="btn btn--primary btn--sm" type="submit">Find Stylist</button>
+        </form>
+        <div class="coveted-hero__alt">
+          or <a href="#directory">browse by state →</a>
+        </div>
+      </div>
+
+      <div class="coveted-hero__media">
+        <div class="img-zone">
+          <img src="https://covetandmane.com/cdn/shop/files/image_1-1.webp"
+               alt="Covet & Mane editorial — stylist portrait">
+          <span class="img-label">Real C&amp;M editorial — stylist portrait</span>
+        </div>
+      </div>
+
+    </section>
+
+
+    <!-- ════════════════════════════════════════════════════════════
+         WHY C&M CERTIFIED — 3-up trust cards
+         ════════════════════════════════════════════════════════════ -->
+    <section class="why-certified">
+      <div class="container">
+
+        <div class="why-certified__header reveal">
+          <div class="t-eyebrow-gold">The Standard</div>
+          <h2>Why a <em>Coveted Stylist</em>.</h2>
+        </div>
+
+        <div class="why-certified__grid reveal">
+
+          <div class="why-certified__card">
+            <div class="why-certified__icon">01</div>
+            <h3 class="why-certified__title">Certified.</h3>
+            <p class="why-certified__desc">
+              Every stylist in this directory has completed Foundations — the
+              Covet &amp; Mane method, sourcing story, color theory, and clean
+              installation principles. No exceptions, no shortcuts.
+            </p>
+          </div>
+
+          <div class="why-certified__card">
+            <div class="why-certified__icon">02</div>
+            <h3 class="why-certified__title">Premium Product.</h3>
+            <p class="why-certified__desc">
+              C&amp;M extensions are exclusive to licensed professionals.
+              Silicone-free, brass-free, ethically sourced — the hair your
+              stylist works with is the same hair seen on Zendaya, Zoë
+              Saldaña, and Jessica Alba.
+            </p>
+          </div>
+
+          <div class="why-certified__card">
+            <div class="why-certified__icon">03</div>
+            <h3 class="why-certified__title">Accountable.</h3>
+            <p class="why-certified__desc">
+              The Collective holds a standard. If something goes wrong with
+              your install, your stylist has direct access to a C&amp;M
+              educator and a real human rep — and you get the result you
+              came in for.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════════════════════════
+         DIRECTORY — map + filters + grid
+         ════════════════════════════════════════════════════════════ -->
+    <section id="directory" class="directory">
+      <div class="container-wide">
+
+        <div class="directory__header reveal">
+          <div class="t-eyebrow-gold mb-2">The Directory</div>
+          <h2><em>Find</em> your stylist.</h2>
+          <p class="directory__sub">
+            Browse certified Coveted Stylists by city, method, and tier.
+            Click a pin to preview, or use the filters on the left to narrow
+            the directory.
+          </p>
+        </div>
+
+        <div class="directory__layout">
+
+          <aside class="directory__filters reveal">
+
+            <div class="directory__filter-group">
+              <div class="directory__filter-title">Method</div>
+              <label class="directory__filter-option">
+                <input type="checkbox" checked>
+                <span>Hand-Tied Weft</span>
+                <span class="directory__filter-option-count">412</span>
+              </label>
+              <label class="directory__filter-option">
+                <input type="checkbox">
+                <span>Tape-In</span>
+                <span class="directory__filter-option-count">298</span>
+              </label>
+              <label class="directory__filter-option">
+                <input type="checkbox">
+                <span>Keratin Tip</span>
+                <span class="directory__filter-option-count">186</span>
+              </label>
+              <label class="directory__filter-option">
+                <input type="checkbox">
+                <span>Textures</span>
+                <span class="directory__filter-option-count">94</span>
+              </label>
+            </div>
+
+            <div class="directory__filter-group">
+              <div class="directory__filter-title">Tier</div>
+              <label class="directory__filter-option">
+                <input type="checkbox" checked>
+                <span>Master Educator</span>
+                <span class="directory__filter-option-count">14</span>
+              </label>
+              <label class="directory__filter-option">
+                <input type="checkbox" checked>
+                <span>Advanced</span>
+                <span class="directory__filter-option-count">486</span>
+              </label>
+              <label class="directory__filter-option">
+                <input type="checkbox" checked>
+                <span>Foundations</span>
+                <span class="directory__filter-option-count">1,924</span>
+              </label>
+            </div>
+
+            <div class="directory__filter-group">
+              <div class="directory__filter-title">Region</div>
+              <label class="directory__filter-option">
+                <input type="checkbox">
+                <span>Northeast</span>
+                <span class="directory__filter-option-count">612</span>
+              </label>
+              <label class="directory__filter-option">
+                <input type="checkbox">
+                <span>West Coast</span>
+                <span class="directory__filter-option-count">488</span>
+              </label>
+              <label class="directory__filter-option">
+                <input type="checkbox">
+                <span>South</span>
+                <span class="directory__filter-option-count">704</span>
+              </label>
+              <label class="directory__filter-option">
+                <input type="checkbox">
+                <span>Midwest</span>
+                <span class="directory__filter-option-count">320</span>
+              </label>
+              <label class="directory__filter-option">
+                <input type="checkbox">
+                <span>Canada</span>
+                <span class="directory__filter-option-count">186</span>
+              </label>
+            </div>
+
+            <span class="img-label img-label--placeholder" style="position: static; display: inline-flex;">PLACEHOLDER — directory counts; replace with real Collective numbers</span>
+
+          </aside>
+
+          <div class="directory__main">
+
+            <div class="directory__map reveal">
+              <div class="directory__map-grid"></div>
+              <div class="directory__map-overlay"></div>
+
+              <!-- Simulated map pins — purely decorative -->
+              <div class="directory__map-pin" style="top: 32%; left: 18%;">
+                <div class="directory__map-pin-dot"></div>
+                <div class="directory__map-pin-label">Los Angeles · 3</div>
+              </div>
+              <div class="directory__map-pin" style="top: 26%; left: 78%;">
+                <div class="directory__map-pin-dot"></div>
+                <div class="directory__map-pin-label">New York · 8</div>
+              </div>
+              <div class="directory__map-pin" style="top: 42%; left: 72%;">
+                <div class="directory__map-pin-dot"></div>
+                <div class="directory__map-pin-label">Atlanta · 4</div>
+              </div>
+              <div class="directory__map-pin" style="top: 64%; left: 64%;">
+                <div class="directory__map-pin-dot"></div>
+                <div class="directory__map-pin-label">Miami · 5</div>
+              </div>
+              <div class="directory__map-pin" style="top: 24%; left: 48%;">
+                <div class="directory__map-pin-dot"></div>
+                <div class="directory__map-pin-label">Chicago · 6</div>
+              </div>
+              <div class="directory__map-pin" style="top: 38%; left: 36%;">
+                <div class="directory__map-pin-dot"></div>
+                <div class="directory__map-pin-label">Denver · 2</div>
+              </div>
+              <div class="directory__map-pin" style="top: 56%; left: 84%;">
+                <div class="directory__map-pin-dot"></div>
+                <div class="directory__map-pin-label">Charleston · 3</div>
+              </div>
+
+              <span class="directory__map-note">Simulated directory map · interactive in production</span>
+            </div>
+
+            <div class="directory__results reveal">
+
+              <article class="stylist-card">
+                <div class="stylist-card__media img-zone img-zone--placeholder">
+                  <span class="img-label img-label--placeholder">PLACEHOLDER — stylist portrait, warm editorial</span>
+                </div>
+                <div class="stylist-card__body">
+                  <div class="stylist-card__name">Alana Reyes</div>
+                  <div class="stylist-card__location">Williamsburg, Brooklyn</div>
+                  <span class="stylist-card__badge">Master Educator</span>
+                </div>
+              </article>
+
+              <article class="stylist-card">
+                <div class="stylist-card__media img-zone img-zone--placeholder">
+                  <span class="img-label img-label--placeholder">PLACEHOLDER — stylist portrait</span>
+                </div>
+                <div class="stylist-card__body">
+                  <div class="stylist-card__name">Tori Elyse</div>
+                  <div class="stylist-card__location">West Hollywood, CA</div>
+                  <span class="stylist-card__badge">Master Educator</span>
+                </div>
+              </article>
+
+              <article class="stylist-card">
+                <div class="stylist-card__media img-zone img-zone--placeholder">
+                  <span class="img-label img-label--placeholder">PLACEHOLDER — stylist portrait</span>
+                </div>
+                <div class="stylist-card__body">
+                  <div class="stylist-card__name">Marina Calderone</div>
+                  <div class="stylist-card__location">Wynwood, Miami</div>
+                  <span class="stylist-card__badge">Advanced</span>
+                </div>
+              </article>
+
+              <article class="stylist-card">
+                <div class="stylist-card__media img-zone img-zone--placeholder">
+                  <span class="img-label img-label--placeholder">PLACEHOLDER — stylist portrait</span>
+                </div>
+                <div class="stylist-card__body">
+                  <div class="stylist-card__name">Jasmine Whitley</div>
+                  <div class="stylist-card__location">Buckhead, Atlanta</div>
+                  <span class="stylist-card__badge">Advanced</span>
+                </div>
+              </article>
+
+            </div>
+
+            <div style="text-align: center; padding-block: var(--space-8);">
+              <a href="#" class="btn btn--ghost">View All 2,424 Stylists →</a>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════════════════════════
+         METHODS — consumer-appropriate product discovery (no prices)
+         ════════════════════════════════════════════════════════════ -->
+    <section class="methods">
+      <div class="container">
+
+        <div class="methods__header reveal">
+          <div class="t-eyebrow-gold">Behind the Chair</div>
+          <h2>The <em>extensions</em> your stylist uses.</h2>
+          <p>
+            Ask your stylist which method is right for you — every C&amp;M
+            extension is available exclusively to licensed professionals.
+          </p>
+        </div>
+
+        <div class="methods__grid reveal">
+
+          <article class="method-card">
+            <div class="method-card__media img-zone">
+              <img src="https://covetandmane.com/cdn/shop/files/1196-general-coveted-tape.jpg"
+                   alt="The Coveted Tape">
+              <span class="img-label">Real C&amp;M — The Coveted Tape</span>
+            </div>
+            <div class="method-card__body">
+              <div class="method-card__tag">Tape-In · Quickest Install</div>
+              <h3 class="method-card__name">The Coveted Tape</h3>
+              <p class="method-card__desc">
+                Undetectable, damage-free, and rapid to install. Tape-ins are
+                a clean entry point — perfect for first-time extension wearers
+                or anyone who wants minimum maintenance between visits.
+              </p>
+              <div class="method-card__hint">
+                Best for: fine to medium hair · 6–8 week refresh
+              </div>
+            </div>
+          </article>
+
+          <article class="method-card">
+            <div class="method-card__media img-zone">
+              <img src="https://covetandmane.com/cdn/shop/files/1196-thecutpointsilkystraight-general.jpg"
+                   alt="The Cut-Point Weft">
+              <span class="img-label">Real C&amp;M — The Cut-Point Weft</span>
+            </div>
+            <div class="method-card__body">
+              <div class="method-card__tag">Hand-Tied · Most Versatile</div>
+              <h3 class="method-card__name">Hand-Tied Wefts</h3>
+              <p class="method-card__desc">
+                Sewn under your natural hair onto small beaded rows.
+                Lightweight, secure, and infinitely customizable. The
+                go-to for natural movement and long-term wear.
+              </p>
+              <div class="method-card__hint">
+                Best for: medium to thick hair · 6–10 week refresh
+              </div>
+            </div>
+          </article>
+
+          <article class="method-card">
+            <div class="method-card__media img-zone">
+              <img src="https://covetandmane.com/cdn/shop/files/Keratin-tip-general2.jpg"
+                   alt="The Keratin Tip">
+              <span class="img-label">Real C&amp;M — The Keratin Tip</span>
+            </div>
+            <div class="method-card__body">
+              <div class="method-card__tag">Keratin Tip · Most Seamless</div>
+              <h3 class="method-card__name">The Keratin Tip</h3>
+              <p class="method-card__desc">
+                Pre-tipped, keratin-bonded extensions installed strand by
+                strand. The most undetectable method — built for fine hair,
+                face-framing detail work, and red-carpet finishes.
+              </p>
+              <div class="method-card__hint">
+                Best for: fine to medium hair · 8–12 week refresh
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════════════════════════
+         AFTERCARE & MAINTENANCE — consumer post-purchase content
+         (Part of why "The Coveted" is more than a directory)
+         ════════════════════════════════════════════════════════════ -->
+    <section class="aftercare">
+      <div class="container">
+
+        <div class="aftercare__header reveal">
+          <div class="aftercare__title-block">
+            <div class="t-eyebrow-gold">Care &amp; Maintenance</div>
+            <h2><em>Love them</em> longer.</h2>
+          </div>
+          <a href="care.html" class="link-arrow">All Care Guides →</a>
+        </div>
+
+        <div class="aftercare__grid reveal">
+
+          <a href="aftercare.html" class="aftercare-card aftercare__featured">
+            <div class="aftercare-card__media img-zone">
+              <img src="https://covetandmane.com/cdn/shop/files/SocialShare_hair.jpg"
+                   alt="The first 48 hours">
+              <span class="img-label">Real C&amp;M editorial</span>
+            </div>
+            <div class="aftercare-card__body">
+              <span class="aftercare-card__cat">The Essentials · Aftercare 101</span>
+              <h3 class="aftercare-card__title">
+                The First 48 Hours After Your Install — What to Do, What to Skip.
+              </h3>
+              <span class="aftercare-card__meta">6 min read · For new clients</span>
+              <span class="link-arrow link-arrow--gold mt-4">Read the Guide →</span>
+            </div>
+          </a>
+
+          <a href="care.html" class="aftercare-card">
+            <div class="aftercare-card__media img-zone">
+              <img src="https://covetandmane.com/cdn/shop/files/TheBeachWaveCare_MaintenanceCards.webp"
+                   alt="Wash day routine">
+              <span class="img-label">Real C&amp;M — care cards</span>
+            </div>
+            <div class="aftercare-card__body">
+              <span class="aftercare-card__cat">Wash Day</span>
+              <h3 class="aftercare-card__title">Your Wash Day Routine, Simplified.</h3>
+              <span class="aftercare-card__meta">4 min read</span>
+            </div>
+          </a>
+
+          <a href="care.html" class="aftercare-card">
+            <div class="aftercare-card__media img-zone img-zone--placeholder">
+              <span class="img-label img-label--placeholder">PLACEHOLDER — Sleeping/styling editorial</span>
+            </div>
+            <div class="aftercare-card__body">
+              <span class="aftercare-card__cat">Sleep &amp; Style</span>
+              <h3 class="aftercare-card__title">How to Sleep, Tie, and Travel With Extensions.</h3>
+              <span class="aftercare-card__meta">5 min read</span>
+            </div>
+          </a>
+
+          <a href="care.html" class="aftercare-card">
+            <div class="aftercare-card__media img-zone img-zone--placeholder">
+              <span class="img-label img-label--placeholder">PLACEHOLDER — Workout/swim lifestyle</span>
+            </div>
+            <div class="aftercare-card__body">
+              <span class="aftercare-card__cat">Active Lifestyle</span>
+              <h3 class="aftercare-card__title">Workouts, Pools &amp; Beach Days — Without the Damage.</h3>
+              <span class="aftercare-card__meta">7 min read</span>
+            </div>
+          </a>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════════════════════════
+         STYLIST CTA — for stylists who landed here
+         ════════════════════════════════════════════════════════════ -->
+    <section class="stylist-cta">
+      <div class="container">
+        <div class="stylist-cta__inner reveal">
+          <div class="stylist-cta__copy">
+            <h3>Are you a licensed stylist?</h3>
+            <p>
+              Apply for a professional account and start with Foundations.
+              The Collective is open by invitation — and so is the work.
+            </p>
+          </div>
+          <div>
+            <a href="apply.html" class="btn btn--primary">Apply for Account →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="site-footer-mount"></div>
+
+  <script src="js/nav.js"></script>
+  <script src="js/toggle.js"></script>
+  <script src="js/reveal.js"></script>
+
+</body>
+</html>

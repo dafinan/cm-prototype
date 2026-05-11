@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portal — Covet &amp; Mane</title>
+  <meta name="description" content="The Covet & Mane professional portal — quick reorder, education progress, community, and your rep.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,300;1,400;1,500&family=Nunito+Sans:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages/portal.css">
+</head>
+<body data-page="portal">
+
+  <div id="site-nav-mount"></div>
+
+  <main id="MainContent">
+
+    <!-- ════════════════════════════════════════════════════════════
+         LOGGED-OUT GATE — shown when user isn't logged in
+         (Toggle via the floating dev button)
+         ════════════════════════════════════════════════════════════ -->
+    <div class="portal-gate">
+      <div class="t-eyebrow-gold mb-4">Pro Portal</div>
+      <h1 class="portal-gate__title">Sign in to access your portal.</h1>
+      <p class="portal-gate__sub">
+        The portal is reserved for verified Covet &amp; Mane account holders.
+        Sign in to view your quick reorder, education path, community, and rep
+        details.
+      </p>
+
+      <div style="display: flex; gap: var(--space-4); flex-wrap: wrap; justify-content: center;">
+        <a href="#" class="btn btn--primary btn--lg" onclick="document.querySelector('.dev-toggle')?.click(); return false;">Sign In</a>
+        <a href="apply.html" class="btn btn--gold-outline btn--lg">Apply for Account</a>
+      </div>
+
+      <div class="portal-gate__hint">
+        <strong>Reviewing the prototype?</strong> Click the
+        <code>View as</code> toggle bottom-right to switch into the logged-in
+        view. State persists across pages.
+      </div>
+    </div>
+
+
+    <!-- ════════════════════════════════════════════════════════════
+         LOGGED-IN PORTAL CONTENT — shown when body.logged-in
+         ════════════════════════════════════════════════════════════ -->
+    <div class="portal-content">
+
+      <!-- ── Portal Header ─────────────────────────────────────────── -->
+      <header class="portal-header">
+        <div class="container-wide">
+
+          <div class="portal-header__top reveal">
+            <h1 class="portal-header__greeting">
+              Welcome back, Sarah.
+              <span class="portal-header__greeting-sub">Last sign-in · 3 days ago</span>
+            </h1>
+            <div class="portal-header__status">
+              <span class="portal-header__status-label">Account Status</span>
+              <span class="portal-header__status-tier">Advanced Certified</span>
+              <span class="portal-header__status-label" style="margin-top: 4px;">Member since 2023</span>
+            </div>
+          </div>
+
+          <div class="portal-header__actions reveal">
+            <a href="#quick-reorder" class="portal-action">
+              <span class="portal-action__icon">↺</span>
+              <span class="portal-action__body">
+                <span class="portal-action__name">Reorder</span>
+                <span class="portal-action__meta">Last 3 orders</span>
+              </span>
+            </a>
+            <a href="shop.html" class="portal-action">
+              <span class="portal-action__icon">+</span>
+              <span class="portal-action__body">
+                <span class="portal-action__name">New Order</span>
+                <span class="portal-action__meta">Browse catalog</span>
+              </span>
+            </a>
+            <a href="#education" class="portal-action">
+              <span class="portal-action__icon">◇</span>
+              <span class="portal-action__body">
+                <span class="portal-action__name">My Education</span>
+                <span class="portal-action__meta">Next: Master</span>
+              </span>
+            </a>
+            <a href="#rep" class="portal-action">
+              <span class="portal-action__icon">✦</span>
+              <span class="portal-action__body">
+                <span class="portal-action__name">Talk to My Rep</span>
+                <span class="portal-action__meta">Jenna Park</span>
+              </span>
+            </a>
+          </div>
+
+        </div>
+      </header>
+
+
+      <!-- ── Tabs ──────────────────────────────────────────────────── -->
+      <div class="tabs" data-tabs>
+
+        <div class="tabs__triggers" role="tablist">
+          <button class="tabs__trigger is-active" data-tab="overview" role="tab" aria-selected="true">Overview</button>
+          <button class="tabs__trigger" data-tab="orders" role="tab" aria-selected="false">Orders</button>
+          <button class="tabs__trigger" data-tab="education" role="tab" aria-selected="false">Education</button>
+          <button class="tabs__trigger" data-tab="community" role="tab" aria-selected="false">Community</button>
+        </div>
+
+
+        <!-- ════════════════════════════════════════════════════════
+             OVERVIEW TAB
+             ════════════════════════════════════════════════════════ -->
+        <div class="tabs__panel is-active" data-panel="overview" role="tabpanel">
+
+
+          <!-- Quick Reorder -->
+          <section id="quick-reorder" class="portal-section">
+            <div class="container-wide">
+
+              <div class="portal-section__header reveal">
+                <div class="portal-section__title-block">
+                  <div class="t-eyebrow-gold">Quick Reorder</div>
+                  <h2 class="portal-section__title">Your last 3 orders.</h2>
+                </div>
+                <a href="orders.html" class="link-arrow">All Orders →</a>
+              </div>
+
+              <div class="quick-reorder__layout reveal">
+
+                <div class="quick-reorder__list">
+
+                  <article class="reorder-item">
+                    <div class="reorder-item__media img-zone">
+                      <img src="https://covetandmane.com/cdn/shop/files/1196-thecutpointsilkystraight-general.jpg"
+                           alt="The Cut-Point Weft">
+                    </div>
+                    <div>
+                      <div class="reorder-item__name">The Cut-Point Weft — Silky Straight</div>
+                      <div class="reorder-item__spec">
+                        <span>Casablanca · 2/4</span>
+                        <span>22"</span>
+                        <span>3 packs</span>
+                      </div>
+                      <div class="reorder-item__meta">Ordered Apr 24 · Delivered Apr 28</div>
+                    </div>
+                    <a href="#" class="btn btn--gold btn--sm">Reorder →</a>
+                  </article>
+
+                  <article class="reorder-item">
+                    <div class="reorder-item__media img-zone">
+                      <img src="https://covetandmane.com/cdn/shop/files/Keratin-tip-general2.jpg"
+                           alt="The Keratin Tip">
+                    </div>
+                    <div>
+                      <div class="reorder-item__name">The Keratin Tip — Silky Straight</div>
+                      <div class="reorder-item__spec">
+                        <span>Capetown · 8</span>
+                        <span>20"</span>
+                        <span>2 packs (40g)</span>
+                      </div>
+                      <div class="reorder-item__meta">Ordered Apr 09 · Delivered Apr 12</div>
+                    </div>
+                    <a href="#" class="btn btn--gold-outline btn--sm">Reorder →</a>
+                  </article>
+
+                  <article class="reorder-item">
+                    <div class="reorder-item__media img-zone">
+                      <img src="https://covetandmane.com/cdn/shop/files/1196-general-coveted-tape.jpg"
+                           alt="The Coveted Tape">
+                    </div>
+                    <div>
+                      <div class="reorder-item__name">The Coveted Tape — Soft Relaxed</div>
+                      <div class="reorder-item__spec">
+                        <span>London</span>
+                        <span>18"</span>
+                        <span>1 pack</span>
+                      </div>
+                      <div class="reorder-item__meta">Ordered Mar 22 · Delivered Mar 26</div>
+                    </div>
+                    <a href="#" class="btn btn--gold-outline btn--sm">Reorder →</a>
+                  </article>
+
+                </div>
+
+                <div class="sku-order">
+                  <h3 class="sku-order__title">Order by SKU.</h3>
+                  <p class="sku-order__sub">For when you know what you need.</p>
+                  <form onsubmit="event.preventDefault();">
+                    <div class="sku-order__row">
+                      <input type="text" placeholder="Enter SKU" aria-label="SKU">
+                      <input type="number" placeholder="Qty" aria-label="Quantity" min="1" value="1">
+                    </div>
+                    <a href="#" class="btn btn--primary btn--block">Add to Order →</a>
+                  </form>
+                </div>
+
+              </div>
+
+            </div>
+          </section>
+
+
+          <!-- Pro Feed (was "The Coveted" in handoff — renamed since The Coveted is consumer-facing) -->
+          <section class="portal-section pro-feed">
+            <div class="container-wide">
+
+              <div class="portal-section__header reveal">
+                <div class="portal-section__title-block">
+                  <div class="t-eyebrow-gold">From the Studio · For the Collective</div>
+                  <h2 class="portal-section__title">Notes from the practice.</h2>
+                </div>
+                <a href="pro-resources.html" class="link-arrow">All Resources →</a>
+                <span class="img-label img-label--placeholder" style="position: static; display: inline-flex;">PLACEHOLDER — Confirm pro-feed naming (was "The Coveted"; that name now belongs to the consumer side)</span>
+              </div>
+
+              <div class="pro-feed__grid reveal">
+
+                <article class="article-card pro-feed__featured">
+                  <div class="article-card__media img-zone">
+                    <img src="https://covetandmane.com/cdn/shop/files/image-1_a21330f0-eae0-4586-9034-149b609459c7.webp"
+                         alt="Tape-In technique deep dive">
+                    <span class="img-label">Real C&amp;M editorial — Tape masterclass</span>
+                  </div>
+                  <div class="article-card__eyebrow">Technique · Featured</div>
+                  <h3 class="article-card__title">The Five Mistakes Even Senior Stylists Make on Tape-Ins.</h3>
+                  <div class="article-card__meta">8 min read · Foundations refresher</div>
+                </article>
+
+                <article class="article-card">
+                  <div class="article-card__media img-zone">
+                    <img src="https://covetandmane.com/cdn/shop/files/1196-capetown-blend.jpg"
+                         alt="Color story — Casablanca">
+                    <span class="img-label">Real C&amp;M editorial — color</span>
+                  </div>
+                  <div class="article-card__eyebrow">Color</div>
+                  <h3 class="article-card__title">Casablanca: A Brass-Free Brunette, Reimagined.</h3>
+                  <div class="article-card__meta">5 min read</div>
+                </article>
+
+                <article class="article-card">
+                  <div class="article-card__media img-zone">
+                    <img src="https://covetandmane.com/cdn/shop/files/DSCF4021_1_3.jpg"
+                         alt="Business for stylists">
+                    <span class="img-label">Real C&amp;M editorial</span>
+                  </div>
+                  <div class="article-card__eyebrow">Business</div>
+                  <h3 class="article-card__title">Pricing Your Install: A Framework.</h3>
+                  <div class="article-card__meta">12 min read</div>
+                </article>
+
+              </div>
+
+              <p class="pro-feed__footer">
+                New resources added every week. Exclusive to verified accounts.
+              </p>
+
+            </div>
+          </section>
+
+
+          <!-- Cert Progress -->
+          <section id="education" class="portal-section cert-progress">
+            <div class="container-wide">
+
+              <div class="portal-section__header reveal">
+                <div class="portal-section__title-block">
+                  <div class="t-eyebrow-gold">Your Certification Path</div>
+                  <h2 class="portal-section__title">You're 2 of 3.</h2>
+                </div>
+                <a href="academy.html" class="link-arrow">The Academy →</a>
+              </div>
+
+              <div class="cert-progress__steps reveal">
+
+                <div class="cert-progress__step cert-progress__step--done">
+                  <span class="cert-progress__step-tier">Tier 01 · Foundations</span>
+                  <h3 class="cert-progress__step-name">Foundations</h3>
+                  <p class="cert-progress__step-desc">
+                    Completed November 2023. The on-ramp to the C&amp;M method.
+                  </p>
+                </div>
+
+                <div class="cert-progress__step cert-progress__step--done">
+                  <span class="cert-progress__step-tier">Tier 02 · Advanced</span>
+                  <h3 class="cert-progress__step-name">Concealed by C&amp;M</h3>
+                  <p class="cert-progress__step-desc">
+                    Completed February 2024. Hand-tied weft mastery, in studio.
+                  </p>
+                </div>
+
+                <div class="cert-progress__step cert-progress__step--next">
+                  <span class="cert-progress__step-tier">Tier 03 · Master Educator</span>
+                  <h3 class="cert-progress__step-name">Apply to Master Educator</h3>
+                  <p class="cert-progress__step-desc">
+                    Invitation-only. Lead Foundations classes. Represent the
+                    Collective. We've flagged you as ready.
+                  </p>
+                  <a href="contact.html" class="btn btn--gold mt-4" style="align-self: flex-start;">Start Application →</a>
+                </div>
+
+              </div>
+
+            </div>
+          </section>
+
+
+          <!-- Upcoming Events for You -->
+          <section class="portal-section" style="background: var(--color-surface-warm);">
+            <div class="container-wide">
+
+              <div class="portal-section__header reveal">
+                <div class="portal-section__title-block">
+                  <div class="t-eyebrow-gold">Upcoming in Your Area</div>
+                  <h2 class="portal-section__title">Classes near Brooklyn.</h2>
+                </div>
+                <a href="academy.html#events" class="link-arrow">Full Calendar →</a>
+              </div>
+
+              <div class="events__grid reveal">
+
+                <article class="event-card">
+                  <div class="event-card__date">
+                    <span class="event-card__month">June</span>
+                    <span class="event-card__day">14</span>
+                  </div>
+                  <div class="event-card__body">
+                    <span class="event-card__tier">Advanced · Concealed</span>
+                    <h3 class="event-card__title">Concealed by C&amp;M — The Method</h3>
+                    <span class="event-card__where">New York, NY · 12 min from you</span>
+                  </div>
+                  <div class="event-card__footer">
+                    <span class="event-card__status event-card__status--available">Available</span>
+                    <a href="#" class="link-arrow link-arrow--gold" style="font-size: 9px;">Register →</a>
+                  </div>
+                </article>
+
+                <article class="event-card">
+                  <div class="event-card__date">
+                    <span class="event-card__month">Sept</span>
+                    <span class="event-card__day">12</span>
+                  </div>
+                  <div class="event-card__body">
+                    <span class="event-card__tier">The Experience · Annual</span>
+                    <h3 class="event-card__title">The Experience 2026 — Two-Day Immersive</h3>
+                    <span class="event-card__where">New York, NY · 22 min from you</span>
+                  </div>
+                  <div class="event-card__footer">
+                    <span class="event-card__status event-card__status--available">Early Access</span>
+                    <a href="#" class="link-arrow link-arrow--gold" style="font-size: 9px;">Reserve →</a>
+                  </div>
+                </article>
+
+              </div>
+
+            </div>
+          </section>
+
+
+          <!-- Community / Network -->
+          <section class="portal-section">
+            <div class="container-wide">
+
+              <div class="portal-section__header reveal">
+                <div class="portal-section__title-block">
+                  <div class="t-eyebrow-gold">The Collective</div>
+                  <h2 class="portal-section__title">Who's in your network.</h2>
+                </div>
+                <a href="#" class="link-arrow">View Directory →</a>
+              </div>
+
+              <div class="network__layout reveal">
+
+                <div>
+                  <h3 class="t-eyebrow mb-6">Active near Brooklyn this week</h3>
+                  <div class="network__peers">
+
+                    <a href="#" class="network__peer">
+                      <div class="network__peer-media img-zone img-zone--placeholder">
+                        <span class="img-label img-label--placeholder">PLACEHOLDER — peer portrait</span>
+                      </div>
+                      <span class="network__peer-name">Alana Reyes</span>
+                      <span class="network__peer-loc">Williamsburg</span>
+                    </a>
+
+                    <a href="#" class="network__peer">
+                      <div class="network__peer-media img-zone img-zone--placeholder">
+                        <span class="img-label img-label--placeholder">PLACEHOLDER</span>
+                      </div>
+                      <span class="network__peer-name">Marcus Chen</span>
+                      <span class="network__peer-loc">SoHo</span>
+                    </a>
+
+                    <a href="#" class="network__peer">
+                      <div class="network__peer-media img-zone img-zone--placeholder">
+                        <span class="img-label img-label--placeholder">PLACEHOLDER</span>
+                      </div>
+                      <span class="network__peer-name">Priya Anand</span>
+                      <span class="network__peer-loc">DUMBO</span>
+                    </a>
+
+                    <a href="#" class="network__peer">
+                      <div class="network__peer-media img-zone img-zone--placeholder">
+                        <span class="img-label img-label--placeholder">PLACEHOLDER</span>
+                      </div>
+                      <span class="network__peer-name">Devon Mitchell</span>
+                      <span class="network__peer-loc">Park Slope</span>
+                    </a>
+
+                  </div>
+                </div>
+
+                <div class="network__threads">
+                  <h3 class="t-eyebrow mb-4">Latest from the Collective</h3>
+
+                  <div class="network__thread">
+                    <div class="network__thread-meta">Technique · 18 replies</div>
+                    <a href="#"><h4 class="network__thread-title">Anyone else seeing different blend results with the new Beach Wave batch?</h4></a>
+                    <p class="network__thread-snippet">"Picked up an order last week and noticed the wave pattern is slightly tighter on the 22"…"</p>
+                  </div>
+
+                  <div class="network__thread">
+                    <div class="network__thread-meta">Business · 6 replies</div>
+                    <a href="#"><h4 class="network__thread-title">How are you all pricing Keratin Tip touch-ups now?</h4></a>
+                    <p class="network__thread-snippet">"My current per-tip price feels low after Concealed. Curious where the room is settling…"</p>
+                  </div>
+
+                  <div class="network__thread">
+                    <div class="network__thread-meta">Education · 3 replies</div>
+                    <a href="#"><h4 class="network__thread-title">Master Educator track — who's applying for the September cohort?</h4></a>
+                    <p class="network__thread-snippet">"Putting my hat in the ring this year. Looking for a study partner from Northeast…"</p>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+          </section>
+
+
+          <!-- My Rep -->
+          <section id="rep" class="portal-section" style="background: var(--color-surface);">
+            <div class="container-wide">
+
+              <div class="portal-section__header reveal">
+                <div class="portal-section__title-block">
+                  <div class="t-eyebrow-gold">A Real Human</div>
+                  <h2 class="portal-section__title">Your rep.</h2>
+                </div>
+              </div>
+
+              <div class="rep-card reveal">
+                <div class="rep-card__avatar img-zone img-zone--placeholder">
+                  <span class="img-label img-label--placeholder" style="font-size: 7px;">REP</span>
+                </div>
+                <div>
+                  <div class="rep-card__role">Your Concierge · Northeast</div>
+                  <div class="rep-card__name">Jenna Park</div>
+                  <div class="rep-card__contact">
+                    <span>📱 (917) 555-0142</span>
+                    <span>✉ jenna@covetandmane.com</span>
+                    <span>📅 Mon–Fri · 9–6 ET</span>
+                  </div>
+                </div>
+                <div>
+                  <a href="#" class="btn btn--gold">Schedule a Call →</a>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+        </div>
+
+
+        <!-- ════════════════════════════════════════════════════════
+             ORDERS TAB
+             ════════════════════════════════════════════════════════ -->
+        <div class="tabs__panel" data-panel="orders" role="tabpanel" hidden>
+          <section class="portal-section">
+            <div class="container-wide">
+              <div class="portal-section__header">
+                <div class="portal-section__title-block">
+                  <div class="t-eyebrow-gold">Order History</div>
+                  <h2 class="portal-section__title">Every order, every time.</h2>
+                </div>
+              </div>
+              <p class="t-body-lg t-muted max-w-prose">
+                Your full order history with reorder, invoice download, and
+                tracking lives here.
+              </p>
+              <span class="img-label img-label--placeholder" style="position: static; display: inline-flex; margin-top: var(--space-6);">
+                PLACEHOLDER — Full orders view. Stub for prototype; production will list every order with status, tracking, invoice.
+              </span>
+            </div>
+          </section>
+        </div>
+
+
+        <!-- ════════════════════════════════════════════════════════
+             EDUCATION TAB
+             ════════════════════════════════════════════════════════ -->
+        <div class="tabs__panel" data-panel="education" role="tabpanel" hidden>
+          <section class="portal-section cert-progress">
+            <div class="container-wide">
+              <div class="portal-section__header">
+                <div class="portal-section__title-block">
+                  <div class="t-eyebrow-gold">Education</div>
+                  <h2 class="portal-section__title">Your path, your pace.</h2>
+                </div>
+                <a href="academy.html" class="link-arrow">The Academy →</a>
+              </div>
+
+              <div class="cert-progress__steps">
+                <div class="cert-progress__step cert-progress__step--done">
+                  <span class="cert-progress__step-tier">Tier 01 · Foundations</span>
+                  <h3 class="cert-progress__step-name">Foundations</h3>
+                  <p class="cert-progress__step-desc">Completed November 2023.</p>
+                </div>
+                <div class="cert-progress__step cert-progress__step--done">
+                  <span class="cert-progress__step-tier">Tier 02 · Advanced</span>
+                  <h3 class="cert-progress__step-name">Concealed by C&amp;M</h3>
+                  <p class="cert-progress__step-desc">Completed February 2024.</p>
+                </div>
+                <div class="cert-progress__step cert-progress__step--next">
+                  <span class="cert-progress__step-tier">Tier 03 · Master Educator</span>
+                  <h3 class="cert-progress__step-name">Apply to Master Educator</h3>
+                  <p class="cert-progress__step-desc">
+                    Invitation-only. We've flagged you as ready.
+                  </p>
+                  <a href="contact.html" class="btn btn--gold mt-4" style="align-self: flex-start;">Start Application →</a>
+                </div>
+              </div>
+
+              <h3 class="t-eyebrow mt-16 mb-4">Video Library · Available to You</h3>
+              <div class="pro-feed__grid">
+                <article class="article-card">
+                  <div class="article-card__media img-zone">
+                    <img src="https://covetandmane.com/cdn/shop/files/20250314_COVET_MANE_LT_MILLI_BTS__8995_v1a_76_2.webp" alt="Master class">
+                    <span class="img-label">Real C&amp;M — masterclass</span>
+                  </div>
+                  <div class="article-card__eyebrow">Master Class</div>
+                  <h3 class="article-card__title">The Keratin Tip with Tori Elyse</h3>
+                  <div class="article-card__meta">10 min · On-demand</div>
+                </article>
+                <article class="article-card">
+                  <div class="article-card__media img-zone">
+                    <img src="https://covetandmane.com/cdn/shop/files/image_1-1.webp" alt="Photography">
+                    <span class="img-label">Real C&amp;M editorial</span>
+                  </div>
+                  <div class="article-card__eyebrow">Master Class</div>
+                  <h3 class="article-card__title">Photography for Hairdressers — Ian Sannicolas</h3>
+                  <div class="article-card__meta">45 min · On-demand</div>
+                </article>
+                <article class="article-card">
+                  <div class="article-card__media img-zone">
+                    <img src="https://covetandmane.com/cdn/shop/files/image-1_a21330f0-eae0-4586-9034-149b609459c7.webp" alt="Tape masterclass">
+                    <span class="img-label">Real C&amp;M editorial</span>
+                  </div>
+                  <div class="article-card__eyebrow">Master Class</div>
+                  <h3 class="article-card__title">Master the Art of Tape-In Extensions</h3>
+                  <div class="article-card__meta">38 min · On-demand</div>
+                </article>
+              </div>
+
+            </div>
+          </section>
+        </div>
+
+
+        <!-- ════════════════════════════════════════════════════════
+             COMMUNITY TAB
+             ════════════════════════════════════════════════════════ -->
+        <div class="tabs__panel" data-panel="community" role="tabpanel" hidden>
+          <section class="portal-section">
+            <div class="container-wide">
+              <div class="portal-section__header">
+                <div class="portal-section__title-block">
+                  <div class="t-eyebrow-gold">The Collective</div>
+                  <h2 class="portal-section__title">Conversation, not commerce.</h2>
+                </div>
+              </div>
+
+              <div class="network__layout">
+
+                <div>
+                  <h3 class="t-eyebrow mb-6">Stylists near you</h3>
+                  <div class="network__peers">
+                    <a href="#" class="network__peer">
+                      <div class="network__peer-media img-zone img-zone--placeholder"><span class="img-label img-label--placeholder">PLACEHOLDER</span></div>
+                      <span class="network__peer-name">Alana Reyes</span>
+                      <span class="network__peer-loc">Williamsburg</span>
+                    </a>
+                    <a href="#" class="network__peer">
+                      <div class="network__peer-media img-zone img-zone--placeholder"><span class="img-label img-label--placeholder">PLACEHOLDER</span></div>
+                      <span class="network__peer-name">Marcus Chen</span>
+                      <span class="network__peer-loc">SoHo</span>
+                    </a>
+                    <a href="#" class="network__peer">
+                      <div class="network__peer-media img-zone img-zone--placeholder"><span class="img-label img-label--placeholder">PLACEHOLDER</span></div>
+                      <span class="network__peer-name">Priya Anand</span>
+                      <span class="network__peer-loc">DUMBO</span>
+                    </a>
+                    <a href="#" class="network__peer">
+                      <div class="network__peer-media img-zone img-zone--placeholder"><span class="img-label img-label--placeholder">PLACEHOLDER</span></div>
+                      <span class="network__peer-name">Devon Mitchell</span>
+                      <span class="network__peer-loc">Park Slope</span>
+                    </a>
+                  </div>
+                </div>
+
+                <div class="network__threads">
+                  <h3 class="t-eyebrow mb-4">Latest threads</h3>
+                  <div class="network__thread">
+                    <div class="network__thread-meta">Technique · 18 replies · 2h ago</div>
+                    <a href="#"><h4 class="network__thread-title">Anyone else seeing different blend results with the new Beach Wave batch?</h4></a>
+                  </div>
+                  <div class="network__thread">
+                    <div class="network__thread-meta">Business · 6 replies · 5h ago</div>
+                    <a href="#"><h4 class="network__thread-title">How are you all pricing Keratin Tip touch-ups now?</h4></a>
+                  </div>
+                  <div class="network__thread">
+                    <div class="network__thread-meta">Education · 3 replies · 1d ago</div>
+                    <a href="#"><h4 class="network__thread-title">Master Educator track — who's applying for the September cohort?</h4></a>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </section>
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <div id="site-footer-mount"></div>
+
+  <script src="js/nav.js"></script>
+  <script src="js/toggle.js"></script>
+  <script src="js/reveal.js"></script>
+  <script src="js/tabs.js"></script>
+
+</body>
+</html>

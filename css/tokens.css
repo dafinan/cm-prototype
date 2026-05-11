@@ -1,0 +1,184 @@
+/* =========================================================================
+   COVET & MANE — DESIGN TOKENS
+   Single source of truth for color, type, spacing, motion.
+   Change a value here → it propagates everywhere.
+   ========================================================================= */
+
+:root {
+
+  /* ── COLOR ──────────────────────────────────────────────────────────
+     Two layers:
+     1) Raw palette (named by hue, never use directly in components)
+     2) Semantic tokens (named by role — use these in components)
+     ────────────────────────────────────────────────────────────────── */
+
+  /* Raw palette */
+  --c-black:        #0e0e0e;
+  --c-warm-dark:    #1a1510;
+  --c-charcoal:     #3a3530;
+  --c-mid-grey:     #9a9490;
+  --c-warm-grey:    #e8e2d8;
+  --c-cream:        #f5f0e8;
+  --c-cream-soft:   #faf6ef;
+  --c-white:        #ffffff;
+  --c-gold:         #b89a6a;
+  --c-gold-light:   #d4b98a;
+  --c-gold-deep:    #8e7448;
+
+  /* Semantic tokens — use these in component CSS */
+  --color-text:           var(--c-black);
+  --color-text-muted:     var(--c-charcoal);
+  --color-text-subtle:    var(--c-mid-grey);
+  --color-text-inverse:   var(--c-white);
+  --color-text-accent:    var(--c-gold);
+
+  --color-surface:        var(--c-white);
+  --color-surface-soft:   var(--c-cream-soft);
+  --color-surface-warm:   var(--c-cream);
+  --color-surface-dim:    var(--c-warm-grey);
+  --color-surface-dark:   var(--c-warm-dark);
+  --color-surface-black:  var(--c-black);
+
+  --color-border:         var(--c-warm-grey);
+  --color-border-strong:  var(--c-charcoal);
+  --color-border-gold:    var(--c-gold);
+
+  --color-accent:         var(--c-gold);
+  --color-accent-light:   var(--c-gold-light);
+  --color-accent-deep:    var(--c-gold-deep);
+
+  /* ── TYPOGRAPHY ─────────────────────────────────────────────────────
+     Type families:
+       --font-serif → EB Garamond (stand-in for Adobe Caslon Pro Italic
+                      until the licensed font is loaded for production)
+       --font-sans  → Nunito Sans (stand-in for Avenir Book/Black)
+     ────────────────────────────────────────────────────────────────── */
+
+  --font-serif: 'EB Garamond', 'Adobe Caslon Pro', Georgia, serif;
+  --font-sans:  'Nunito Sans', 'Avenir Next', 'Avenir', system-ui, -apple-system, sans-serif;
+
+  /* Type scale — fluid where it matters (heros, section headlines) */
+  --fs-hero:        clamp(48px, 7vw, 96px);   /* hero headlines */
+  --fs-display:     clamp(36px, 4.5vw, 64px); /* secondary heroes */
+  --fs-h1:          clamp(32px, 3.5vw, 56px); /* section headlines */
+  --fs-h2:          clamp(24px, 2.5vw, 40px); /* sub-section */
+  --fs-h3:          22px;
+  --fs-h4:          18px;
+  --fs-body-lg:     16px;
+  --fs-body:        15px;
+  --fs-body-sm:     14px;
+  --fs-label:       11px;  /* uppercase labels, nav */
+  --fs-micro:       10px;  /* CTAs, eyebrow */
+  --fs-tiny:        9px;   /* image annotations */
+
+  /* Line heights */
+  --lh-tight:   1.1;
+  --lh-snug:    1.25;
+  --lh-normal:  1.5;
+  --lh-relaxed: 1.7;
+
+  /* Letter spacing — brand book Avenir Black uses loose tracking */
+  --ls-tight:    -0.01em;
+  --ls-normal:    0;
+  --ls-wide:      0.08em;
+  --ls-wider:     0.12em;   /* CTAs */
+  --ls-widest:    0.2em;    /* eyebrow labels, promo bar */
+
+  /* Font weights */
+  --fw-light:     300;
+  --fw-regular:   400;
+  --fw-medium:    500;
+  --fw-semibold:  600;
+  --fw-bold:      700;
+  --fw-black:     900;
+
+  /* ── SPACING ────────────────────────────────────────────────────────
+     8-point system. Use scale tokens, not raw pixels.
+     ────────────────────────────────────────────────────────────────── */
+
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:   12px;
+  --space-4:   16px;
+  --space-5:   20px;
+  --space-6:   24px;
+  --space-8:   32px;
+  --space-10:  40px;
+  --space-12:  48px;
+  --space-16:  64px;
+  --space-20:  80px;
+  --space-24:  96px;
+  --space-32:  128px;
+  --space-40:  160px;
+
+  /* Section padding (vertical) — varies with viewport */
+  --section-pad-y:    clamp(56px, 9vw, 120px);
+  --section-pad-x:    clamp(20px, 5vw, 48px);
+
+  /* ── LAYOUT ─────────────────────────────────────────────────────────
+     Single container max + gutters. No 12-column framework needed for
+     a prototype — we use CSS grid per section.
+     ────────────────────────────────────────────────────────────────── */
+
+  --container-max:   1280px;
+  --container-wide:  1440px;
+  --container-pad:   clamp(20px, 5vw, 48px);
+  --nav-height:      64px;
+  --promo-height:    36px;
+
+  /* ── BREAKPOINTS (reference values — used in media queries) ─────────
+     Mobile-first. Use min-width.
+     ────────────────────────────────────────────────────────────────── */
+  /*  --bp-sm: 480px;   small phones up
+      --bp-md: 768px;   tablet up
+      --bp-lg: 1024px;  desktop up
+      --bp-xl: 1280px;  large desktop up                                */
+
+  /* ── BORDERS, RADIUS, SHADOWS ───────────────────────────────────────
+     Brand is restrained — minimal radius, soft warm shadows.
+     ────────────────────────────────────────────────────────────────── */
+
+  --radius-none:  0;
+  --radius-sm:    2px;
+  --radius-md:    4px;
+  --radius-pill:  999px;
+
+  --border-thin:    1px solid var(--color-border);
+  --border-strong:  1px solid var(--color-border-strong);
+  --border-gold:    1px solid var(--color-border-gold);
+
+  --shadow-soft:    0 2px 12px rgba(26, 21, 16, 0.06);
+  --shadow-card:    0 4px 24px rgba(26, 21, 16, 0.08);
+  --shadow-lifted:  0 12px 40px rgba(26, 21, 16, 0.14);
+
+  /* ── MOTION ─────────────────────────────────────────────────────────
+     Editorial motion is slow and confident, never bouncy.
+     ────────────────────────────────────────────────────────────────── */
+
+  --ease-out:      cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:   cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --dur-fast:    150ms;
+  --dur-base:    250ms;
+  --dur-slow:    450ms;
+  --dur-slower:  700ms;
+
+  /* ── Z-INDEX SCALE ──────────────────────────────────────────────── */
+  --z-nav:        200;
+  --z-sticky:     180;
+  --z-dropdown:   220;
+  --z-modal:      900;
+  --z-toggle:     9999;
+
+}
+
+/* Respect users who don't want motion */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast:   0ms;
+    --dur-base:   0ms;
+    --dur-slow:   0ms;
+    --dur-slower: 0ms;
+  }
+}

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Check Your Application Status — Covet &amp; Mane</title>
+  <meta name="description" content="Check the status of your Covet & Mane Collective application.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,300;1,400;1,500&family=Nunito+Sans:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+
+  <style>
+    .status-shell {
+      min-height: calc(100vh - var(--nav-height) - var(--promo-height) - 320px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-16) var(--container-pad);
+      background: var(--color-surface-warm);
+    }
+    .status-card {
+      max-width: 540px;
+      width: 100%;
+      background: var(--color-surface);
+      padding: var(--space-12);
+      border: var(--border-thin);
+      box-shadow: var(--shadow-soft);
+    }
+    @media (max-width: 600px) { .status-card { padding: var(--space-8); } }
+
+    .status-card__eyebrow {
+      font-family: var(--font-sans);
+      font-size: var(--fs-micro);
+      font-weight: var(--fw-semibold);
+      letter-spacing: var(--ls-widest);
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: var(--space-4);
+    }
+    .status-card__title {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: clamp(32px, 4vw, 44px);
+      font-weight: var(--fw-light);
+      line-height: 1.1;
+      margin-bottom: var(--space-4);
+    }
+    .status-card__sub {
+      font-size: var(--fs-body);
+      color: var(--color-text-muted);
+      line-height: var(--lh-relaxed);
+      margin-bottom: var(--space-8);
+    }
+    .status-card__form > * + * { margin-top: var(--space-4); }
+    .status-card__note {
+      margin-top: var(--space-6);
+      padding-top: var(--space-5);
+      border-top: var(--border-thin);
+      font-size: var(--fs-body-sm);
+      color: var(--color-text-muted);
+      line-height: var(--lh-relaxed);
+    }
+    .status-card__note strong {
+      font-family: var(--font-sans);
+      font-weight: var(--fw-semibold);
+      color: var(--color-text);
+      display: block;
+      margin-bottom: 6px;
+      letter-spacing: var(--ls-wide);
+      text-transform: uppercase;
+      font-size: var(--fs-tiny);
+    }
+
+    /* Confirmation state — shown after submission */
+    .status-confirm {
+      display: none;
+      text-align: center;
+    }
+    .status-confirm__mark {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      color: var(--color-text-inverse);
+      font-size: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--space-5);
+    }
+    .status-form.is-submitted { display: none; }
+    .status-form.is-submitted + .status-confirm { display: block; }
+  </style>
+</head>
+<body data-page="apply">
+
+  <div id="site-nav-mount"></div>
+
+  <main id="MainContent">
+
+    <section class="status-shell">
+      <div class="status-card">
+
+        <div class="status-card__eyebrow">Application Status</div>
+        <h1 class="status-card__title">Check on your <em>application</em>.</h1>
+        <p class="status-card__sub">
+          Enter the email address you applied with. Our application team will
+          look you up and reply within one business day with where you stand.
+        </p>
+
+        <form class="status-card__form status-form" id="status-form" onsubmit="event.preventDefault(); this.classList.add('is-submitted');">
+
+          <div class="form-field">
+            <label class="form-field__label" for="status-email">
+              Email used on your application
+            </label>
+            <input class="form-input" type="email" id="status-email" required
+                   placeholder="email@yoursalon.com">
+            <span class="form-field__hint">
+              Use the same email you submitted on the application form — if it
+              doesn't match, we won't be able to find you.
+            </span>
+          </div>
+
+          <div class="form-field">
+            <label class="form-field__label" for="status-license">
+              State license number <span class="form-field__optional">optional</span>
+            </label>
+            <input class="form-input" type="text" id="status-license"
+                   placeholder="License number">
+            <span class="form-field__hint">
+              Optional. Helps us find you faster if your application email
+              was a personal account.
+            </span>
+          </div>
+
+          <button class="btn btn--primary btn--block" type="submit">
+            Email Me My Status &rarr;
+          </button>
+        </form>
+
+        <div class="status-confirm">
+          <div class="status-confirm__mark">✓</div>
+          <h2 class="t-h2 mb-4">Got it.</h2>
+          <p class="t-body t-muted max-w-prose" style="margin: 0 auto var(--space-6);">
+            Our application team will look up your application and email you
+            within one business day. Check your spam folder if you don't see
+            our reply.
+          </p>
+          <a href="index.html" class="btn btn--ghost">&larr; Back to Home</a>
+        </div>
+
+        <div class="status-card__note">
+          <strong>Need help?</strong>
+          If you didn't get a confirmation email when you applied, your
+          application may not have submitted. Try applying again, or email
+          <a href="mailto:apply@covetandmane.com" style="color: var(--color-accent); border-bottom: 1px solid currentColor;">apply@covetandmane.com</a>
+          directly.
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <div id="site-footer-mount"></div>
+
+  <script src="js/nav.js"></script>
+  <script src="js/toggle.js"></script>
+</body>
+</html>
