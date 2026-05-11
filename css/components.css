@@ -1044,3 +1044,11 @@ body.nav-open .site-nav__hamburger span:nth-child(3) {
   .form-row--2,
   .form-row--3 { grid-template-columns: 1fr; }
 }
+
+
+/* Patch: hide the mobile nav drawer at desktop widths. The existing @media
+   (max-width: 960px) block above sets the drawer's visible mobile styles, but
+   there was no default display: none, so it leaked onto desktop. */
+@media (min-width: 961px) {
+     .site-nav-drawer { display: none !important; }
+}
