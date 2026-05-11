@@ -372,6 +372,6 @@ p {
    Default display flavor matches the element type.
    ────────────────────────────────────────────────────────────────────── */
 
-.logged-in-only { display: none; }
-body.logged-in .logged-out-only { display: none; }
-body.logged-in .logged-in-only  { display: revert; }
+.logged-in-only { display: none !important; }
+body.logged-in .logged-out-only { display: none !important; }
+body.logged-in .logged-in-only  { display: revert !important; }
