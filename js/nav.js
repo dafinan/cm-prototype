@@ -1,14 +1,28 @@
 /* =========================================================================
    COVET & MANE — SHARED NAV + FOOTER INJECTION
    Injects the promo bar, primary nav, mobile drawer, and footer into every
-   page. To set the active nav link, give <body> a data-page attribute:
-          - index.html         uses  data-page="home"
-               - academy.html       uses  data-page="academy"
-                    - find-a-stylist.html uses  data-page="coveted"
-                         - portal.html        uses  data-page="portal"
+   page. To set the active nav link, give the <body> a data-page attribute:
+     - index.html         uses  data-page="home"
+     - academy.html       uses  data-page="academy"
+     - find-a-stylist.html uses data-page="coveted"
+     - portal.html        uses  data-page="portal"
    Active state is computed from data-page. Edit copy in this file once and
    it propagates to all four pages.
    ========================================================================= */
+
+/* ── NOINDEX / NOFOLLOW META TAG ─────────────────────────────────────
+   Belt-and-suspenders to robots.txt: injects a meta tag that tells
+   Google, Bing, and other compliant crawlers not to index, follow,
+   archive, or snippet any page of this prototype. Runs immediately
+   so it lands in <head> before crawlers parse the document.
+   ──────────────────────────────────────────────────────────────────── */
+(function () {
+  const m = document.createElement('meta');
+  m.name = 'robots';
+  m.content = 'noindex, nofollow, noarchive, nosnippet, noimageindex';
+  document.head.appendChild(m);
+})();
+
 
 (function () {
   'use strict';
@@ -102,7 +116,11 @@
               By licensed stylists, for licensed stylists.
             </p>
             <div class="site-footer__newsletter">
-              <div class="t-eyebrow-gold mb-4">Free Pro Guide</div><p style="font-size: 13px; line-height: 1.5; color: rgba(247,244,238,0.78); margin-bottom: 12px;"><em>How to Double Your Extensions Revenue</em> — sent free to licensed stylists. Real numbers from working artists, no fluff.</p>
+              <div class="t-eyebrow-gold mb-4">Free Pro Guide</div>
+              <p style="font-size: 13px; line-height: 1.5; color: rgba(247,244,238,0.78); margin-bottom: 12px;">
+                <em>How to Double Your Extensions Revenue</em> — sent free to
+                licensed stylists. Real numbers from working artists, no fluff.
+              </p>
               <input type="email" placeholder="email@yoursalon.com" aria-label="Email address">
               <a href="#" class="link-arrow link-arrow--inverse">Send Me the Guide →</a>
             </div>
@@ -114,8 +132,8 @@
               <li><a href="apply.html">Apply for Account</a></li>
               <li><a href="portal.html">Sign In</a></li>
               <li><a href="shop.html">Wholesale Catalog</a></li>
-              <li><a href="contact.html">Chat with Us</a></li>
               <li><a href="contact.html">Talk to a Rep</a></li>
+              <li><a href="contact.html">Chat with Us</a></li>
             </ul>
           </div>
 
@@ -144,7 +162,7 @@
             <h4 class="site-footer__col-title">Company</h4>
             <ul class="site-footer__list">
               <li><a href="about.html">About</a></li>
-              <li><a href="find-a-stylist.html">Find a Stylist</a></li>
+              <li><a href="find-a-stylist.html">The Coveted</a></li>
               <li><a href="press.html">Press</a></li>
               <li><a href="contact.html">Contact</a></li>
               <li><a href="careers.html">Careers</a></li>
