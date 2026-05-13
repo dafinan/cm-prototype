@@ -13,17 +13,17 @@
      ────────────────────────────────────────────────────────────────── */
 
   /* Raw palette */
-  --c-black:        #0e0e0e;
-  --c-warm-dark:    #1a1510;
-  --c-charcoal:     #3a3530;
-  --c-mid-grey:     #9a9490;
-  --c-warm-grey:    #e8e2d8;
-  --c-cream:        #f5f0e8;
-  --c-cream-soft:   #faf6ef;
+  --c-black:        #1A1822;
+  --c-warm-dark:    #14121A;
+  --c-charcoal:     #2F2A35;
+  --c-mid-grey:     #8B8590;
+  --c-warm-grey:    #E8E4DD;
+  --c-cream:        #F7F4EE;
+  --c-cream-soft:   #FAF8F3;
   --c-white:        #ffffff;
-  --c-gold:         #b89a6a;
-  --c-gold-light:   #d4b98a;
-  --c-gold-deep:    #8e7448;
+  --c-gold:         #6E2E48;
+  --c-gold-light:   #94516D;
+  --c-gold-deep:    #4F1F33;
 
   /* Semantic tokens — use these in component CSS */
   --color-text:           var(--c-black);
