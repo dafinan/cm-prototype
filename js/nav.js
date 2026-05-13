@@ -33,7 +33,7 @@
         <ul class="site-nav__links">
           <li><a href="index.html"           data-page="home">Shop</a></li>
           <li><a href="academy.html"         data-page="academy">Academy</a></li>
-          <li><a href="find-a-stylist.html"  data-page="coveted">The Coveted</a></li>
+          <li><a href="find-a-stylist.html"  data-page="coveted">Find a Stylist</a></li>
           <li><a href="about.html"           data-page="about">About</a></li>
         </ul>
 
@@ -76,7 +76,7 @@
     <aside id="site-nav-drawer" class="site-nav-drawer" aria-hidden="true">
       <a href="index.html"           data-page="home">Shop</a>
       <a href="academy.html"         data-page="academy">Academy</a>
-      <a href="find-a-stylist.html"  data-page="coveted">The Coveted</a>
+      <a href="find-a-stylist.html"  data-page="coveted">Find a Stylist</a>
       <a href="about.html"           data-page="about">About</a>
 
       <div class="drawer-actions">
@@ -102,9 +102,9 @@
               By licensed stylists, for licensed stylists.
             </p>
             <div class="site-footer__newsletter">
-              <div class="t-eyebrow-gold mb-4">The Coveted — Monthly</div>
-              <input type="email" placeholder="Email address" aria-label="Email address">
-              <a href="#" class="link-arrow link-arrow--inverse">Subscribe</a>
+              <div class="t-eyebrow-gold mb-4">Free Pro Guide</div><p style="font-size: 13px; line-height: 1.5; color: rgba(247,244,238,0.78); margin-bottom: 12px;"><em>How to Double Your Extensions Revenue</em> — sent free to licensed stylists. Real numbers from working artists, no fluff.</p>
+              <input type="email" placeholder="email@yoursalon.com" aria-label="Email address">
+              <a href="#" class="link-arrow link-arrow--inverse">Send Me the Guide →</a>
             </div>
           </div>
 
@@ -114,7 +114,7 @@
               <li><a href="apply.html">Apply for Account</a></li>
               <li><a href="portal.html">Sign In</a></li>
               <li><a href="shop.html">Wholesale Catalog</a></li>
-              <li><a href="pro-resources.html">Pro Resources</a></li>
+              <li><a href="contact.html">Chat with Us</a></li>
               <li><a href="contact.html">Talk to a Rep</a></li>
             </ul>
           </div>
@@ -144,7 +144,7 @@
             <h4 class="site-footer__col-title">Company</h4>
             <ul class="site-footer__list">
               <li><a href="about.html">About</a></li>
-              <li><a href="find-a-stylist.html">The Coveted</a></li>
+              <li><a href="find-a-stylist.html">Find a Stylist</a></li>
               <li><a href="press.html">Press</a></li>
               <li><a href="contact.html">Contact</a></li>
               <li><a href="careers.html">Careers</a></li>
