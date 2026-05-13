@@ -111,7 +111,18 @@
           <button class="tabs__trigger" data-tab="orders" role="tab" aria-selected="false">Orders</button>
           <button class="tabs__trigger" data-tab="education" role="tab" aria-selected="false">Education</button>
           <button class="tabs__trigger" data-tab="community" role="tab" aria-selected="false">Community</button>
+          <!-- LIVE tab — visible only when a class is currently streaming.
+               Per 2026-05-11 walkthrough: "if we're live and it's just fees." -->
+          <button class="tabs__trigger" data-tab="live" role="tab" aria-selected="false" style="position: relative;">
+            <span style="display: inline-block; width: 8px; height: 8px; background: #b04848; border-radius: 50%; margin-right: 8px; animation: livePulse 1.6s ease-in-out infinite;"></span>Live
+          </button>
         </div>
+        <style>
+          @keyframes livePulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.85); }
+          }
+        </style>
 
 
         <!-- ════════════════════════════════════════════════════════
@@ -189,14 +200,65 @@
 
                 </div>
 
+                <!-- Quick order by collection — per 2026-05-11 walkthrough:
+                     "I don't think this is beneficial order bucks too. Nobody
+                     knows that maybe this would just be like a quick order like
+                     to go here to order like by line sheet." -->
                 <div class="sku-order">
-                  <h3 class="sku-order__title">Order by SKU.</h3>
-                  <p class="sku-order__sub">For when you know what you need.</p>
+                  <h3 class="sku-order__title">Order by collection.</h3>
+                  <p class="sku-order__sub">Pick a collection, preview the line sheet, add the qty you need.</p>
                   <form onsubmit="event.preventDefault();">
-                    <div class="sku-order__row">
-                      <input type="text" placeholder="Enter SKU" aria-label="SKU">
-                      <input type="number" placeholder="Qty" aria-label="Quantity" min="1" value="1">
+                    <div class="form-field" style="margin-bottom: 16px;">
+                      <label class="form-field__label" for="collection-select">Collection</label>
+                      <select id="collection-select" class="form-select">
+                        <option>The Cut-Point Weft — Silky Straight</option>
+                        <option>The Cut-Point Weft — Beach Wave</option>
+                        <option>The Coveted Weft — Silky Straight</option>
+                        <option>The Coveted Weft — Beach Wave</option>
+                        <option>The Coveted Tape</option>
+                        <option>The Keratin Tip — Silky Straight</option>
+                        <option>The Keratin Tip — Beach Wave</option>
+                        <option>Textures — Wavy / Curly / Blowout</option>
+                      </select>
                     </div>
+
+                    <!-- Line sheet preview pane -->
+                    <div style="background: var(--color-surface); border: var(--border-thin); padding: 14px; margin-bottom: 14px;">
+                      <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 10px; margin-bottom: 12px; border-bottom: var(--border-thin);">
+                        <span style="font-family: var(--font-sans); font-size: var(--fs-tiny); font-weight: 600; letter-spacing: var(--ls-wide); text-transform: uppercase; color: var(--color-text-muted);">📄 Line Sheet Preview</span>
+                        <a href="#" class="link-arrow" style="font-size: 9px;">Open PDF →</a>
+                      </div>
+
+                      <!-- Mini shade list with inline qty inputs -->
+                      <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <div style="display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 12px; padding: 6px 0;">
+                          <div>
+                            <div style="font-family: var(--font-serif); font-size: 15px; line-height: 1.2;">Casablanca 2/4 · 22"</div>
+                            <div style="font-family: var(--font-sans); font-size: var(--fs-tiny); color: var(--color-text-subtle);">SKU CP-22-CASA · In stock</div>
+                          </div>
+                          <input type="number" min="0" max="99" placeholder="0" style="width: 56px; padding: 6px 8px; font-family: var(--font-sans); font-size: var(--fs-body-sm); background: var(--color-surface-soft); border: var(--border-thin);" aria-label="Qty Casablanca 22 inch">
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 12px; padding: 6px 0; border-top: 1px dashed var(--color-border);">
+                          <div>
+                            <div style="font-family: var(--font-serif); font-size: 15px; line-height: 1.2;">Capetown 8 · 20"</div>
+                            <div style="font-family: var(--font-sans); font-size: var(--fs-tiny); color: var(--color-text-subtle);">SKU CP-20-CAPE · In stock</div>
+                          </div>
+                          <input type="number" min="0" max="99" placeholder="0" style="width: 56px; padding: 6px 8px; font-family: var(--font-sans); font-size: var(--fs-body-sm); background: var(--color-surface-soft); border: var(--border-thin);" aria-label="Qty Capetown 20 inch">
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 12px; padding: 6px 0; border-top: 1px dashed var(--color-border);">
+                          <div>
+                            <div style="font-family: var(--font-serif); font-size: 15px; line-height: 1.2;">London 8N · 18"</div>
+                            <div style="font-family: var(--font-sans); font-size: var(--fs-tiny); color: #b04848;">SKU CP-18-LON · Low stock · 4 left</div>
+                          </div>
+                          <input type="number" min="0" max="99" placeholder="0" style="width: 56px; padding: 6px 8px; font-family: var(--font-sans); font-size: var(--fs-body-sm); background: var(--color-surface-soft); border: var(--border-thin);" aria-label="Qty London 18 inch">
+                        </div>
+                      </div>
+
+                      <div style="font-family: var(--font-sans); font-size: var(--fs-tiny); color: var(--color-text-subtle); margin-top: 10px; padding-top: 10px; border-top: var(--border-thin); font-style: italic;">
+                        Showing 3 of 18 shades · scroll for more
+                      </div>
+                    </div>
+
                     <a href="#" class="btn btn--primary btn--block">Add to Order →</a>
                   </form>
                 </div>
@@ -576,22 +638,112 @@
 
 
         <!-- ════════════════════════════════════════════════════════
-             COMMUNITY TAB
+             COMMUNITY TAB — restructured per 2026-05-11 walkthrough.
+             Three tiers (Concealed students / All certified / General).
+             Plus Ask Us Anything monthly with educators. Embedded, doesn't
+             bounce out to Facebook.
              ════════════════════════════════════════════════════════ -->
         <div class="tabs__panel" data-panel="community" role="tabpanel" hidden>
+
+          <!-- Ask Us Anything featured card -->
+          <section class="portal-section" style="background: var(--color-surface-warm);">
+            <div class="container-wide">
+              <div style="display: grid; grid-template-columns: 1.4fr 1fr; gap: var(--space-12); align-items: center; padding: var(--space-8); background: var(--color-surface); border-left: 4px solid var(--color-accent);">
+                <div>
+                  <div class="t-eyebrow-gold mb-3">This Month · Live with Educators</div>
+                  <h2 class="portal-section__title" style="margin-bottom: 12px;">Ask Us <em class="italic">Anything.</em></h2>
+                  <p class="t-body-lg t-muted" style="max-width: 50ch; margin-bottom: 20px;">
+                    Live Q&amp;A with C&amp;M Master Educators &mdash; <strong style="color: var(--color-text);">Angela Goff, Tori Elyse, &amp; Marisa DiPaolo</strong>.
+                    Drop your install questions, color matches, business stuck-points. Replays land in the Collective two days later.
+                  </p>
+                  <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+                    <a href="#" class="btn btn--gold">Save Your Seat · May 28 · 7pm ET →</a>
+                    <a href="#" class="link-arrow">Watch the April replay →</a>
+                  </div>
+                </div>
+                <div style="aspect-ratio: 5/4; background: var(--color-surface-dark); position: relative; overflow: hidden;">
+                  <div class="img-zone img-zone--placeholder" style="position: absolute; inset: 0;">
+                    <span class="img-label img-label--placeholder">PLACEHOLDER — Educator panel still / event poster</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 3 community tiers -->
           <section class="portal-section">
             <div class="container-wide">
               <div class="portal-section__header">
                 <div class="portal-section__title-block">
                   <div class="t-eyebrow-gold">The Collective</div>
-                  <h2 class="portal-section__title">Conversation, not commerce.</h2>
+                  <h2 class="portal-section__title">Three rooms. One Collective.</h2>
+                  <p class="t-body-sm t-muted" style="margin-top: 8px; max-width: 56ch;">
+                    Community is gated by certification. Each room has its own
+                    framework of monthly drops, educator office hours, and
+                    member-led threads.
+                  </p>
                 </div>
               </div>
 
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4);">
+
+                <!-- Concealed students cohort -->
+                <a href="#" style="text-decoration: none; color: inherit; padding: var(--space-6); background: var(--color-surface); border: var(--border-thin); display: flex; flex-direction: column; gap: 14px;">
+                  <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <span class="t-eyebrow-gold">Concealed Students</span>
+                    <span style="font-family: var(--font-sans); font-size: var(--fs-tiny); color: var(--color-text-subtle); letter-spacing: var(--ls-wide); text-transform: uppercase;">Member · You're in</span>
+                  </div>
+                  <h3 style="font-family: var(--font-serif); font-style: italic; font-size: 28px; font-weight: 400; line-height: 1.0;">Month 2 of 3</h3>
+                  <p class="t-body-sm t-muted" style="flex-grow: 1;">
+                    Active cohort from your Concealed cert. Curriculum drops,
+                    install troubleshooting, your educator dropping in.
+                    18 students &middot; 6 new posts.
+                  </p>
+                  <div style="display: flex; align-items: center; gap: 8px; padding-top: 14px; border-top: var(--border-thin); font-family: var(--font-sans); font-size: var(--fs-tiny); font-weight: 600; letter-spacing: var(--ls-wider); text-transform: uppercase; color: var(--color-accent);">Enter Room &nbsp;→</div>
+                </a>
+
+                <!-- All Certified — broader community -->
+                <a href="#" style="text-decoration: none; color: inherit; padding: var(--space-6); background: var(--color-surface); border: var(--border-thin); display: flex; flex-direction: column; gap: 14px;">
+                  <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <span class="t-eyebrow-gold">All Certified Stylists</span>
+                    <span style="font-family: var(--font-sans); font-size: var(--fs-tiny); color: var(--color-text-subtle); letter-spacing: var(--ls-wide); text-transform: uppercase;">Member</span>
+                  </div>
+                  <h3 style="font-family: var(--font-serif); font-style: italic; font-size: 28px; font-weight: 400; line-height: 1.0;">412 members</h3>
+                  <p class="t-body-sm t-muted" style="flex-grow: 1;">
+                    Everyone who's completed any C&amp;M certification.
+                    Cross-method conversations, business threads, regional
+                    meetups. 3 new threads today.
+                  </p>
+                  <div style="display: flex; align-items: center; gap: 8px; padding-top: 14px; border-top: var(--border-thin); font-family: var(--font-sans); font-size: var(--fs-tiny); font-weight: 600; letter-spacing: var(--ls-wider); text-transform: uppercase; color: var(--color-accent);">Enter Room &nbsp;→</div>
+                </a>
+
+                <!-- General — open to all account holders -->
+                <a href="#" style="text-decoration: none; color: inherit; padding: var(--space-6); background: var(--color-surface); border: var(--border-thin); display: flex; flex-direction: column; gap: 14px;">
+                  <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <span class="t-eyebrow-gold">The Public Room</span>
+                    <span style="font-family: var(--font-sans); font-size: var(--fs-tiny); color: var(--color-text-subtle); letter-spacing: var(--ls-wide); text-transform: uppercase;">Member</span>
+                  </div>
+                  <h3 style="font-family: var(--font-serif); font-style: italic; font-size: 28px; font-weight: 400; line-height: 1.0;">2,400+ members</h3>
+                  <p class="t-body-sm t-muted" style="flex-grow: 1;">
+                    Open to anyone who's taken Foundations or spent $1,500+
+                    with us. Monthly Covet Coach drop-ins, Ask Us Anything
+                    replays, getting-started series.
+                    <span class="img-label img-label--placeholder" style="position: static; display: inline-flex; margin-top: 6px;">PLACEHOLDER — Confirm gating rule</span>
+                  </p>
+                  <div style="display: flex; align-items: center; gap: 8px; padding-top: 14px; border-top: var(--border-thin); font-family: var(--font-sans); font-size: var(--fs-tiny); font-weight: 600; letter-spacing: var(--ls-wider); text-transform: uppercase; color: var(--color-accent);">Enter Room &nbsp;→</div>
+                </a>
+
+              </div>
+            </div>
+          </section>
+
+          <!-- Threads from across the Collective -->
+          <section class="portal-section">
+            <div class="container-wide">
               <div class="network__layout">
 
                 <div>
-                  <h3 class="t-eyebrow mb-6">Stylists near you</h3>
+                  <h3 class="t-eyebrow mb-6">Stylists near you · Brooklyn</h3>
                   <div class="network__peers">
                     <a href="#" class="network__peer">
                       <div class="network__peer-media img-zone img-zone--placeholder"><span class="img-label img-label--placeholder">PLACEHOLDER</span></div>
@@ -617,22 +769,98 @@
                 </div>
 
                 <div class="network__threads">
-                  <h3 class="t-eyebrow mb-4">Latest threads</h3>
+                  <h3 class="t-eyebrow mb-4">Latest across the Collective</h3>
                   <div class="network__thread">
-                    <div class="network__thread-meta">Technique · 18 replies · 2h ago</div>
+                    <div class="network__thread-meta">Concealed Students · 18 replies · 2h ago</div>
                     <a href="#"><h4 class="network__thread-title">Anyone else seeing different blend results with the new Beach Wave batch?</h4></a>
                   </div>
                   <div class="network__thread">
-                    <div class="network__thread-meta">Business · 6 replies · 5h ago</div>
+                    <div class="network__thread-meta">All Certified · 6 replies · 5h ago</div>
                     <a href="#"><h4 class="network__thread-title">How are you all pricing Keratin Tip touch-ups now?</h4></a>
                   </div>
                   <div class="network__thread">
-                    <div class="network__thread-meta">Education · 3 replies · 1d ago</div>
+                    <div class="network__thread-meta">All Certified · 3 replies · 1d ago</div>
                     <a href="#"><h4 class="network__thread-title">Master Educator track — who's applying for the September cohort?</h4></a>
+                  </div>
+                  <div class="network__thread">
+                    <div class="network__thread-meta">Public Room · 24 replies · 1d ago</div>
+                    <a href="#"><h4 class="network__thread-title">Best aftercare routine for clients in humid climates?</h4></a>
                   </div>
                 </div>
 
               </div>
+            </div>
+          </section>
+        </div>
+
+
+        <!-- ════════════════════════════════════════════════════════
+             LIVE TAB — visible during a live class stream.
+             Per 2026-05-11 walkthrough: "if we're live and it's just fees...
+             after the live, it would just give a brief video."
+             ════════════════════════════════════════════════════════ -->
+        <div class="tabs__panel" data-panel="live" role="tabpanel" hidden>
+          <section class="portal-section" style="background: var(--color-surface-dark); color: var(--color-text-inverse);">
+            <div class="container-wide">
+
+              <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 32px;">
+                <span style="display: inline-block; width: 12px; height: 12px; background: #e85858; border-radius: 50%; animation: livePulse 1.6s ease-in-out infinite;"></span>
+                <span style="font-family: var(--font-sans); font-size: var(--fs-micro); font-weight: 700; letter-spacing: var(--ls-widest); text-transform: uppercase; color: #e85858;">Live now · 412 watching</span>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 2fr 1fr; gap: var(--space-8); align-items: start;">
+
+                <!-- Player -->
+                <div style="aspect-ratio: 16/9; background: var(--color-surface-black); position: relative; overflow: hidden;">
+                  <div class="img-zone img-zone--placeholder" style="position: absolute; inset: 0;">
+                    <span class="img-label img-label--placeholder">PLACEHOLDER — Live video player (Vimeo / Mux / Restream embed)</span>
+                  </div>
+                  <div style="position: absolute; bottom: 16px; left: 16px; padding: 8px 12px; background: rgba(14,14,14,0.78); border-left: 2px solid var(--color-accent);">
+                    <div style="font-family: var(--font-serif); font-style: italic; font-size: 18px; color: var(--color-text-inverse);">The Keratin Tip · Multi-Tonal Blending</div>
+                    <div style="font-family: var(--font-sans); font-size: var(--fs-tiny); letter-spacing: var(--ls-wide); text-transform: uppercase; color: var(--color-accent-light); margin-top: 4px;">with Tori Elyse · Master Educator</div>
+                  </div>
+                </div>
+
+                <!-- Live chat side panel -->
+                <div style="background: rgba(247,244,238,0.04); border: 1px solid rgba(247,244,238,0.12); padding: var(--space-5); display: flex; flex-direction: column; gap: 14px; min-height: 380px;">
+                  <div style="display: flex; align-items: baseline; justify-content: space-between;">
+                    <span style="font-family: var(--font-sans); font-size: var(--fs-tiny); font-weight: 600; letter-spacing: var(--ls-wide); text-transform: uppercase; color: var(--color-accent-light);">Live Chat</span>
+                    <span style="font-family: var(--font-sans); font-size: var(--fs-tiny); color: rgba(247,244,238,0.5);">412 watching</span>
+                  </div>
+
+                  <div style="flex-grow: 1; display: flex; flex-direction: column; gap: 12px; overflow-y: auto;">
+                    <div style="font-family: var(--font-sans); font-size: var(--fs-body-sm); line-height: 1.5;">
+                      <span style="color: var(--color-accent-light); font-weight: 600;">Marina C.</span>
+                      <span style="color: rgba(247,244,238,0.85);"> &mdash; What's the bond depth on a 4A texture?</span>
+                    </div>
+                    <div style="font-family: var(--font-sans); font-size: var(--fs-body-sm); line-height: 1.5;">
+                      <span style="color: var(--color-accent-light); font-weight: 600;">Alana R.</span>
+                      <span style="color: rgba(247,244,238,0.85);"> &mdash; Tori, the photo behind you is everything 🔥</span>
+                    </div>
+                    <div style="font-family: var(--font-sans); font-size: var(--fs-body-sm); line-height: 1.5;">
+                      <span style="color: var(--color-accent-light); font-weight: 600;">Devon M.</span>
+                      <span style="color: rgba(247,244,238,0.85);"> &mdash; Is there a re-up class for last month's Concealed cohort?</span>
+                    </div>
+                    <div style="font-family: var(--font-sans); font-size: var(--fs-body-sm); line-height: 1.5;">
+                      <span style="color: var(--color-accent-light); font-weight: 600;">Jasmine W.</span>
+                      <span style="color: rgba(247,244,238,0.85);"> &mdash; Replay link please 🙏</span>
+                    </div>
+                  </div>
+
+                  <form onsubmit="event.preventDefault();" style="display: flex; gap: 8px; padding-top: 14px; border-top: 1px solid rgba(247,244,238,0.12);">
+                    <input type="text" placeholder="Ask Tori a question…" style="flex-grow: 1; padding: 10px 12px; background: rgba(247,244,238,0.06); border: 1px solid rgba(247,244,238,0.2); color: var(--color-text-inverse); font-family: var(--font-sans); font-size: var(--fs-body-sm);">
+                    <button type="submit" style="padding: 10px 14px; background: var(--color-accent); color: var(--color-text-inverse); border: none; font-family: var(--font-sans); font-size: var(--fs-tiny); font-weight: 600; letter-spacing: var(--ls-wide); text-transform: uppercase; cursor: pointer;">Send</button>
+                  </form>
+                </div>
+
+              </div>
+
+              <!-- Footnote: replay landing instructions -->
+              <p style="margin-top: 32px; font-family: var(--font-serif); font-style: italic; font-size: var(--fs-body-sm); color: rgba(247,244,238,0.7); max-width: 60ch;">
+                When this class ends, a 10-minute replay highlight will land in your
+                Education library &mdash; then the full session two days later.
+              </p>
+
             </div>
           </section>
         </div>

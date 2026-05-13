@@ -152,22 +152,39 @@
               </label>
             </div>
 
+            <!-- Cert filter per 2026-05-11 walkthrough: drop generic
+                 Master/Advanced/Foundations labels. Use method-specific. -->
             <div class="directory__filter-group">
-              <div class="directory__filter-title">Tier</div>
+              <div class="directory__filter-title">Certification</div>
               <label class="directory__filter-option">
                 <input type="checkbox" checked>
-                <span>Master Educator</span>
+                <span>Concealed Educated</span>
+                <span class="directory__filter-option-count">412</span>
+              </label>
+              <label class="directory__filter-option">
+                <input type="checkbox">
+                <span>Color Certified</span>
+                <span class="directory__filter-option-count">218</span>
+              </label>
+              <label class="directory__filter-option">
+                <input type="checkbox">
+                <span>Keratin Tip Certified</span>
+                <span class="directory__filter-option-count">186</span>
+              </label>
+              <label class="directory__filter-option">
+                <input type="checkbox">
+                <span>Tape-In Certified</span>
+                <span class="directory__filter-option-count">298</span>
+              </label>
+              <label class="directory__filter-option">
+                <input type="checkbox">
+                <span>Advanced Cutting</span>
+                <span class="directory__filter-option-count">94</span>
+              </label>
+              <label class="directory__filter-option">
+                <input type="checkbox">
+                <span>C&amp;M Educator</span>
                 <span class="directory__filter-option-count">14</span>
-              </label>
-              <label class="directory__filter-option">
-                <input type="checkbox" checked>
-                <span>Advanced</span>
-                <span class="directory__filter-option-count">486</span>
-              </label>
-              <label class="directory__filter-option">
-                <input type="checkbox" checked>
-                <span>Foundations</span>
-                <span class="directory__filter-option-count">1,924</span>
               </label>
             </div>
 
@@ -243,51 +260,104 @@
               <span class="directory__map-note">Simulated directory map · interactive in production</span>
             </div>
 
+            <!-- Stylist cards per 2026-05-11 walkthrough:
+                 - Multiple method-specific chips (not "Master/Advanced" generic)
+                 - IG-feed teaser strip below (script will pull top 5 most-liked
+                   from stylist's @handle in production)
+                 - Each card links to stylist's profile/blog page -->
             <div class="directory__results reveal">
 
-              <article class="stylist-card">
+              <a href="#" class="stylist-card" style="text-decoration: none; color: inherit; display: flex; flex-direction: column;">
                 <div class="stylist-card__media img-zone img-zone--placeholder">
                   <span class="img-label img-label--placeholder">PLACEHOLDER — stylist portrait, warm editorial</span>
                 </div>
                 <div class="stylist-card__body">
                   <div class="stylist-card__name">Alana Reyes</div>
-                  <div class="stylist-card__location">Williamsburg, Brooklyn</div>
-                  <span class="stylist-card__badge">Master Educator</span>
+                  <div class="stylist-card__location">Williamsburg, Brooklyn · @alanareyes</div>
+                  <div style="display: flex; flex-wrap: wrap; gap: 4px; margin-top: 10px;">
+                    <span class="stylist-card__badge">Concealed Educated</span>
+                    <span class="stylist-card__badge" style="color: var(--color-text); border-color: var(--color-border-strong);">Color Certified</span>
+                    <span class="stylist-card__badge" style="color: var(--color-text); border-color: var(--color-border-strong);">C&amp;M Educator</span>
+                  </div>
+                  <!-- IG feed teaser — placeholder strip; script pulls top 5 in prod -->
+                  <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--color-border);">
+                    <div style="aspect-ratio: 1; background: var(--c-warm-grey);"></div>
+                    <div style="aspect-ratio: 1; background: var(--c-warm-grey);"></div>
+                    <div style="aspect-ratio: 1; background: var(--c-warm-grey);"></div>
+                    <div style="aspect-ratio: 1; background: var(--c-warm-grey);"></div>
+                    <div style="aspect-ratio: 1; background: var(--c-warm-grey);"></div>
+                  </div>
+                  <div style="font-family: var(--font-sans); font-size: var(--fs-tiny); letter-spacing: var(--ls-wide); text-transform: uppercase; color: var(--color-text-subtle); margin-top: 8px;">Top 5 from @alanareyes</div>
                 </div>
-              </article>
+              </a>
 
-              <article class="stylist-card">
+              <a href="#" class="stylist-card" style="text-decoration: none; color: inherit; display: flex; flex-direction: column;">
                 <div class="stylist-card__media img-zone img-zone--placeholder">
                   <span class="img-label img-label--placeholder">PLACEHOLDER — stylist portrait</span>
                 </div>
                 <div class="stylist-card__body">
                   <div class="stylist-card__name">Tori Elyse</div>
-                  <div class="stylist-card__location">West Hollywood, CA</div>
-                  <span class="stylist-card__badge">Master Educator</span>
+                  <div class="stylist-card__location">West Hollywood, CA · @torielyse</div>
+                  <div style="display: flex; flex-wrap: wrap; gap: 4px; margin-top: 10px;">
+                    <span class="stylist-card__badge">Concealed Educated</span>
+                    <span class="stylist-card__badge" style="color: var(--color-text); border-color: var(--color-border-strong);">Keratin Tip Certified</span>
+                    <span class="stylist-card__badge" style="color: var(--color-text); border-color: var(--color-border-strong);">C&amp;M Educator</span>
+                  </div>
+                  <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--color-border);">
+                    <div style="aspect-ratio: 1; background: var(--c-warm-grey);"></div>
+                    <div style="aspect-ratio: 1; background: var(--c-warm-grey);"></div>
+                    <div style="aspect-ratio: 1; background: var(--c-warm-grey);"></div>
+                    <div style="aspect-ratio: 1; background: var(--c-warm-grey);"></div>
+                    <div style="aspect-ratio: 1; background: var(--c-warm-grey);"></div>
+                  </div>
+                  <div style="font-family: var(--font-sans); font-size: var(--fs-tiny); letter-spacing: var(--ls-wide); text-transform: uppercase; color: var(--color-text-subtle); margin-top: 8px;">Top 5 from @torielyse</div>
                 </div>
-              </article>
+              </a>
 
-              <article class="stylist-card">
+              <a href="#" class="stylist-card" style="text-decoration: none; color: inherit; display: flex; flex-direction: column;">
                 <div class="stylist-card__media img-zone img-zone--placeholder">
                   <span class="img-label img-label--placeholder">PLACEHOLDER — stylist portrait</span>
                 </div>
                 <div class="stylist-card__body">
                   <div class="stylist-card__name">Marina Calderone</div>
-                  <div class="stylist-card__location">Wynwood, Miami</div>
-                  <span class="stylist-card__badge">Advanced</span>
+                  <div class="stylist-card__location">Wynwood, Miami · @marina.cm</div>
+                  <div style="display: flex; flex-wrap: wrap; gap: 4px; margin-top: 10px;">
+                    <span class="stylist-card__badge">Concealed Educated</span>
+                    <span class="stylist-card__badge" style="color: var(--color-text); border-color: var(--color-border-strong);">Tape-In Certified</span>
+                  </div>
+                  <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--color-border);">
+                    <div style="aspect-ratio: 1; background: var(--c-warm-grey);"></div>
+                    <div style="aspect-ratio: 1; background: var(--c-warm-grey);"></div>
+                    <div style="aspect-ratio: 1; background: var(--c-warm-grey);"></div>
+                    <div style="aspect-ratio: 1; background: var(--c-warm-grey);"></div>
+                    <div style="aspect-ratio: 1; background: var(--c-warm-grey);"></div>
+                  </div>
+                  <div style="font-family: var(--font-sans); font-size: var(--fs-tiny); letter-spacing: var(--ls-wide); text-transform: uppercase; color: var(--color-text-subtle); margin-top: 8px;">Top 5 from @marina.cm</div>
                 </div>
-              </article>
+              </a>
 
-              <article class="stylist-card">
+              <a href="#" class="stylist-card" style="text-decoration: none; color: inherit; display: flex; flex-direction: column;">
                 <div class="stylist-card__media img-zone img-zone--placeholder">
                   <span class="img-label img-label--placeholder">PLACEHOLDER — stylist portrait</span>
                 </div>
                 <div class="stylist-card__body">
                   <div class="stylist-card__name">Jasmine Whitley</div>
-                  <div class="stylist-card__location">Buckhead, Atlanta</div>
-                  <span class="stylist-card__badge">Advanced</span>
+                  <div class="stylist-card__location">Buckhead, Atlanta · @jasminewhitley</div>
+                  <div style="display: flex; flex-wrap: wrap; gap: 4px; margin-top: 10px;">
+                    <span class="stylist-card__badge">Concealed Educated</span>
+                    <span class="stylist-card__badge" style="color: var(--color-text); border-color: var(--color-border-strong);">Color Certified</span>
+                    <span class="stylist-card__badge" style="color: var(--color-text); border-color: var(--color-border-strong);">Advanced Cutting</span>
+                  </div>
+                  <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--color-border);">
+                    <div style="aspect-ratio: 1; background: var(--c-warm-grey);"></div>
+                    <div style="aspect-ratio: 1; background: var(--c-warm-grey);"></div>
+                    <div style="aspect-ratio: 1; background: var(--c-warm-grey);"></div>
+                    <div style="aspect-ratio: 1; background: var(--c-warm-grey);"></div>
+                    <div style="aspect-ratio: 1; background: var(--c-warm-grey);"></div>
+                  </div>
+                  <div style="font-family: var(--font-sans); font-size: var(--fs-tiny); letter-spacing: var(--ls-wide); text-transform: uppercase; color: var(--color-text-subtle); margin-top: 8px;">Top 5 from @jasminewhitley</div>
                 </div>
-              </article>
+              </a>
 
             </div>
 

@@ -117,7 +117,10 @@
                 <span class="cert-path__step-meta-value">Complimentary</span>
               </div>
             </div>
-            <a href="apply.html" class="btn btn--primary">Enroll Now →</a>
+            <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
+              <a href="apply.html" class="btn btn--primary">Enroll Now →</a>
+              <a href="programs/foundations.html" class="link-arrow" style="font-size: 9px;">See Foundations details →</a>
+            </div>
           </div>
 
           <div class="cert-path__step cert-path__step--advanced reveal reveal-delay-2">
@@ -147,7 +150,10 @@
                 <span class="cert-path__step-meta-value">From $1,200</span>
               </div>
             </div>
-            <a href="apply.html" class="btn btn--gold-outline">Apply to Advance →</a>
+            <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
+              <a href="apply.html" class="btn btn--gold-outline">Apply to Advance →</a>
+              <a href="programs/concealed.html" class="link-arrow link-arrow--inverse" style="font-size: 9px;">See Advanced courses →</a>
+            </div>
           </div>
 
           <div class="cert-path__step cert-path__step--master reveal reveal-delay-3">
@@ -177,7 +183,10 @@
                 <span class="cert-path__step-meta-value">Invitation only</span>
               </div>
             </div>
-            <a href="contact.html" class="btn btn--gold-outline">Learn More →</a>
+            <div style="display: flex; flex-direction: column; gap: 12px; align-items: flex-start;">
+              <a href="contact.html" class="btn btn--gold-outline">Learn More →</a>
+              <a href="programs/master-educator.html" class="link-arrow link-arrow--inverse" style="font-size: 9px;">See the Master track →</a>
+            </div>
           </div>
 
         </div>
@@ -238,8 +247,24 @@
           <div>
             <div class="t-eyebrow-gold mb-2">In Studio &amp; On Location</div>
             <h2>Upcoming Classes</h2>
+            <p class="t-body-sm t-muted" style="margin-top: 8px; max-width: 56ch;">
+              Hands-on intensives, on-demand masterclasses, and private salon
+              sessions. Every class is led by a Covet &amp; Mane Educator.
+            </p>
           </div>
           <a href="#" class="link-arrow">Full Calendar →</a>
+        </div>
+
+        <!-- FILTER CHIPS — per 2026-05-11 walkthrough: "we should have that filtering" -->
+        <div class="events__filters reveal" style="display: flex; flex-wrap: wrap; gap: 8px; padding-bottom: 24px; margin-bottom: 32px; border-bottom: 1px solid var(--color-border);">
+          <span style="font-family: var(--font-sans); font-size: var(--fs-tiny); font-weight: var(--fw-semibold); letter-spacing: var(--ls-widest); text-transform: uppercase; color: var(--color-text-muted); padding: 8px 0; margin-right: 8px;">Filter ·</span>
+          <button type="button" style="padding: 6px 14px; font-family: var(--font-sans); font-size: var(--fs-tiny); font-weight: var(--fw-semibold); letter-spacing: var(--ls-wide); text-transform: uppercase; background: var(--color-text); color: var(--color-text-inverse); border: 1px solid var(--color-text); border-radius: var(--radius-pill); cursor: pointer;">All Classes</button>
+          <button type="button" style="padding: 6px 14px; font-family: var(--font-sans); font-size: var(--fs-tiny); font-weight: var(--fw-semibold); letter-spacing: var(--ls-wide); text-transform: uppercase; background: transparent; color: var(--color-text); border: 1px solid var(--color-border-strong); border-radius: var(--radius-pill); cursor: pointer;">In Person</button>
+          <button type="button" style="padding: 6px 14px; font-family: var(--font-sans); font-size: var(--fs-tiny); font-weight: var(--fw-semibold); letter-spacing: var(--ls-wide); text-transform: uppercase; background: transparent; color: var(--color-text); border: 1px solid var(--color-border-strong); border-radius: var(--radius-pill); cursor: pointer;">Digital</button>
+          <button type="button" style="padding: 6px 14px; font-family: var(--font-sans); font-size: var(--fs-tiny); font-weight: var(--fw-semibold); letter-spacing: var(--ls-wide); text-transform: uppercase; background: transparent; color: var(--color-text); border: 1px solid var(--color-border-strong); border-radius: var(--radius-pill); cursor: pointer;">Foundations</button>
+          <button type="button" style="padding: 6px 14px; font-family: var(--font-sans); font-size: var(--fs-tiny); font-weight: var(--fw-semibold); letter-spacing: var(--ls-wide); text-transform: uppercase; background: transparent; color: var(--color-text); border: 1px solid var(--color-border-strong); border-radius: var(--radius-pill); cursor: pointer;">Advanced</button>
+          <button type="button" style="padding: 6px 14px; font-family: var(--font-sans); font-size: var(--fs-tiny); font-weight: var(--fw-semibold); letter-spacing: var(--ls-wide); text-transform: uppercase; background: transparent; color: var(--color-text); border: 1px solid var(--color-border-strong); border-radius: var(--radius-pill); cursor: pointer;">Master</button>
+          <span style="font-family: var(--font-sans); font-size: var(--fs-tiny); color: var(--color-text-subtle); padding: 8px 0; margin-left: auto;">12 upcoming · 6 shown</span>
         </div>
 
         <div class="events__grid reveal">
@@ -253,6 +278,8 @@
               <span class="event-card__tier">Advanced · Concealed</span>
               <h3 class="event-card__title">Concealed by C&amp;M — The Method</h3>
               <span class="event-card__where">New York, NY · Hybrid Studio</span>
+              <span class="event-card__educator" style="font-family: var(--font-serif); font-style: italic; font-size: 14px; color: var(--color-accent); margin-top: 6px;">with <a href="educators/tori-elyse.html" style="color: inherit; border-bottom: 1px solid currentColor;">Tori Elyse</a></span>
+              <span class="event-card__seats" style="font-family: var(--font-sans); font-size: var(--fs-tiny); letter-spacing: var(--ls-wide); text-transform: uppercase; color: var(--color-text-subtle); margin-top: 4px;">8 of 16 seats remaining</span>
             </div>
             <div class="event-card__footer">
               <span class="event-card__status event-card__status--available">Available</span>
@@ -269,6 +296,8 @@
               <span class="event-card__tier">Advanced · Tape</span>
               <h3 class="event-card__title">The Coveted Tape Certification</h3>
               <span class="event-card__where">Los Angeles, CA · 1-Day Intensive</span>
+              <span class="event-card__educator" style="font-family: var(--font-serif); font-style: italic; font-size: 14px; color: var(--color-accent); margin-top: 6px;">with <a href="educators/marisa-dipaolo.html" style="color: inherit; border-bottom: 1px solid currentColor;">Marisa DiPaolo</a></span>
+              <span class="event-card__seats" style="font-family: var(--font-sans); font-size: var(--fs-tiny); letter-spacing: var(--ls-wide); text-transform: uppercase; color: #b04848; margin-top: 4px; font-weight: 600;">Full · 4 on waitlist</span>
             </div>
             <div class="event-card__footer">
               <span class="event-card__status event-card__status--waitlist">Waitlist</span>
@@ -283,8 +312,10 @@
             </div>
             <div class="event-card__body">
               <span class="event-card__tier">Advanced · Keratin Tip</span>
-              <h3 class="event-card__title">Mastering The Keratin Tip — Angela Goff</h3>
+              <h3 class="event-card__title">Mastering The Keratin Tip</h3>
               <span class="event-card__where">Miami, FL · 1-Day Intensive</span>
+              <span class="event-card__educator" style="font-family: var(--font-serif); font-style: italic; font-size: 14px; color: var(--color-accent); margin-top: 6px;">with <a href="educators/angela-goff.html" style="color: inherit; border-bottom: 1px solid currentColor;">Angela Goff</a></span>
+              <span class="event-card__seats" style="font-family: var(--font-sans); font-size: var(--fs-tiny); letter-spacing: var(--ls-wide); text-transform: uppercase; color: #b04848; margin-top: 4px; font-weight: 600;">3 of 12 seats remaining</span>
             </div>
             <div class="event-card__footer">
               <span class="event-card__status event-card__status--available">Available</span>
@@ -301,10 +332,12 @@
               <span class="event-card__tier">Master · Salon Private</span>
               <h3 class="event-card__title">Private Salon Session — Your Studio</h3>
               <span class="event-card__where">By appointment · Continental US</span>
+              <span class="event-card__educator" style="font-family: var(--font-serif); font-style: italic; font-size: 14px; color: var(--color-accent); margin-top: 6px;">Educator matched to your method &amp; region</span>
+              <span class="event-card__seats" style="font-family: var(--font-sans); font-size: var(--fs-tiny); letter-spacing: var(--ls-wide); text-transform: uppercase; color: var(--color-text-subtle); margin-top: 4px;">By appointment · Salon-team capacity</span>
             </div>
             <div class="event-card__footer">
               <span class="event-card__status event-card__status--available">Bookable</span>
-              <a href="#" class="link-arrow link-arrow--gold" style="font-size: 9px;">Inquire →</a>
+              <a href="contact.html" class="link-arrow link-arrow--gold" style="font-size: 9px;">Inquire →</a>
             </div>
           </article>
 
@@ -317,6 +350,8 @@
               <span class="event-card__tier">Advanced · Concealed</span>
               <h3 class="event-card__title">Concealed by C&amp;M Canada</h3>
               <span class="event-card__where">Toronto, ON · 1-Day Intensive</span>
+              <span class="event-card__educator" style="font-family: var(--font-serif); font-style: italic; font-size: 14px; color: var(--color-accent); margin-top: 6px;">with <a href="educators/tori-elyse.html" style="color: inherit; border-bottom: 1px solid currentColor;">Tori Elyse</a> &amp; <a href="educators/heather-jensen.html" style="color: inherit; border-bottom: 1px solid currentColor;">Heather Jensen</a></span>
+              <span class="event-card__seats" style="font-family: var(--font-sans); font-size: var(--fs-tiny); letter-spacing: var(--ls-wide); text-transform: uppercase; color: var(--color-text-subtle); margin-top: 4px;">Sold out · 9 on waitlist</span>
             </div>
             <div class="event-card__footer">
               <span class="event-card__status event-card__status--soldout">Sold Out</span>
@@ -333,6 +368,8 @@
               <span class="event-card__tier">The Experience · Annual</span>
               <h3 class="event-card__title">The Experience 2026 — Two-Day Immersive</h3>
               <span class="event-card__where">New York, NY · Two Days</span>
+              <span class="event-card__educator" style="font-family: var(--font-serif); font-style: italic; font-size: 14px; color: var(--color-accent); margin-top: 6px;">Hosted by the full C&amp;M Educator team</span>
+              <span class="event-card__seats" style="font-family: var(--font-sans); font-size: var(--fs-tiny); letter-spacing: var(--ls-wide); text-transform: uppercase; color: var(--color-text-subtle); margin-top: 4px;">Collective members · Pre-sale only</span>
             </div>
             <div class="event-card__footer">
               <span class="event-card__status event-card__status--available">Early Access</span>
@@ -361,9 +398,14 @@
           </p>
         </div>
 
+        <!-- Educator cards link to /educators/[slug].html — Tori Elyse is the
+             real exemplar (Phase 3a); others link to stub pages. Per 2026-05-11
+             walkthrough: "if you click on Tori Elyse, you're hearing for storing...
+             instead of selling stability you, you're like, look at Angela how
+             amazing or Buris and with us." -->
         <div class="educators__grid reveal">
 
-          <div class="educator">
+          <a href="educators/tori-elyse.html" class="educator" style="text-decoration: none; color: inherit;">
             <div class="educator__media img-zone">
               <img src="https://covetandmane.com/cdn/shop/files/20250314_COVET_MANE_LT_MILLI_BTS__8995_v1a_76_2.webp"
                    alt="Master Educator">
@@ -372,35 +414,46 @@
             <div class="educator__tier">Master Educator</div>
             <h3 class="educator__name">Tori Elyse</h3>
             <div class="educator__specialty">The Keratin Tip · Multi-tonal blending</div>
-          </div>
+            <div class="educator__cta" style="margin-top: 12px; font-family: var(--font-sans); font-size: var(--fs-tiny); font-weight: 600; letter-spacing: var(--ls-wider); text-transform: uppercase; color: var(--color-accent);">View profile &amp; classes →</div>
+          </a>
 
-          <div class="educator">
+          <a href="educators/angela-goff.html" class="educator" style="text-decoration: none; color: inherit;">
             <div class="educator__media img-zone img-zone--placeholder">
               <span class="img-label img-label--placeholder">PLACEHOLDER — Educator portrait, warm editorial light</span>
             </div>
             <div class="educator__tier">Master Educator</div>
             <h3 class="educator__name">Angela Goff</h3>
             <div class="educator__specialty">The Keratin Tip · Custom bonding</div>
-          </div>
+            <div class="educator__cta" style="margin-top: 12px; font-family: var(--font-sans); font-size: var(--fs-tiny); font-weight: 600; letter-spacing: var(--ls-wider); text-transform: uppercase; color: var(--color-accent);">View profile &amp; classes →</div>
+          </a>
 
-          <div class="educator">
+          <a href="educators/ian-sannicolas.html" class="educator" style="text-decoration: none; color: inherit;">
             <div class="educator__media img-zone img-zone--placeholder">
               <span class="img-label img-label--placeholder">PLACEHOLDER — Educator portrait, warm editorial light</span>
             </div>
             <div class="educator__tier">Master Educator</div>
             <h3 class="educator__name">Ian Sannicolas</h3>
             <div class="educator__specialty">Editorial photography for stylists</div>
-          </div>
+            <div class="educator__cta" style="margin-top: 12px; font-family: var(--font-sans); font-size: var(--fs-tiny); font-weight: 600; letter-spacing: var(--ls-wider); text-transform: uppercase; color: var(--color-accent);">View profile &amp; classes →</div>
+          </a>
 
-          <div class="educator">
+          <a href="educators/marisa-dipaolo.html" class="educator" style="text-decoration: none; color: inherit;">
             <div class="educator__media img-zone img-zone--placeholder">
               <span class="img-label img-label--placeholder">PLACEHOLDER — Educator portrait, warm editorial light</span>
             </div>
             <div class="educator__tier">Advanced Educator</div>
             <h3 class="educator__name">Marisa DiPaolo</h3>
             <div class="educator__specialty">Concealed · Hand-tied wefts</div>
-          </div>
+            <div class="educator__cta" style="margin-top: 12px; font-family: var(--font-sans); font-size: var(--fs-tiny); font-weight: 600; letter-spacing: var(--ls-wider); text-transform: uppercase; color: var(--color-accent);">View profile &amp; classes →</div>
+          </a>
 
+        </div>
+
+        <div style="margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--color-border); display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 16px;">
+          <p class="t-body-sm t-muted" style="max-width: 50ch;">
+            Our full educator roster includes <a href="#" style="color: var(--color-accent); border-bottom: 1px solid currentColor;">Heather Jensen</a>, <a href="#" style="color: var(--color-accent); border-bottom: 1px solid currentColor;">Mana Dave</a>, <a href="#" style="color: var(--color-accent); border-bottom: 1px solid currentColor;">Brian Acosta</a>, <a href="#" style="color: var(--color-accent); border-bottom: 1px solid currentColor;">Jasmine Whitley</a> and more.
+          </p>
+          <a href="#" class="link-arrow">Meet the full team →</a>
         </div>
 
       </div>
