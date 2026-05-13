@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Cut-Point Weft · V3 Build Your System — Covet &amp; Mane Portal</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,300;1,400;1,500&family=Nunito+Sans:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+
+  <style>
+    .variant-ribbon {
+      background: var(--color-text); color: var(--color-text-inverse); padding: 8px 0;
+      font-family: var(--font-sans); font-size: var(--fs-tiny);
+      font-weight: 600; letter-spacing: var(--ls-widest); text-transform: uppercase;
+      text-align: center;
+    }
+    .variant-ribbon a { color: var(--color-accent-light); border-bottom: 1px solid currentColor; padding-bottom: 1px; }
+
+    /* Sticky kit-completion meter at top */
+    .kit-meter {
+      position: sticky;
+      top: calc(var(--nav-height) + var(--promo-height));
+      z-index: 100;
+      background: var(--color-text);
+      color: var(--color-text-inverse);
+      padding: 14px 0;
+      border-bottom: 1px solid var(--color-charcoal, #2F2A35);
+    }
+    .kit-meter__inner {
+      max-width: var(--container-wide);
+      margin: 0 auto;
+      padding: 0 var(--container-pad);
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 24px;
+    }
+    .kit-meter__label {
+      font-family: var(--font-sans); font-size: 10px; font-weight: 700;
+      letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--color-accent-light);
+      white-space: nowrap;
+    }
+    .kit-meter__modules {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+    .kit-meter__module {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 8px 12px;
+      border: 1px solid rgba(247,244,238,0.18);
+      background: transparent;
+      color: rgba(247,244,238,0.6);
+      cursor: pointer;
+      transition: all var(--dur-base) var(--ease-out);
+    }
+    .kit-meter__module.is-complete {
+      border-color: var(--color-accent);
+      background: rgba(110,46,72,0.15);
+      color: var(--color-accent-light);
+    }
+    .kit-meter__module.is-current {
+      border-color: var(--color-accent-light);
+      color: var(--color-text-inverse);
+    }
+    .kit-meter__module-name {
+      font-family: var(--font-sans); font-size: 9.5px;
+      font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+      display: flex; align-items: center; gap: 4px;
+    }
+    .kit-meter__module-detail {
+      font-family: var(--font-serif); font-size: 12px;
+      font-style: italic;
+      opacity: 0.8;
+    }
+    .kit-meter__progress {
+      font-family: var(--font-serif); font-style: italic;
+      font-size: 22px;
+      color: var(--color-accent-light);
+      white-space: nowrap;
+    }
+    .kit-meter__progress strong {
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(247,244,238,0.7);
+      display: block;
+    }
+
+    /* PDP hero */
+    .pdp {
+      max-width: var(--container-wide);
+      margin: 0 auto;
+      padding: var(--space-12) var(--container-pad);
+    }
+
+    .pdp__hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-12);
+      align-items: start;
+      padding-bottom: var(--space-12);
+      border-bottom: 1px solid var(--color-border);
+    }
+    @media (max-width: 960px) { .pdp__hero { grid-template-columns: 1fr; } }
+
+    .pdp__hero-img {
+      aspect-ratio: 4/5;
+      background: var(--color-surface-soft);
+    }
+    .pdp__hero-img img { width: 100%; height: 100%; object-fit: cover; }
+
+    .pdp__hero-body { display: flex; flex-direction: column; gap: 20px; }
+
+    .pdp__hero-eyebrow {
+      font-family: var(--font-sans); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.32em; text-transform: uppercase; color: var(--color-accent);
+    }
+    .pdp__hero-title {
+      font-family: var(--font-serif); font-style: italic; font-weight: 300;
+      font-size: clamp(36px, 5vw, 56px); line-height: 0.98;
+    }
+    .pdp__hero-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+      padding-block: 14px; border-block: 1px solid var(--color-border);
+    }
+    .pdp__hero-stat-num { font-family: var(--font-serif); font-style: italic; font-size: 22px; color: var(--color-accent); }
+    .pdp__hero-stat-label { font-family: var(--font-sans); font-size: var(--fs-tiny); letter-spacing: var(--ls-wide); text-transform: uppercase; color: var(--color-text-muted); }
+    .pdp__hero-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    }
+    .pdp__hero-field { display: flex; flex-direction: column; gap: 4px; }
+    .pdp__hero-field label { font-family: var(--font-sans); font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-text-muted); }
+    .pdp__hero-field select { padding: 12px 14px; font-family: var(--font-sans); font-size: 14px; background: var(--color-surface-soft); border: 1px solid var(--color-border-strong); }
+    .pdp__hero-price { font-family: var(--font-serif); font-style: italic; font-size: 30px; color: var(--color-text); }
+    .pdp__hero-bundle {
+      padding: 10px 14px;
+      background: var(--color-surface-soft);
+      border-left: 3px solid var(--color-accent);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    /* Module sections */
+    .module-section {
+      padding-block: var(--space-12);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .module-section--filled { background: var(--color-surface-soft); }
+    .module-section--missing { background: var(--color-surface); }
+
+    .module-head {
+      display: grid;
+      grid-template-columns: 56px 1fr auto;
+      gap: 24px;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+    .module-head__icon {
+      width: 56px; height: 56px;
+      background: var(--color-accent);
+      color: var(--color-text-inverse);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-serif); font-style: italic; font-size: 26px;
+    }
+    .module-head__icon.is-missing {
+      background: transparent;
+      border: 1px dashed var(--color-border-strong);
+      color: var(--color-text-subtle);
+    }
+    .module-head__title { font-family: var(--font-serif); font-style: italic; font-size: clamp(28px, 3.5vw, 40px); line-height: 1.0; }
+    .module-head__title em { color: var(--color-accent); }
+    .module-head__sub { font-family: var(--font-sans); font-size: 13px; color: var(--color-text-muted); margin-top: 6px; }
+    .module-head__status {
+      font-family: var(--font-sans); font-size: 10px; font-weight: 700;
+      letter-spacing: 0.24em; text-transform: uppercase;
+      padding: 6px 12px; border: 1px solid currentColor;
+    }
+    .module-head__status.is-complete { color: var(--color-accent); }
+    .module-head__status.is-suggested { color: var(--color-text-muted); }
+
+    /* Companion product grid */
+    .companions {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    @media (max-width: 768px) { .companions { grid-template-columns: 1fr; } }
+
+    .companion {
+      display: flex;
+      flex-direction: column;
+      background: var(--color-surface);
+      border: var(--border-thin);
+      transition: border-color var(--dur-base) var(--ease-out);
+    }
+    .companion:hover { border-color: var(--color-accent); }
+    .companion__img {
+      aspect-ratio: 5/4;
+      background: var(--color-surface-soft);
+    }
+    .companion__img img { width: 100%; height: 100%; object-fit: cover; }
+    .companion__body { padding: 18px; display: flex; flex-direction: column; gap: 6px; flex-grow: 1; }
+    .companion__cat { font-family: var(--font-sans); font-size: 10px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: var(--color-accent); }
+    .companion__name { font-family: var(--font-serif); font-style: italic; font-size: 20px; line-height: 1.1; }
+    .companion__why { font-family: var(--font-serif); font-size: 14px; font-style: italic; color: var(--color-text-muted); line-height: 1.5; flex-grow: 1; padding-block: 6px; }
+    .companion__price {
+      display: flex; align-items: baseline; justify-content: space-between;
+      padding-top: 10px; border-top: 1px solid var(--color-border);
+      margin-top: 10px;
+    }
+    .companion__price-num { font-family: var(--font-serif); font-style: italic; font-size: 20px; color: var(--color-text); }
+    .companion__add {
+      padding: 8px 14px;
+      background: transparent;
+      border: 1px solid var(--color-text);
+      font-family: var(--font-sans); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      cursor: pointer;
+    }
+    .companion__add:hover { background: var(--color-text); color: var(--color-text-inverse); }
+
+    /* Cart drawer V3 */
+    .cart-drawer {
+      position: fixed; top: 0; bottom: 0; right: 0;
+      width: min(480px, 92vw); background: var(--color-surface);
+      box-shadow: -16px 0 60px rgba(14,14,14,0.18); z-index: 9000;
+      transform: translateX(100%); transition: transform var(--dur-slow) var(--ease-out);
+      display: flex; flex-direction: column; overflow: hidden;
+    }
+    .cart-drawer.is-open { transform: translateX(0); }
+    .cart-drawer__backdrop {
+      position: fixed; inset: 0; background: rgba(14,14,14,0.45);
+      z-index: 8999; opacity: 0; pointer-events: none;
+      transition: opacity var(--dur-base) var(--ease-out);
+    }
+    .cart-drawer__backdrop.is-open { opacity: 1; pointer-events: auto; }
+    .cart-drawer__head {
+      padding: 20px 24px; border-bottom: 1px solid var(--color-border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .cart-drawer__head-title { font-family: var(--font-serif); font-style: italic; font-size: 22px; }
+    .cart-drawer__close {
+      width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+      background: transparent; border: none; cursor: pointer; font-size: 22px; color: var(--color-text-muted);
+    }
+    .cart-drawer__body { flex-grow: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 20px; }
+
+    /* Big kit-completion banner in drawer */
+    .cart-drawer__kit-banner {
+      padding: 20px;
+      background: var(--color-surface-dark);
+      color: var(--color-text-inverse);
+      text-align: center;
+    }
+    .cart-drawer__kit-progress-num {
+      font-family: var(--font-serif); font-style: italic;
+      font-size: 56px; color: var(--color-accent-light); line-height: 1; margin-bottom: 8px;
+    }
+    .cart-drawer__kit-progress-label {
+      font-family: var(--font-sans); font-size: 10px; font-weight: 700;
+      letter-spacing: 0.32em; text-transform: uppercase; color: var(--color-accent-light);
+      margin-bottom: 14px;
+    }
+    .cart-drawer__kit-meter {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px;
+      margin-bottom: 12px;
+    }
+    .cart-drawer__kit-cell {
+      height: 6px;
+      background: rgba(247,244,238,0.18);
+    }
+    .cart-drawer__kit-cell.is-on { background: var(--color-accent); }
+    .cart-drawer__kit-msg {
+      font-family: var(--font-serif); font-style: italic;
+      font-size: 16px;
+      color: var(--c-warm-grey);
+    }
+    .cart-drawer__kit-msg em { color: var(--color-accent-light); }
+
+    .cart-drawer__missing-head {
+      font-family: var(--font-sans); font-size: var(--fs-micro); font-weight: 600;
+      letter-spacing: var(--ls-widest); text-transform: uppercase;
+      color: var(--color-accent);
+    }
+    .cart-drawer__missing-sub {
+      font-family: var(--font-serif); font-style: italic; font-size: 22px; line-height: 1.2;
+      margin: 6px 0 16px;
+    }
+    .cart-drawer__missing-card {
+      display: grid; grid-template-columns: 60px 1fr auto;
+      gap: 14px; align-items: center;
+      padding: 14px; background: var(--color-surface-soft);
+      margin-bottom: 10px;
+    }
+    .cart-drawer__missing-img {
+      aspect-ratio: 1; background: var(--c-warm-grey);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-serif); font-style: italic;
+      font-size: 22px; color: var(--color-text-muted);
+    }
+    .cart-drawer__missing-name { font-family: var(--font-serif); font-size: 15px; line-height: 1.2; }
+    .cart-drawer__missing-meta { font-family: var(--font-sans); font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-accent); margin-top: 4px; }
+    .cart-drawer__missing-add {
+      padding: 8px 12px; background: var(--color-text); color: var(--color-text-inverse);
+      border: none; font-family: var(--font-sans); font-size: 10px; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer;
+    }
+
+    .cart-drawer__bundle {
+      padding: 14px 16px;
+      background: rgba(110, 46, 72, 0.08);
+      border-left: 3px solid var(--color-accent);
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 15px;
+      line-height: 1.4;
+    }
+    .cart-drawer__bundle strong { color: var(--color-accent); }
+
+    .cart-drawer__foot {
+      padding: 20px 24px; border-top: 1px solid var(--color-border);
+    }
+    .cart-drawer__total {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;
+      font-family: var(--font-serif); font-style: italic;
+    }
+    .cart-drawer__total-num { font-size: 26px; color: var(--color-accent); }
+    .cart-drawer__bundle-savings {
+      font-family: var(--font-sans); font-size: 12px; color: var(--color-accent); margin-bottom: 14px; font-weight: 600;
+    }
+  </style>
+</head>
+<body data-page="portal">
+
+  <div id="site-nav-mount"></div>
+
+  <div class="variant-ribbon">
+    Variant 03 · Build Your System &nbsp;|&nbsp; <a href="pdp-options.html">Back to comparison</a> &nbsp;|&nbsp; <a href="pdp-2-editorial.html">← V2 Editorial</a>
+  </div>
+
+
+  <!-- ════════════════════════════════════════════════════════════
+       STICKY KIT-COMPLETION METER
+       Persistent across the page. Updates as user adds modules.
+       ════════════════════════════════════════════════════════════ -->
+  <div class="kit-meter">
+    <div class="kit-meter__inner">
+
+      <div class="kit-meter__label">Your Install Kit</div>
+
+      <div class="kit-meter__modules">
+        <div class="kit-meter__module is-current">
+          <span class="kit-meter__module-name">01 · Hair</span>
+          <span class="kit-meter__module-detail">Cut-Point Weft</span>
+        </div>
+        <div class="kit-meter__module">
+          <span class="kit-meter__module-name">02 · Tools</span>
+          <span class="kit-meter__module-detail">Not in cart</span>
+        </div>
+        <div class="kit-meter__module">
+          <span class="kit-meter__module-name">03 · Color</span>
+          <span class="kit-meter__module-detail">Ring + Cert</span>
+        </div>
+        <div class="kit-meter__module">
+          <span class="kit-meter__module-name">04 · Care</span>
+          <span class="kit-meter__module-detail">Client cards</span>
+        </div>
+        <div class="kit-meter__module">
+          <span class="kit-meter__module-name">05 · Ed</span>
+          <span class="kit-meter__module-detail">Concealed cert</span>
+        </div>
+      </div>
+
+      <div class="kit-meter__progress">
+        <strong>1 of 5 modules</strong>
+        20% complete
+      </div>
+
+    </div>
+  </div>
+
+
+  <main id="MainContent">
+
+    <div class="pdp">
+
+      <!-- Breadcrumb -->
+      <div style="display: flex; align-items: baseline; gap: 12px; margin-bottom: 24px;">
+        <a href="../portal.html" style="font-family: var(--font-sans); font-size: var(--fs-tiny); font-weight: 600; letter-spacing: var(--ls-widest); text-transform: uppercase; color: var(--color-accent); padding-bottom: 2px; border-bottom: 1px solid currentColor;">← Portal</a>
+        <span style="font-family: var(--font-sans); font-size: var(--fs-tiny); color: var(--color-text-subtle); letter-spacing: var(--ls-wide);">/ Shop / Hand-Tied Wefts / The Cut-Point Weft</span>
+      </div>
+
+
+      <!-- ════════════════════════════════════════════════════════════
+           HERO — Hair module (the product itself)
+           ════════════════════════════════════════════════════════════ -->
+      <div class="pdp__hero">
+
+        <div class="pdp__hero-img">
+          <img src="https://covetandmane.com/cdn/shop/files/1196-thecutpointsilkystraight-general.jpg"
+               alt="The Cut-Point Weft in Silky Straight">
+        </div>
+
+        <div class="pdp__hero-body">
+          <div class="pdp__hero-eyebrow">Module 01 · Hair · Hand-Tied Wefts</div>
+          <h1 class="pdp__hero-title">The Cut-Point Weft <em class="italic">in Silky Straight.</em></h1>
+
+          <div class="pdp__hero-stats">
+            <div>
+              <div class="pdp__hero-stat-num">120g</div>
+              <div class="pdp__hero-stat-label">Full pack</div>
+            </div>
+            <div>
+              <div class="pdp__hero-stat-num">6</div>
+              <div class="pdp__hero-stat-label">Lengths</div>
+            </div>
+            <div>
+              <div class="pdp__hero-stat-num">18</div>
+              <div class="pdp__hero-stat-label">Shades</div>
+            </div>
+          </div>
+
+          <div class="pdp__hero-row">
+            <div class="pdp__hero-field">
+              <label>Shade</label>
+              <select>
+                <option>Casablanca 2/4</option>
+                <option>Frenchman's Cove 8A</option>
+                <option>Capetown 8</option>
+              </select>
+            </div>
+            <div class="pdp__hero-field">
+              <label>Length</label>
+              <select>
+                <option>22"</option>
+                <option>18"</option>
+                <option>26"</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="pdp__hero-row">
+            <div class="pdp__hero-field">
+              <label>Qty</label>
+              <select>
+                <option>3 packs</option>
+                <option>1 pack</option>
+                <option>2 packs</option>
+                <option>4 packs</option>
+                <option>5 packs</option>
+              </select>
+            </div>
+            <div style="display: flex; align-items: end; justify-content: flex-end;">
+              <div class="pdp__hero-price">$445</div>
+            </div>
+          </div>
+
+          <div class="pdp__hero-bundle">
+            <strong>System bundle preview:</strong> Add the other 4 modules and save up to <strong>$92</strong>. Or add now and complete later.
+          </div>
+
+          <button type="button" class="btn btn--primary btn--lg" style="width: 100%;" onclick="openCart()">Add Hair Module &middot; $445 →</button>
+        </div>
+
+      </div>
+
+
+      <!-- ════════════════════════════════════════════════════════════
+           MODULE 02 — TOOLS
+           ════════════════════════════════════════════════════════════ -->
+      <section class="module-section module-section--missing">
+        <div class="module-head">
+          <div class="module-head__icon is-missing">02</div>
+          <div>
+            <h2 class="module-head__title">Tools you'll <em>need.</em></h2>
+            <p class="module-head__sub">Hand-tied installs require specific tools. Most pros installing this weft already have these — but you can refill consumables here.</p>
+          </div>
+          <div class="module-head__status is-suggested">Missing</div>
+        </div>
+
+        <div class="companions">
+          <a href="#" class="companion">
+            <div class="companion__img">
+              <img src="https://covetandmane.com/cdn/shop/files/1196-HairExtensionTools.jpg" alt="Install kit">
+            </div>
+            <div class="companion__body">
+              <span class="companion__cat">Tools · Kit</span>
+              <h3 class="companion__name">Hand-Tied Install Kit</h3>
+              <p class="companion__why">"The full install kit — thread, beads, ventilating hook, sectioning clips."</p>
+              <div class="companion__price">
+                <span class="companion__price-num">$89</span>
+                <button class="companion__add">+ Add to Kit</button>
+              </div>
+            </div>
+          </a>
+
+          <a href="#" class="companion">
+            <div class="companion__img">
+              <img src="https://covetandmane.com/cdn/shop/files/6585b0e63628b9e60db5c844_Tools_and_accessories_thread.jpg" alt="Gutermann thread">
+            </div>
+            <div class="companion__body">
+              <span class="companion__cat">Tools · Refill</span>
+              <h3 class="companion__name">Gutermann Thread &times; 5</h3>
+              <p class="companion__why">"Invisible stitch, doesn't swell with humidity. Five-pack lasts a quarter."</p>
+              <div class="companion__price">
+                <span class="companion__price-num">$22</span>
+                <button class="companion__add">+ Add to Kit</button>
+              </div>
+            </div>
+          </a>
+
+          <a href="#" class="companion">
+            <div class="companion__img">
+              <img src="https://covetandmane.com/cdn/shop/files/1196-3.5_2-DarkBlonde.jpg" alt="Beads">
+            </div>
+            <div class="companion__body">
+              <span class="companion__cat">Tools · Beads</span>
+              <h3 class="companion__name">Silicone-Lined Beads &times; 250</h3>
+              <p class="companion__why">"Color-matched to dark blonde &mdash; auto-suggested for your selected shade."</p>
+              <div class="companion__price">
+                <span class="companion__price-num">$34</span>
+                <button class="companion__add">+ Add to Kit</button>
+              </div>
+            </div>
+          </a>
+        </div>
+      </section>
+
+
+      <!-- ════════════════════════════════════════════════════════════
+           MODULE 03 — COLOR
+           ════════════════════════════════════════════════════════════ -->
+      <section class="module-section module-section--missing">
+        <div class="module-head">
+          <div class="module-head__icon is-missing">03</div>
+          <div>
+            <h2 class="module-head__title">Match the <em>color.</em></h2>
+            <p class="module-head__sub">Color matching is where most installs go sideways. Our color ring is the only way to see the actual weft tones &mdash; and the color cert teaches the technique.</p>
+          </div>
+          <div class="module-head__status is-suggested">Missing</div>
+        </div>
+
+        <div class="companions">
+          <a href="#" class="companion">
+            <div class="companion__img">
+              <img src="https://covetandmane.com/cdn/shop/files/1196-ColorRing_b68f8ed0-a426-4dee-8cb9-f38c994740b5.jpg" alt="Color ring">
+            </div>
+            <div class="companion__body">
+              <span class="companion__cat">Color · Tool</span>
+              <h3 class="companion__name">Cut-Point Color Ring</h3>
+              <p class="companion__why">"Real-weft swatches for all 18 shades. Match in front of the client, not on screen."</p>
+              <div class="companion__price">
+                <span class="companion__price-num">$52</span>
+                <button class="companion__add">+ Add to Kit</button>
+              </div>
+            </div>
+          </a>
+
+          <a href="../programs/color.html" class="companion">
+            <div class="companion__img" style="background: var(--color-surface-dark);">
+              <span class="img-label img-label--placeholder" style="position: static; display: flex; height: 100%; align-items: center; justify-content: center; font-size: 10px;">CLASS</span>
+            </div>
+            <div class="companion__body">
+              <span class="companion__cat">Color · Education</span>
+              <h3 class="companion__name">Covet &amp; Mane Color Cert</h3>
+              <p class="companion__why">"The brass-free dye method, undertone reading, multi-tonal blending. Required for color line resell."</p>
+              <div class="companion__price">
+                <span class="companion__price-num">$680</span>
+                <button class="companion__add">+ Enroll</button>
+              </div>
+            </div>
+          </a>
+
+          <a href="#" class="companion">
+            <div class="companion__img">
+              <img src="https://covetandmane.com/cdn/shop/files/1x1_3N_Dark_Brown_Flatlay-min.jpg" alt="Root Melt color">
+            </div>
+            <div class="companion__body">
+              <span class="companion__cat">Color · Product</span>
+              <h3 class="companion__name">Root Melt Color · 3N Dark Brown</h3>
+              <p class="companion__why">"Matched to your selected weft shade. Apply at the install for a seamless root."</p>
+              <div class="companion__price">
+                <span class="companion__price-num">$38</span>
+                <button class="companion__add">+ Add to Kit</button>
+              </div>
+            </div>
+          </a>
+        </div>
+      </section>
+
+
+      <!-- ════════════════════════════════════════════════════════════
+           MODULE 04 — CARE (client aftercare)
+           ════════════════════════════════════════════════════════════ -->
+      <section class="module-section module-section--missing">
+        <div class="module-head">
+          <div class="module-head__icon is-missing">04</div>
+          <div>
+            <h2 class="module-head__title">Send her home <em>set up.</em></h2>
+            <p class="module-head__sub">Aftercare is the difference between a client returning and a client losing wefts. Stock the cards and the brush in advance.</p>
+          </div>
+          <div class="module-head__status is-suggested">Missing</div>
+        </div>
+
+        <div class="companions">
+          <a href="#" class="companion">
+            <div class="companion__img">
+              <img src="https://covetandmane.com/cdn/shop/files/TheBeachWaveCare_MaintenanceCards.webp" alt="Aftercare cards">
+            </div>
+            <div class="companion__body">
+              <span class="companion__cat">Care · Take-Home</span>
+              <h3 class="companion__name">Aftercare Cards · 10-pack</h3>
+              <p class="companion__why">"Hand to clients at checkout. Maintenance steps, wash routine, when to come back."</p>
+              <div class="companion__price">
+                <span class="companion__price-num">$18</span>
+                <button class="companion__add">+ Add to Kit</button>
+              </div>
+            </div>
+          </a>
+
+          <a href="#" class="companion">
+            <div class="companion__img img-zone--placeholder">
+              <span class="img-label img-label--placeholder">PLACEHOLDER — Extension brush product photo</span>
+            </div>
+            <div class="companion__body">
+              <span class="companion__cat">Care · Take-Home</span>
+              <h3 class="companion__name">Extension-Safe Brush</h3>
+              <p class="companion__why">"Resell to the client at the install. Margin built in for the stylist."</p>
+              <div class="companion__price">
+                <span class="companion__price-num">$24 / $44 retail</span>
+                <button class="companion__add">+ Add to Kit</button>
+              </div>
+            </div>
+          </a>
+
+          <a href="../aftercare.html" class="companion">
+            <div class="companion__img" style="background: var(--color-surface-dark);">
+              <span class="img-label img-label--placeholder" style="position: static; display: flex; height: 100%; align-items: center; justify-content: center; font-size: 10px;">GUIDE</span>
+            </div>
+            <div class="companion__body">
+              <span class="companion__cat">Care · Resource</span>
+              <h3 class="companion__name">Client Aftercare Library</h3>
+              <p class="companion__why">"Free with your account. Shareable links to send clients after their install."</p>
+              <div class="companion__price">
+                <span class="companion__price-num">Included</span>
+                <button class="companion__add">View →</button>
+              </div>
+            </div>
+          </a>
+        </div>
+      </section>
+
+
+      <!-- ════════════════════════════════════════════════════════════
+           MODULE 05 — EDUCATION
+           This is the big one per Dafina's "education is the gate."
+           ════════════════════════════════════════════════════════════ -->
+      <section class="module-section module-section--missing">
+        <div class="module-head">
+          <div class="module-head__icon is-missing">05</div>
+          <div>
+            <h2 class="module-head__title">Master the <em>install.</em></h2>
+            <p class="module-head__sub">Education sits inside the kit, not as an afterthought. The class teaches the patented cut-point sectioning, the multi-tonal blend, and the consultation framework that makes this install pay.</p>
+          </div>
+          <div class="module-head__status is-suggested">Missing</div>
+        </div>
+
+        <div class="companions">
+          <a href="../programs/concealed.html" class="companion">
+            <div class="companion__img" style="background: var(--color-surface-dark);">
+              <span class="img-label img-label--placeholder" style="position: static; display: flex; height: 100%; align-items: center; justify-content: center; font-size: 10px;">CONCEALED · NYC</span>
+            </div>
+            <div class="companion__body">
+              <span class="companion__cat">Education · 1-Day</span>
+              <h3 class="companion__name">Concealed by C&amp;M</h3>
+              <p class="companion__why">"The hand-tied install method. Hands-on, in person, with Tori Elyse. June 14 · NYC."</p>
+              <div class="companion__price">
+                <span class="companion__price-num">$1,200</span>
+                <button class="companion__add">+ Enroll</button>
+              </div>
+            </div>
+          </a>
+
+          <a href="#" class="companion">
+            <div class="companion__img" style="background: var(--color-surface-dark);">
+              <span class="img-label img-label--placeholder" style="position: static; display: flex; height: 100%; align-items: center; justify-content: center; font-size: 10px;">VIDEO · 18 MIN</span>
+            </div>
+            <div class="companion__body">
+              <span class="companion__cat">Education · Free with Kit</span>
+              <h3 class="companion__name">Multi-Tonal Blending — Tori Elyse</h3>
+              <p class="companion__why">"On-demand master class. Free when you complete this kit. Unlocks at checkout."</p>
+              <div class="companion__price">
+                <span class="companion__price-num">Unlocks with kit</span>
+                <button class="companion__add">→</button>
+              </div>
+            </div>
+          </a>
+
+          <a href="../programs/foundations.html" class="companion">
+            <div class="companion__img" style="background: var(--color-surface-soft);">
+              <span class="img-label img-label--placeholder" style="position: static; display: flex; height: 100%; align-items: center; justify-content: center; font-size: 10px;">FOUNDATIONS</span>
+            </div>
+            <div class="companion__body">
+              <span class="companion__cat">Education · Refresher</span>
+              <h3 class="companion__name">Cut-Point Sectioning</h3>
+              <p class="companion__why">"Module 05 of Foundations. Refresh anytime, free with your account."</p>
+              <div class="companion__price">
+                <span class="companion__price-num">Included</span>
+                <button class="companion__add">Watch →</button>
+              </div>
+            </div>
+          </a>
+        </div>
+      </section>
+
+
+      <!-- About this variant -->
+      <section style="padding: var(--space-12) 0; background: var(--color-surface-warm); margin-top: var(--space-12);">
+        <div style="max-width: 720px;">
+          <div class="t-eyebrow-gold mb-2">About this variant</div>
+          <h3 style="font-family: var(--font-serif); font-style: italic; font-size: 32px; margin-bottom: 16px;">V3 is the boldest bet.</h3>
+          <p class="t-body" style="line-height: 1.7; color: var(--color-text-muted); margin-bottom: 14px;">
+            Reframes the entire PDP as a 5-module install system, not a product
+            page. Education sits inside the kit as Module 05 &mdash; not below the
+            fold, not in a footer link. The kit-completion meter at the top
+            persists as the user scrolls and incentivizes module-completion
+            via bundle savings. Most aligned with "education is the gate."
+          </p>
+          <p class="t-body" style="line-height: 1.7; color: var(--color-text-muted); margin-bottom: 14px;">
+            Trade-off: pro stylists who already know this product and just want
+            to reorder will find it heavy. Could be solved with a "Quick Reorder"
+            button up top that bypasses the system view.
+          </p>
+          <p class="t-body-sm" style="margin-top: 14px; color: var(--color-text-subtle); font-style: italic;">
+            Click <strong>Add Hair Module</strong> above to see the V3 cart drawer with kit-completion meter and bundle savings.
+          </p>
+        </div>
+      </section>
+
+    </div>
+
+
+    <!-- ════════════════════════════════════════════════════════════
+         CART DRAWER — V3 pattern: kit-completion + bundle savings
+         ════════════════════════════════════════════════════════════ -->
+    <div class="cart-drawer__backdrop" id="cart-backdrop" onclick="closeCart()"></div>
+    <aside class="cart-drawer" id="cart-drawer">
+
+      <header class="cart-drawer__head">
+        <span class="cart-drawer__head-title">Your Install Kit</span>
+        <button class="cart-drawer__close" onclick="closeCart()" aria-label="Close">×</button>
+      </header>
+
+      <div class="cart-drawer__body">
+
+        <div class="cart-drawer__kit-banner">
+          <div class="cart-drawer__kit-progress-num">20%</div>
+          <div class="cart-drawer__kit-progress-label">1 of 5 Modules</div>
+
+          <div class="cart-drawer__kit-meter">
+            <div class="cart-drawer__kit-cell is-on" title="Hair"></div>
+            <div class="cart-drawer__kit-cell" title="Tools"></div>
+            <div class="cart-drawer__kit-cell" title="Color"></div>
+            <div class="cart-drawer__kit-cell" title="Care"></div>
+            <div class="cart-drawer__kit-cell" title="Education"></div>
+          </div>
+
+          <p class="cart-drawer__kit-msg">
+            Add the rest of the kit and unlock <em>up to $92 in bundle savings.</em>
+          </p>
+        </div>
+
+        <div>
+          <div class="cart-drawer__missing-head">Complete the kit</div>
+          <h3 class="cart-drawer__missing-sub">4 modules to go.</h3>
+
+          <div class="cart-drawer__missing-card">
+            <div class="cart-drawer__missing-img">02</div>
+            <div>
+              <div class="cart-drawer__missing-name">Tools · Install Kit</div>
+              <div class="cart-drawer__missing-meta">+ $89 · Save $12 with kit</div>
+            </div>
+            <button class="cart-drawer__missing-add">+ Add</button>
+          </div>
+
+          <div class="cart-drawer__missing-card">
+            <div class="cart-drawer__missing-img">03</div>
+            <div>
+              <div class="cart-drawer__missing-name">Color Ring</div>
+              <div class="cart-drawer__missing-meta">+ $52 · Save $8 with kit</div>
+            </div>
+            <button class="cart-drawer__missing-add">+ Add</button>
+          </div>
+
+          <div class="cart-drawer__missing-card">
+            <div class="cart-drawer__missing-img">04</div>
+            <div>
+              <div class="cart-drawer__missing-name">Aftercare Cards · 10-pack</div>
+              <div class="cart-drawer__missing-meta">+ $18 · Save $3 with kit</div>
+            </div>
+            <button class="cart-drawer__missing-add">+ Add</button>
+          </div>
+
+          <div class="cart-drawer__missing-card">
+            <div class="cart-drawer__missing-img">05</div>
+            <div>
+              <div class="cart-drawer__missing-name">Concealed Cert · June 14 NYC</div>
+              <div class="cart-drawer__missing-meta">+ $1,200 · Save $69 with kit</div>
+            </div>
+            <button class="cart-drawer__missing-add">+ Enroll</button>
+          </div>
+        </div>
+
+        <div class="cart-drawer__bundle">
+          <strong>Complete the kit</strong> and you'll save <strong>$92</strong> across these modules
+          — plus unlock the free "Multi-Tonal Blending" master class.
+        </div>
+
+      </div>
+
+      <footer class="cart-drawer__foot">
+        <div class="cart-drawer__total">
+          <span>Kit subtotal</span>
+          <span class="cart-drawer__total-num">$445</span>
+        </div>
+        <div class="cart-drawer__bundle-savings">$92 in bundle savings unlocked at full kit</div>
+        <a href="#" class="btn btn--primary btn--block">Continue to Checkout →</a>
+        <button onclick="closeCart()" style="margin-top: 10px; width: 100%; padding: 12px; background: transparent; border: none; font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-text-muted); cursor: pointer;">
+          Keep building the kit
+        </button>
+      </footer>
+
+    </aside>
+
+  </main>
+
+  <div id="site-footer-mount"></div>
+
+  <script src="../js/nav.js"></script>
+  <script src="../js/toggle.js"></script>
+  <script>
+    function openCart() {
+      document.getElementById('cart-drawer').classList.add('is-open');
+      document.getElementById('cart-backdrop').classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeCart() {
+      document.getElementById('cart-drawer').classList.remove('is-open');
+      document.getElementById('cart-backdrop').classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+  </script>
+
+</body>
+</html>

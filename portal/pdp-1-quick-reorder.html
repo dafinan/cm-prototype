@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Cut-Point Weft · V1 Quick Reorder — Covet &amp; Mane Portal</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,300;1,400;1,500&family=Nunito+Sans:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/pages/portal.css">
+
+  <style>
+    /* Variant ribbon */
+    .variant-ribbon {
+      background: var(--color-text);
+      color: var(--color-text-inverse);
+      padding: 8px 0;
+      font-family: var(--font-sans);
+      font-size: var(--fs-tiny);
+      font-weight: 600;
+      letter-spacing: var(--ls-widest);
+      text-transform: uppercase;
+      text-align: center;
+    }
+    .variant-ribbon a { color: var(--color-accent-light); border-bottom: 1px solid currentColor; padding-bottom: 1px; }
+
+    /* PDP layout */
+    .pdp {
+      max-width: var(--container-wide);
+      margin: 0 auto;
+      padding: var(--space-8) var(--container-pad);
+    }
+    .pdp__hero {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: var(--space-12);
+      align-items: start;
+    }
+    @media (max-width: 960px) { .pdp__hero { grid-template-columns: 1fr; } }
+
+    /* Gallery */
+    .pdp__gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .pdp__gallery-main {
+      aspect-ratio: 4/5;
+      background: var(--color-surface-soft);
+      position: relative;
+      overflow: hidden;
+    }
+    .pdp__gallery-main img { width: 100%; height: 100%; object-fit: cover; }
+    .pdp__gallery-thumbs {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+    }
+    .pdp__gallery-thumb {
+      aspect-ratio: 1;
+      background: var(--color-surface-soft);
+      border: 1px solid var(--color-border);
+      cursor: pointer;
+    }
+    .pdp__gallery-thumb.is-active { border-color: var(--color-accent); border-width: 2px; }
+    .pdp__gallery-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* Buy module — sticky on desktop */
+    .pdp__buy {
+      position: sticky;
+      top: calc(var(--nav-height) + var(--promo-height) + 24px);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-5);
+      padding: var(--space-6);
+      background: var(--color-surface);
+      border: var(--border-thin);
+    }
+    .pdp__buy-eyebrow {
+      font-family: var(--font-sans);
+      font-size: var(--fs-micro);
+      font-weight: 600;
+      letter-spacing: var(--ls-widest);
+      text-transform: uppercase;
+      color: var(--color-accent);
+    }
+    .pdp__buy-title {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(32px, 4vw, 44px);
+      line-height: 0.98;
+      color: var(--color-text);
+    }
+    .pdp__buy-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      padding-block: 14px;
+      border-block: 1px solid var(--color-border);
+    }
+    .pdp__buy-stat-num { font-family: var(--font-serif); font-style: italic; font-size: 22px; color: var(--color-accent); }
+    .pdp__buy-stat-label { font-family: var(--font-sans); font-size: var(--fs-tiny); letter-spacing: var(--ls-wide); text-transform: uppercase; color: var(--color-text-muted); }
+
+    /* Shade picker */
+    .shade-picker { display: flex; flex-direction: column; gap: 6px; }
+    .shade-picker__label { font-family: var(--font-sans); font-size: var(--fs-micro); font-weight: 600; letter-spacing: var(--ls-wide); text-transform: uppercase; color: var(--color-text); display: flex; justify-content: space-between; }
+    .shade-picker__selected { color: var(--color-accent); font-style: italic; text-transform: none; letter-spacing: 0; font-family: var(--font-serif); font-size: 13px; }
+    .shade-picker__grid { display: grid; grid-template-columns: repeat(9, 1fr); gap: 4px; }
+    .shade-picker__swatch { aspect-ratio: 1; border: 1px solid var(--color-border); cursor: pointer; position: relative; }
+    .shade-picker__swatch.is-active { outline: 2px solid var(--color-accent); outline-offset: 1px; }
+    .shade-picker__swatch::after { content: ""; position: absolute; inset: 0; background: currentColor; }
+
+    /* Length picker */
+    .length-picker { display: grid; grid-template-columns: repeat(6, 1fr); gap: 4px; }
+    .length-picker__btn {
+      padding: 10px 6px;
+      font-family: var(--font-sans);
+      font-size: var(--fs-body-sm);
+      font-weight: 600;
+      background: transparent;
+      border: 1px solid var(--color-border-strong);
+      cursor: pointer;
+    }
+    .length-picker__btn.is-active { background: var(--color-text); color: var(--color-text-inverse); border-color: var(--color-text); }
+
+    /* Qty + price */
+    .pdp__buy-row {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 10px;
+    }
+    .pdp__buy-row input {
+      padding: 12px 14px;
+      font-family: var(--font-sans);
+      font-size: var(--fs-body);
+      background: var(--color-surface-soft);
+      border: 1px solid var(--color-border-strong);
+      text-align: center;
+    }
+    .pdp__buy-price { font-family: var(--font-serif); font-style: italic; font-size: 34px; color: var(--color-text); display: flex; align-items: baseline; gap: 8px; }
+    .pdp__buy-price-strike { font-size: 16px; color: var(--color-text-subtle); text-decoration: line-through; }
+
+    /* Quick reorder note */
+    .pdp__quick-reorder {
+      padding: 12px 14px;
+      background: var(--color-surface-soft);
+      border-left: 3px solid var(--color-accent);
+      font-family: var(--font-sans);
+      font-size: var(--fs-body-sm);
+      line-height: 1.5;
+    }
+    .pdp__quick-reorder strong { font-weight: 600; }
+    .pdp__quick-reorder a { color: var(--color-accent); border-bottom: 1px solid currentColor; }
+
+    /* Cross-sell strip */
+    .pair-strip {
+      margin-top: var(--space-16);
+      padding-top: var(--space-12);
+      border-top: 1px solid var(--color-text);
+    }
+    .pair-strip__head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .pair-strip__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-5);
+    }
+    @media (max-width: 768px) { .pair-strip__grid { grid-template-columns: 1fr; } }
+    .pair-card {
+      display: flex;
+      gap: 16px;
+      padding: 18px;
+      background: var(--color-surface);
+      border: var(--border-thin);
+      transition: border-color var(--dur-base) var(--ease-out);
+    }
+    .pair-card:hover { border-color: var(--color-accent); }
+    .pair-card__img {
+      flex-shrink: 0;
+      width: 80px;
+      aspect-ratio: 1;
+      background: var(--color-surface-soft);
+    }
+    .pair-card__img img { width: 100%; height: 100%; object-fit: cover; }
+    .pair-card__body { flex-grow: 1; display: flex; flex-direction: column; gap: 4px; }
+    .pair-card__cat { font-family: var(--font-sans); font-size: var(--fs-tiny); font-weight: 600; letter-spacing: var(--ls-wide); text-transform: uppercase; color: var(--color-accent); }
+    .pair-card__name { font-family: var(--font-serif); font-size: 18px; line-height: 1.2; }
+    .pair-card__meta { font-family: var(--font-sans); font-size: var(--fs-tiny); color: var(--color-text-subtle); margin-top: auto; }
+    .pair-card__cta { font-family: var(--font-sans); font-size: var(--fs-tiny); font-weight: 600; letter-spacing: var(--ls-wider); text-transform: uppercase; color: var(--color-accent); margin-top: 6px; }
+
+    /* The Work — install grid */
+    .work-grid {
+      margin-top: var(--space-16);
+      padding-top: var(--space-12);
+      border-top: 1px solid var(--color-text);
+    }
+    .work-grid__head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .work-grid__tiles {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 6px;
+    }
+    @media (max-width: 768px) { .work-grid__tiles { grid-template-columns: repeat(3, 1fr); } }
+    .work-tile {
+      aspect-ratio: 1;
+      background: var(--color-surface-soft);
+      position: relative;
+      overflow: hidden;
+    }
+    .work-tile img { width: 100%; height: 100%; object-fit: cover; }
+    .work-tile__tag {
+      position: absolute;
+      bottom: 6px;
+      left: 6px;
+      padding: 3px 8px;
+      background: rgba(14,14,14,0.72);
+      color: var(--color-accent-light);
+      font-family: var(--font-sans);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+    }
+
+    /* Cart drawer */
+    .cart-drawer {
+      position: fixed;
+      top: 0; bottom: 0; right: 0;
+      width: min(440px, 92vw);
+      background: var(--color-surface);
+      box-shadow: -16px 0 60px rgba(14,14,14,0.18);
+      z-index: 9000;
+      transform: translateX(100%);
+      transition: transform var(--dur-slow) var(--ease-out);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .cart-drawer.is-open { transform: translateX(0); }
+    .cart-drawer__backdrop {
+      position: fixed; inset: 0; background: rgba(14,14,14,0.45);
+      z-index: 8999; opacity: 0; pointer-events: none;
+      transition: opacity var(--dur-base) var(--ease-out);
+    }
+    .cart-drawer__backdrop.is-open { opacity: 1; pointer-events: auto; }
+    .cart-drawer__head {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .cart-drawer__head-title { font-family: var(--font-serif); font-style: italic; font-size: 22px; }
+    .cart-drawer__close {
+      width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      background: transparent; border: none; cursor: pointer;
+      font-size: 22px; color: var(--color-text-muted);
+    }
+    .cart-drawer__body { flex-grow: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 24px; }
+    .cart-drawer__added {
+      padding: 14px 16px; background: var(--color-surface-soft); border-left: 3px solid var(--color-accent);
+      font-family: var(--font-sans); font-size: var(--fs-body-sm);
+    }
+    .cart-drawer__added strong { display: block; font-weight: 600; margin-bottom: 4px; }
+    .cart-drawer__crosssell-head {
+      font-family: var(--font-sans); font-size: var(--fs-micro); font-weight: 600; letter-spacing: var(--ls-widest);
+      text-transform: uppercase; color: var(--color-accent); padding-top: 14px; border-top: 1px solid var(--color-border);
+    }
+    .cart-drawer__crosssell-sub {
+      font-family: var(--font-serif); font-style: italic; font-size: 22px; line-height: 1.2;
+      margin: 6px 0 16px;
+    }
+    .cart-drawer__crosssell {
+      display: flex; gap: 14px; padding: 14px; background: var(--color-surface-soft); align-items: center;
+    }
+    .cart-drawer__crosssell-img {
+      flex-shrink: 0; width: 56px; aspect-ratio: 1; background: var(--c-warm-grey);
+    }
+    .cart-drawer__crosssell-img img { width: 100%; height: 100%; object-fit: cover; }
+    .cart-drawer__crosssell-body { flex-grow: 1; }
+    .cart-drawer__crosssell-name { font-family: var(--font-serif); font-size: 15px; line-height: 1.2; margin-bottom: 2px; }
+    .cart-drawer__crosssell-meta { font-family: var(--font-sans); font-size: 11px; color: var(--color-text-muted); }
+    .cart-drawer__crosssell-add {
+      flex-shrink: 0; padding: 8px 12px; background: var(--color-surface); border: 1px solid var(--color-border-strong);
+      font-family: var(--font-sans); font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      cursor: pointer;
+    }
+    .cart-drawer__crosssell-add:hover { background: var(--color-text); color: var(--color-text-inverse); border-color: var(--color-text); }
+    .cart-drawer__foot {
+      padding: 20px 24px; border-top: 1px solid var(--color-border); background: var(--color-surface);
+    }
+    .cart-drawer__total {
+      display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px;
+      font-family: var(--font-serif); font-style: italic;
+    }
+    .cart-drawer__total-num { font-size: 26px; color: var(--color-accent); }
+  </style>
+</head>
+<body data-page="portal">
+
+  <div id="site-nav-mount"></div>
+
+  <!-- Variant ribbon -->
+  <div class="variant-ribbon">
+    Variant 01 · Quick Reorder First &nbsp;|&nbsp; <a href="pdp-options.html">Back to comparison</a> &nbsp;|&nbsp; <a href="pdp-2-editorial.html">V2 Editorial →</a>
+  </div>
+
+  <main id="MainContent">
+
+    <!-- ════════════════════════════════════════════════════════════
+         PDP — Hero with split gallery + sticky buy module
+         V1 worldview: pro stylist who already knows. Buy first.
+         ════════════════════════════════════════════════════════════ -->
+    <div class="pdp">
+
+      <!-- Breadcrumb -->
+      <div style="display: flex; align-items: baseline; gap: 12px; margin-bottom: 24px;">
+        <a href="../portal.html" style="font-family: var(--font-sans); font-size: var(--fs-tiny); font-weight: 600; letter-spacing: var(--ls-widest); text-transform: uppercase; color: var(--color-accent); padding-bottom: 2px; border-bottom: 1px solid currentColor;">← Portal</a>
+        <span style="font-family: var(--font-sans); font-size: var(--fs-tiny); color: var(--color-text-subtle); letter-spacing: var(--ls-wide);">/ Shop / Hand-Tied Wefts / The Cut-Point Weft</span>
+      </div>
+
+      <div class="pdp__hero">
+
+        <!-- Gallery -->
+        <div class="pdp__gallery">
+          <div class="pdp__gallery-main">
+            <img src="https://covetandmane.com/cdn/shop/files/1196-thecutpointsilkystraight-general.jpg"
+                 alt="The Cut-Point Weft in Silky Straight">
+          </div>
+          <div class="pdp__gallery-thumbs">
+            <div class="pdp__gallery-thumb is-active">
+              <img src="https://covetandmane.com/cdn/shop/files/1196-thecutpointsilkystraight-general.jpg" alt="Main">
+            </div>
+            <div class="pdp__gallery-thumb">
+              <img src="https://covetandmane.com/cdn/shop/files/1196-general-against-beachwave.jpg" alt="Detail 1">
+            </div>
+            <div class="pdp__gallery-thumb">
+              <img src="https://covetandmane.com/cdn/shop/files/1196-capetown-blend.jpg" alt="Detail 2">
+            </div>
+            <div class="pdp__gallery-thumb" style="background: var(--color-surface-dark);">
+              <span class="img-label img-label--placeholder" style="position: static; display: flex; height: 100%; align-items: center; justify-content: center; font-size: 7px;">Install</span>
+            </div>
+            <div class="pdp__gallery-thumb" style="background: var(--color-surface-dark);">
+              <span class="img-label img-label--placeholder" style="position: static; display: flex; height: 100%; align-items: center; justify-content: center; font-size: 7px;">Cut-Point</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Buy module — sticky -->
+        <aside class="pdp__buy">
+          <div>
+            <div class="pdp__buy-eyebrow">Hand-Tied Wefts · Asian Remy</div>
+            <h1 class="pdp__buy-title">The Cut-Point Weft<br><em>in Silky Straight.</em></h1>
+          </div>
+
+          <div class="pdp__buy-stats">
+            <div>
+              <div class="pdp__buy-stat-num">120g</div>
+              <div class="pdp__buy-stat-label">Full pack</div>
+            </div>
+            <div>
+              <div class="pdp__buy-stat-num">6</div>
+              <div class="pdp__buy-stat-label">Lengths</div>
+            </div>
+            <div>
+              <div class="pdp__buy-stat-num">18</div>
+              <div class="pdp__buy-stat-label">Shades</div>
+            </div>
+          </div>
+
+          <!-- Shade -->
+          <div class="shade-picker">
+            <div class="shade-picker__label">Shade · <span class="shade-picker__selected">Casablanca 2/4</span></div>
+            <div class="shade-picker__grid">
+              <div class="shade-picker__swatch is-active" style="color: #3d2018;" title="Casablanca 2/4"></div>
+              <div class="shade-picker__swatch" style="color: #6b4530;" title="Frenchman's Cove 8A"></div>
+              <div class="shade-picker__swatch" style="color: #4a2e1f;" title="Capetown 8"></div>
+              <div class="shade-picker__swatch" style="color: #8a6643;" title="Maldives"></div>
+              <div class="shade-picker__swatch" style="color: #b5926b;" title="Mykonos"></div>
+              <div class="shade-picker__swatch" style="color: #d4b88a;" title="Santorini"></div>
+              <div class="shade-picker__swatch" style="color: #1f1612;" title="Tokyo 1B"></div>
+              <div class="shade-picker__swatch" style="color: #2e1f18;" title="Marrakech 3"></div>
+              <div class="shade-picker__swatch" style="color: #5a3a26;" title="London 8N"></div>
+            </div>
+          </div>
+
+          <!-- Length -->
+          <div class="shade-picker">
+            <div class="shade-picker__label">Length · <span class="shade-picker__selected">22"</span></div>
+            <div class="length-picker">
+              <button type="button" class="length-picker__btn">10"</button>
+              <button type="button" class="length-picker__btn">14"</button>
+              <button type="button" class="length-picker__btn">18"</button>
+              <button type="button" class="length-picker__btn is-active">22"</button>
+              <button type="button" class="length-picker__btn">26"</button>
+              <button type="button" class="length-picker__btn">28"</button>
+            </div>
+          </div>
+
+          <!-- Quick reorder note -->
+          <div class="pdp__quick-reorder">
+            <strong>Quick Reorder Available</strong>
+            Your Apr 24 order: <strong>Casablanca · 22" · 3 packs.</strong>
+            <a href="#" onclick="quickReorder(); return false;">Reorder exact specs →</a>
+          </div>
+
+          <!-- Qty + price -->
+          <div class="pdp__buy-row">
+            <input type="number" min="1" value="3" aria-label="Quantity">
+            <div class="pdp__buy-price">
+              $445<span class="pdp__buy-price-strike">$480</span>
+            </div>
+          </div>
+
+          <button type="button" class="btn btn--primary btn--block" onclick="openCart()">Add to Order · $445 →</button>
+
+          <p style="font-family: var(--font-sans); font-size: 11px; line-height: 1.5; color: var(--color-text-muted); text-align: center;">
+            Member pricing applied · Free ground over $300 · Ships in 1-2 business days
+          </p>
+        </aside>
+
+      </div>
+
+      <!-- ════════════════════════════════════════════════════════════
+           PAIR WITH STRIP — light cross-sell, 3 cards
+           V1: cross-sell is present but not intrusive.
+           ════════════════════════════════════════════════════════════ -->
+      <section class="pair-strip">
+        <div class="pair-strip__head">
+          <div>
+            <div class="t-eyebrow-gold mb-2">Pair this with</div>
+            <h2 style="font-family: var(--font-serif); font-style: italic; font-weight: 300; font-size: clamp(28px, 3.5vw, 40px); line-height: 1.0;">What pros bundle with this.</h2>
+          </div>
+          <span class="t-body-sm t-muted" style="font-style: italic;">3 most-added items by stylists ordering this product</span>
+        </div>
+
+        <div class="pair-strip__grid">
+
+          <!-- Companion 1: Tools -->
+          <a href="#" class="pair-card">
+            <div class="pair-card__img">
+              <img src="https://covetandmane.com/cdn/shop/files/1196-HairExtensionTools.jpg" alt="Install kit">
+            </div>
+            <div class="pair-card__body">
+              <span class="pair-card__cat">Tools</span>
+              <span class="pair-card__name">Hand-Tied Install Kit</span>
+              <span class="pair-card__meta">Thread · beads · ventilating hook</span>
+              <span class="pair-card__cta">Add to order · $89 →</span>
+            </div>
+          </a>
+
+          <!-- Companion 2: Education -->
+          <a href="../programs/concealed.html" class="pair-card">
+            <div class="pair-card__img" style="background: var(--color-surface-dark);">
+              <span class="img-label img-label--placeholder" style="position: static; display: flex; height: 100%; align-items: center; justify-content: center; font-size: 8px;">CLASS</span>
+            </div>
+            <div class="pair-card__body">
+              <span class="pair-card__cat">Education</span>
+              <span class="pair-card__name">Concealed by C&amp;M</span>
+              <span class="pair-card__meta">Master the install method · June 14 · NYC</span>
+              <span class="pair-card__cta">See class details →</span>
+            </div>
+          </a>
+
+          <!-- Companion 3: Color -->
+          <a href="#" class="pair-card">
+            <div class="pair-card__img">
+              <img src="https://covetandmane.com/cdn/shop/files/1196-ColorRing_b68f8ed0-a426-4dee-8cb9-f38c994740b5.jpg" alt="Color ring">
+            </div>
+            <div class="pair-card__body">
+              <span class="pair-card__cat">Color</span>
+              <span class="pair-card__name">Cut-Point Color Ring</span>
+              <span class="pair-card__meta">Real-weft swatches · all 18 shades</span>
+              <span class="pair-card__cta">Add to order · $52 →</span>
+            </div>
+          </a>
+
+        </div>
+      </section>
+
+
+      <!-- ════════════════════════════════════════════════════════════
+           THE WORK — community proof
+           V1: community = proof, not narrative
+           ════════════════════════════════════════════════════════════ -->
+      <section class="work-grid">
+        <div class="work-grid__head">
+          <div>
+            <div class="t-eyebrow-gold mb-2">In the Chair</div>
+            <h2 style="font-family: var(--font-serif); font-style: italic; font-weight: 300; font-size: clamp(28px, 3.5vw, 40px); line-height: 1.0;">Stylists installing this product.</h2>
+          </div>
+          <a href="../find-a-stylist.html" class="link-arrow">Browse Coveted Stylists →</a>
+        </div>
+
+        <div class="work-grid__tiles">
+          <div class="work-tile">
+            <img src="https://covetandmane.com/cdn/shop/files/20250314_COVET_MANE_LT_MILLI_BTS__8995_v1a_76_2.webp" alt="Install by Tori Elyse">
+            <span class="work-tile__tag">@torielyse</span>
+          </div>
+          <div class="work-tile">
+            <img src="https://covetandmane.com/cdn/shop/files/1196-general-against-beachwave.jpg" alt="Install by Alana Reyes">
+            <span class="work-tile__tag">@alanareyes</span>
+          </div>
+          <div class="work-tile">
+            <img src="https://covetandmane.com/cdn/shop/files/image_1-1.webp" alt="Install by Marina Calderone">
+            <span class="work-tile__tag">@marina.cm</span>
+          </div>
+          <div class="work-tile">
+            <img src="https://covetandmane.com/cdn/shop/files/general_curly-textures_66308772.jpg" alt="Install by Jasmine Whitley">
+            <span class="work-tile__tag">@jasminewhitley</span>
+          </div>
+          <div class="work-tile">
+            <img src="https://covetandmane.com/cdn/shop/files/image-3_c255c2d5-7809-452e-b2e8-bfe307d91305.webp" alt="Install by Devon Mitchell">
+            <span class="work-tile__tag">@devonmitchell</span>
+          </div>
+          <div class="work-tile" style="background: var(--color-surface-dark);">
+            <span class="img-label img-label--placeholder" style="position: static; display: flex; height: 100%; align-items: center; justify-content: center; font-size: 9px; padding: 8px; text-align: center;">42 more · Click to filter feed</span>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Pro takeaway about variant -->
+      <section style="margin-top: var(--space-16); padding: var(--space-8); background: var(--color-surface-warm); border-left: 4px solid var(--color-accent);">
+        <div class="t-eyebrow-gold mb-2">About this variant</div>
+        <h3 style="font-family: var(--font-serif); font-style: italic; font-size: 26px; margin-bottom: 12px;">V1 is the fastest path.</h3>
+        <p class="t-body" style="max-width: 65ch; line-height: 1.7; color: var(--color-text-muted);">
+          The buy module is sticky and prominent. Repeat-buyers can reorder in
+          under 10 seconds. Cross-sells exist but stay below the fold &mdash; the
+          page respects the pro who already knows. The real cross-sell happens
+          in the cart drawer, after the buy decision is locked. Most aligned
+          with Shopify defaults &mdash; would ship in 2 weeks.
+        </p>
+        <p class="t-body-sm" style="margin-top: 14px; color: var(--color-text-subtle); font-style: italic;">
+          Click <strong>Add to Order</strong> above to see the V1 cart drawer cross-sell pattern.
+        </p>
+      </section>
+
+    </div>
+
+
+    <!-- ════════════════════════════════════════════════════════════
+         CART DRAWER — V1 pattern: "Complete your install"
+         ════════════════════════════════════════════════════════════ -->
+    <div class="cart-drawer__backdrop" id="cart-backdrop" onclick="closeCart()"></div>
+    <aside class="cart-drawer" id="cart-drawer" aria-hidden="true">
+
+      <header class="cart-drawer__head">
+        <span class="cart-drawer__head-title">Added to Order</span>
+        <button class="cart-drawer__close" onclick="closeCart()" aria-label="Close cart">×</button>
+      </header>
+
+      <div class="cart-drawer__body">
+
+        <div class="cart-drawer__added">
+          <strong>The Cut-Point Weft · Silky Straight</strong>
+          Casablanca 2/4 · 22" · 3 packs · <strong>$445</strong>
+        </div>
+
+        <div>
+          <div class="cart-drawer__crosssell-head">Complete your install</div>
+          <h3 class="cart-drawer__crosssell-sub">Pros installing this product usually add these.</h3>
+
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+
+            <div class="cart-drawer__crosssell">
+              <div class="cart-drawer__crosssell-img">
+                <img src="https://covetandmane.com/cdn/shop/files/1196-HairExtensionTools.jpg" alt="Install kit">
+              </div>
+              <div class="cart-drawer__crosssell-body">
+                <div class="cart-drawer__crosssell-name">Hand-Tied Install Kit</div>
+                <div class="cart-drawer__crosssell-meta">Thread, beads, hook · $89</div>
+              </div>
+              <button class="cart-drawer__crosssell-add">+ Add</button>
+            </div>
+
+            <div class="cart-drawer__crosssell">
+              <div class="cart-drawer__crosssell-img">
+                <img src="https://covetandmane.com/cdn/shop/files/1196-ColorRing_b68f8ed0-a426-4dee-8cb9-f38c994740b5.jpg" alt="Color ring">
+              </div>
+              <div class="cart-drawer__crosssell-body">
+                <div class="cart-drawer__crosssell-name">Color Ring · Cut-Point shades</div>
+                <div class="cart-drawer__crosssell-meta">Match shades for your next consult · $52</div>
+              </div>
+              <button class="cart-drawer__crosssell-add">+ Add</button>
+            </div>
+
+            <div class="cart-drawer__crosssell">
+              <div class="cart-drawer__crosssell-img">
+                <img src="https://covetandmane.com/cdn/shop/files/TheBeachWaveCare_MaintenanceCards.webp" alt="Aftercare cards">
+              </div>
+              <div class="cart-drawer__crosssell-body">
+                <div class="cart-drawer__crosssell-name">Aftercare Cards · 10-pack</div>
+                <div class="cart-drawer__crosssell-meta">Hand to clients at checkout · $18</div>
+              </div>
+              <button class="cart-drawer__crosssell-add">+ Add</button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Soft education prompt -->
+        <a href="../programs/concealed.html" style="text-decoration: none; padding: 14px 16px; background: var(--color-surface-soft); border-left: 3px solid var(--color-accent); display: block;">
+          <div style="font-family: var(--font-sans); font-size: 9px; font-weight: 700; letter-spacing: 0.32em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 6px;">Master This Method</div>
+          <div style="font-family: var(--font-serif); font-style: italic; font-size: 17px; color: var(--color-text); margin-bottom: 4px;">Concealed by C&amp;M — Hand-Tied Mastery</div>
+          <div style="font-family: var(--font-sans); font-size: 12px; color: var(--color-text-muted);">Next class June 14 · NYC · with Tori Elyse →</div>
+        </a>
+
+      </div>
+
+      <footer class="cart-drawer__foot">
+        <div class="cart-drawer__total">
+          <span>Order subtotal</span>
+          <span class="cart-drawer__total-num">$445</span>
+        </div>
+        <a href="#" class="btn btn--primary btn--block">Continue to Checkout →</a>
+        <button onclick="closeCart()" style="margin-top: 10px; width: 100%; padding: 12px; background: transparent; border: none; font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-text-muted); cursor: pointer;">
+          Continue shopping
+        </button>
+      </footer>
+
+    </aside>
+
+  </main>
+
+  <div id="site-footer-mount"></div>
+
+  <script src="../js/nav.js"></script>
+  <script src="../js/toggle.js"></script>
+
+  <script>
+    function openCart() {
+      document.getElementById('cart-drawer').classList.add('is-open');
+      document.getElementById('cart-backdrop').classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeCart() {
+      document.getElementById('cart-drawer').classList.remove('is-open');
+      document.getElementById('cart-backdrop').classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+    function quickReorder() { openCart(); }
+  </script>
+
+</body>
+</html>

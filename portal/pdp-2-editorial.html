@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Cut-Point Weft · V2 Editorial Story — Covet &amp; Mane Portal</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,300;1,400;1,500&family=Nunito+Sans:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+
+  <style>
+    .variant-ribbon {
+      background: var(--color-text);
+      color: var(--color-text-inverse);
+      padding: 8px 0;
+      font-family: var(--font-sans);
+      font-size: var(--fs-tiny);
+      font-weight: 600;
+      letter-spacing: var(--ls-widest);
+      text-transform: uppercase;
+      text-align: center;
+    }
+    .variant-ribbon a { color: var(--color-accent-light); border-bottom: 1px solid currentColor; padding-bottom: 1px; }
+
+    /* Full-bleed editorial hero */
+    .ed-hero {
+      position: relative;
+      min-height: calc(100vh - var(--nav-height) - var(--promo-height) - 36px);
+      background: var(--color-surface-black);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ed-hero__media {
+      position: absolute; inset: 0; z-index: 0;
+    }
+    .ed-hero__media img {
+      width: 100%; height: 100%; object-fit: cover; opacity: 0.65;
+    }
+    .ed-hero__media::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(14,14,14,0.4), rgba(14,14,14,0.7));
+    }
+    .ed-hero__inner {
+      position: relative; z-index: 1;
+      text-align: center; color: var(--color-text-inverse);
+      max-width: 720px;
+      padding-inline: var(--container-pad);
+    }
+    .ed-hero__masthead {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding-bottom: 14px; margin-bottom: 36px;
+      border-bottom: 1px solid rgba(247,244,238,0.4);
+    }
+    .ed-hero__edition {
+      font-family: var(--font-sans); font-size: var(--fs-tiny);
+      font-weight: 600; letter-spacing: var(--ls-widest); text-transform: uppercase;
+      color: var(--color-accent-light);
+    }
+    .ed-hero__title {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(64px, 9vw, 120px);
+      line-height: 0.95;
+      letter-spacing: -0.018em;
+      color: var(--color-text-inverse);
+      margin-bottom: 22px;
+    }
+    .ed-hero__sub {
+      font-family: var(--font-serif);
+      font-size: clamp(18px, 2vw, 22px);
+      line-height: 1.5;
+      color: var(--c-warm-grey);
+      max-width: 36ch;
+      margin: 0 auto 32px;
+    }
+    .ed-hero__scroll-cue {
+      font-family: var(--font-sans);
+      font-size: var(--fs-tiny);
+      letter-spacing: var(--ls-widest);
+      text-transform: uppercase;
+      color: var(--color-accent-light);
+    }
+
+    /* Chapter blocks */
+    .chapter {
+      padding-block: clamp(72px, 10vw, 144px);
+      border-bottom: 1px solid var(--color-text);
+    }
+    .chapter--cream { background: var(--color-surface-warm); }
+    .chapter--ink { background: var(--color-text); color: var(--color-text-inverse); }
+    .chapter--ink h2 { color: var(--color-text-inverse); }
+    .chapter--ink p { color: var(--c-warm-grey); }
+
+    .chapter__inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-inline: var(--container-pad);
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: clamp(40px, 6vw, 96px);
+      align-items: center;
+    }
+    .chapter__inner--reverse { grid-template-columns: 1.2fr 1fr; }
+    @media (max-width: 960px) {
+      .chapter__inner, .chapter__inner--reverse { grid-template-columns: 1fr; }
+    }
+
+    .chapter__media {
+      aspect-ratio: 4/5;
+      min-height: 380px;
+    }
+    .chapter__media .img-zone { position: relative; height: 100%; }
+    .chapter__media img { width: 100%; height: 100%; object-fit: cover; }
+
+    .chapter__num {
+      font-family: var(--font-serif); font-style: italic;
+      font-size: 80px; color: var(--color-accent); line-height: 1;
+      margin-bottom: 14px;
+    }
+    .chapter--ink .chapter__num { color: var(--color-accent-light); }
+
+    .chapter__eyebrow {
+      font-family: var(--font-sans); font-size: var(--fs-micro);
+      font-weight: 600; letter-spacing: var(--ls-widest);
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 18px;
+    }
+    .chapter--ink .chapter__eyebrow { color: var(--color-accent-light); }
+
+    .chapter__title {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(40px, 5vw, 64px);
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+      margin-bottom: 28px;
+      max-width: 14ch;
+    }
+    .chapter__title em { color: var(--color-accent); }
+    .chapter--ink .chapter__title em { color: var(--color-accent-light); }
+
+    .chapter__body {
+      font-family: var(--font-serif);
+      font-size: 19px;
+      line-height: 1.55;
+      max-width: 50ch;
+      margin-bottom: 14px;
+    }
+
+    /* Embedded cross-sell footnote — looks editorial, not promotional */
+    .chapter__crosssell {
+      margin-top: 36px;
+      padding: 18px 22px;
+      background: rgba(0,0,0,0.04);
+      border-left: 3px solid var(--color-accent);
+      font-family: var(--font-serif);
+      font-size: 16px;
+      line-height: 1.5;
+      max-width: 50ch;
+    }
+    .chapter--ink .chapter__crosssell {
+      background: rgba(247,244,238,0.06);
+    }
+    .chapter__crosssell-label {
+      font-family: var(--font-sans);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: var(--ls-widest);
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 6px;
+      display: block;
+    }
+    .chapter--ink .chapter__crosssell-label { color: var(--color-accent-light); }
+    .chapter__crosssell a {
+      color: var(--color-accent);
+      border-bottom: 1px solid currentColor;
+    }
+    .chapter--ink .chapter__crosssell a { color: var(--color-accent-light); }
+
+    /* Community voices chapter — different layout */
+    .voices {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-8);
+    }
+    @media (max-width: 768px) { .voices { grid-template-columns: 1fr; } }
+    .voice {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .voice blockquote {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 22px;
+      line-height: 1.4;
+      color: var(--color-text);
+      margin: 0;
+    }
+    .chapter--ink .voice blockquote { color: var(--color-text-inverse); }
+    .voice__attr {
+      padding-top: 14px;
+      border-top: 1px solid currentColor;
+      opacity: 0.7;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      letter-spacing: var(--ls-wide);
+      text-transform: uppercase;
+    }
+    .voice__attr strong { font-family: var(--font-serif); font-style: italic; font-size: 16px; text-transform: none; letter-spacing: 0; }
+
+    /* The buy at the end — restrained, editorial */
+    .ed-buy {
+      padding-block: clamp(72px, 10vw, 144px);
+      background: var(--color-surface-warm);
+    }
+    .ed-buy__inner {
+      max-width: 720px;
+      margin: 0 auto;
+      padding-inline: var(--container-pad);
+      text-align: center;
+    }
+    .ed-buy__eyebrow {
+      font-family: var(--font-sans); font-size: var(--fs-micro);
+      font-weight: 600; letter-spacing: var(--ls-widest); text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 18px;
+    }
+    .ed-buy__title {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(48px, 6vw, 80px);
+      line-height: 0.95;
+      margin-bottom: 28px;
+    }
+    .ed-buy__row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+      max-width: 480px; margin: 28px auto 32px;
+      text-align: left;
+    }
+    .ed-buy__field {
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .ed-buy__field label {
+      font-family: var(--font-sans); font-size: var(--fs-tiny);
+      font-weight: 600; letter-spacing: var(--ls-wide); text-transform: uppercase;
+      color: var(--color-text-muted);
+    }
+    .ed-buy__field select {
+      padding: 14px 16px;
+      font-family: var(--font-sans); font-size: var(--fs-body);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border-strong);
+    }
+    .ed-buy__price {
+      font-family: var(--font-serif); font-style: italic;
+      font-size: 36px; color: var(--color-accent);
+      margin-bottom: 24px;
+    }
+
+    /* Cart drawer — V2 pattern: content recs */
+    .cart-drawer {
+      position: fixed; top: 0; bottom: 0; right: 0;
+      width: min(440px, 92vw); background: var(--color-surface);
+      box-shadow: -16px 0 60px rgba(14,14,14,0.18); z-index: 9000;
+      transform: translateX(100%);
+      transition: transform var(--dur-slow) var(--ease-out);
+      display: flex; flex-direction: column; overflow: hidden;
+    }
+    .cart-drawer.is-open { transform: translateX(0); }
+    .cart-drawer__backdrop {
+      position: fixed; inset: 0; background: rgba(14,14,14,0.45);
+      z-index: 8999; opacity: 0; pointer-events: none;
+      transition: opacity var(--dur-base) var(--ease-out);
+    }
+    .cart-drawer__backdrop.is-open { opacity: 1; pointer-events: auto; }
+    .cart-drawer__head {
+      padding: 20px 24px; border-bottom: 1px solid var(--color-border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .cart-drawer__head-title { font-family: var(--font-serif); font-style: italic; font-size: 22px; }
+    .cart-drawer__close {
+      width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+      background: transparent; border: none; cursor: pointer; font-size: 22px; color: var(--color-text-muted);
+    }
+    .cart-drawer__body { flex-grow: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 20px; }
+    .cart-drawer__added {
+      padding: 14px 16px; background: var(--color-surface-soft); border-left: 3px solid var(--color-accent);
+      font-family: var(--font-sans); font-size: var(--fs-body-sm);
+    }
+
+    /* V2-specific: content recs styled like editorial cards */
+    .cart-drawer__content-head {
+      font-family: var(--font-sans); font-size: var(--fs-micro); font-weight: 600;
+      letter-spacing: var(--ls-widest); text-transform: uppercase;
+      color: var(--color-accent);
+      padding-top: 14px; border-top: 1px solid var(--color-border);
+    }
+    .cart-drawer__content-sub {
+      font-family: var(--font-serif); font-style: italic; font-size: 22px; line-height: 1.2;
+      margin: 6px 0 16px;
+    }
+    .cart-drawer__content-card {
+      display: grid; grid-template-columns: 80px 1fr; gap: 14px;
+      padding: 14px; background: var(--color-surface-soft);
+      text-decoration: none; color: inherit;
+      transition: background var(--dur-base) var(--ease-out);
+    }
+    .cart-drawer__content-card:hover { background: var(--c-warm-grey); }
+    .cart-drawer__content-img {
+      aspect-ratio: 1; background: var(--color-surface-dark);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-serif); font-style: italic; font-size: 26px;
+      color: var(--color-accent-light);
+    }
+    .cart-drawer__content-cat {
+      font-family: var(--font-sans); font-size: 9px; font-weight: 700;
+      letter-spacing: 0.32em; text-transform: uppercase; color: var(--color-accent);
+    }
+    .cart-drawer__content-name {
+      font-family: var(--font-serif); font-size: 17px; line-height: 1.2;
+      color: var(--color-text); margin: 4px 0;
+    }
+    .cart-drawer__content-meta {
+      font-family: var(--font-sans); font-size: 11px; color: var(--color-text-muted);
+      font-style: italic;
+    }
+    .cart-drawer__foot {
+      padding: 20px 24px; border-top: 1px solid var(--color-border);
+    }
+    .cart-drawer__total { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px; font-family: var(--font-serif); font-style: italic; }
+    .cart-drawer__total-num { font-size: 26px; color: var(--color-accent); }
+  </style>
+</head>
+<body data-page="portal">
+
+  <div id="site-nav-mount"></div>
+
+  <div class="variant-ribbon">
+    Variant 02 · Editorial Story &nbsp;|&nbsp; <a href="pdp-options.html">Back to comparison</a> &nbsp;|&nbsp; <a href="pdp-1-quick-reorder.html">← V1 Quick</a> · <a href="pdp-3-system.html">V3 System →</a>
+  </div>
+
+  <main id="MainContent">
+
+    <!-- ════════════════════════════════════════════════════════════
+         FULL-BLEED EDITORIAL HERO
+         No buy module visible. Pure brand moment.
+         ════════════════════════════════════════════════════════════ -->
+    <section class="ed-hero">
+      <div class="ed-hero__media">
+        <img src="https://covetandmane.com/cdn/shop/files/1196-thecutpointsilkystraight-general.jpg"
+             alt="The Cut-Point Weft in Silky Straight">
+      </div>
+      <div class="ed-hero__inner">
+        <div class="ed-hero__masthead">
+          <span class="ed-hero__edition">Covet &amp; Mane</span>
+          <span class="ed-hero__edition">Volume One · Hand-Tied</span>
+        </div>
+
+        <h1 class="ed-hero__title">
+          The Cut-Point <em>Weft.</em>
+        </h1>
+
+        <p class="ed-hero__sub">
+          Patented. Hand-tied. Silicone-free. The weft that taught
+          the industry how to install clean.
+        </p>
+
+        <div class="ed-hero__scroll-cue">— Scroll for the story —</div>
+      </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════════════════════════
+         CHAPTER 01 — PATENTED
+         Each chapter has an embedded cross-sell as an editorial footnote.
+         ════════════════════════════════════════════════════════════ -->
+    <section class="chapter chapter--cream">
+      <div class="chapter__inner">
+
+        <div class="chapter__media">
+          <div class="img-zone img-zone--placeholder" style="height: 100%;">
+            <span class="img-label img-label--placeholder">Cut-point macro photo · patented technique detail</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="chapter__num">01.</div>
+          <div class="chapter__eyebrow">The Patent</div>
+          <h2 class="chapter__title">Two cuts. <em>No unravel.</em></h2>
+          <p class="chapter__body">
+            Every Cut-Point Weft has two patented cut points along its length. Cut
+            anywhere between them and the weft stays intact &mdash; no fraying, no
+            unraveling, no fishline. Patented in 2021, after eighteen months of
+            testing in working salons.
+          </p>
+          <p class="chapter__body">
+            It's the reason a single weft can serve clients across three head
+            shapes. It's also the reason your install lasts.
+          </p>
+
+          <div class="chapter__crosssell">
+            <span class="chapter__crosssell-label">In Foundations</span>
+            The full cut-point technique is taught in Module 05 of Foundations —
+            the only module you can't skip. <a href="../programs/foundations.html">See what's inside Foundations →</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════════════════════════
+         CHAPTER 02 — SOURCING (dark / ink chapter)
+         ════════════════════════════════════════════════════════════ -->
+    <section class="chapter chapter--ink">
+      <div class="chapter__inner chapter__inner--reverse">
+
+        <div>
+          <div class="chapter__num">02.</div>
+          <div class="chapter__eyebrow">The Source</div>
+          <h2 class="chapter__title">Asian Remy. <em>Cuticle intact.</em></h2>
+          <p class="chapter__body">
+            We work directly with one collection of suppliers in Southern China &mdash;
+            the same collective for six years. Every batch is spot-checked at
+            three stages before it leaves the facility. Silicone-free. Brass-free.
+            Virgin. Double-drawn. The dye process is proprietary and runs cool, so
+            the cuticle survives the lift.
+          </p>
+          <p class="chapter__body">
+            We tell the supply-chain story openly because we built it carefully.
+          </p>
+
+          <div class="chapter__crosssell">
+            <span class="chapter__crosssell-label">From the Founder</span>
+            Dafina walks through the sourcing facility on camera — a 14-minute
+            documentary for Collective members.
+            <a href="../portal.html#education">Watch the sourcing doc (Pro members) →</a>
+          </div>
+        </div>
+
+        <div class="chapter__media">
+          <div class="img-zone" style="height: 100%;">
+            <img src="https://covetandmane.com/cdn/shop/files/673ad72ddbf311470602d5b5_conceal.jpg" alt="Sourcing">
+            <span class="img-label">Real C&amp;M editorial — Concealed BTS</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════════════════════════
+         CHAPTER 03 — IN THE CHAIR (community voices)
+         ════════════════════════════════════════════════════════════ -->
+    <section class="chapter chapter--cream">
+      <div class="chapter__inner" style="grid-template-columns: 1fr;">
+        <div>
+          <div class="chapter__num">03.</div>
+          <div class="chapter__eyebrow">In the Chair</div>
+          <h2 class="chapter__title" style="max-width: 20ch;">What stylists who install this <em>actually say.</em></h2>
+        </div>
+
+        <div class="voices" style="margin-top: 32px;">
+
+          <figure class="voice">
+            <blockquote>"The Cut-Point lays flatter than anything else on the market. I haven't gone back to other wefts in two years."</blockquote>
+            <figcaption class="voice__attr">
+              <strong>Tori Elyse</strong><br>
+              West Hollywood · Master Educator
+            </figcaption>
+          </figure>
+
+          <figure class="voice">
+            <blockquote>"Patent or no patent, what matters is the cuts hold. I've literally never had a weft unravel mid-row."</blockquote>
+            <figcaption class="voice__attr">
+              <strong>Alana Reyes</strong><br>
+              Williamsburg · Concealed Educated
+            </figcaption>
+          </figure>
+
+          <figure class="voice">
+            <blockquote>"I install this on red-carpet clients. It moves like real hair because it is real hair."</blockquote>
+            <figcaption class="voice__attr">
+              <strong>Marina Calderone</strong><br>
+              Wynwood · Concealed Educated
+            </figcaption>
+          </figure>
+
+        </div>
+
+        <div class="chapter__crosssell" style="margin-top: 48px; max-width: 70ch;">
+          <span class="chapter__crosssell-label">Get on Their Calendars</span>
+          Tori, Alana, and Marina all take 1:1 mentorship from members of the Collective.
+          <a href="../educators/tori-elyse.html">Browse Tori's open dates →</a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════════════════════════
+         FINALLY — THE BUY
+         Restrained, editorial. The "Ready" moment after the story.
+         ════════════════════════════════════════════════════════════ -->
+    <section class="ed-buy">
+      <div class="ed-buy__inner">
+
+        <div class="ed-buy__eyebrow">— Ready —</div>
+        <h2 class="ed-buy__title">Order Your <em>Cut-Point Weft.</em></h2>
+
+        <p style="font-family: var(--font-serif); font-size: 18px; line-height: 1.55; color: var(--color-text-muted); max-width: 44ch; margin: 0 auto;">
+          Six lengths. Eighteen shades. One patented construction.
+        </p>
+
+        <div class="ed-buy__row">
+          <div class="ed-buy__field">
+            <label>Shade</label>
+            <select>
+              <option>Casablanca 2/4</option>
+              <option>Frenchman's Cove 8A</option>
+              <option>Capetown 8</option>
+              <option>Tokyo 1B</option>
+              <option>London 8N</option>
+            </select>
+          </div>
+          <div class="ed-buy__field">
+            <label>Length</label>
+            <select>
+              <option>22"</option>
+              <option>10"</option>
+              <option>14"</option>
+              <option>18"</option>
+              <option>26"</option>
+              <option>28"</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="ed-buy__price">$148 per pack</div>
+
+        <button type="button" class="btn btn--primary btn--lg" onclick="openCart()">Add to Order →</button>
+
+        <p style="margin-top: 24px; font-family: var(--font-sans); font-size: 11px; line-height: 1.6; color: var(--color-text-muted);">
+          Member pricing applied · Free ground over $300 · Ships in 1-2 business days
+        </p>
+
+      </div>
+    </section>
+
+
+    <!-- About this variant -->
+    <section style="padding: 64px 24px; background: var(--color-text); color: var(--color-text-inverse);">
+      <div style="max-width: 720px; margin: 0 auto;">
+        <div class="t-eyebrow-gold mb-2">About this variant</div>
+        <h3 style="font-family: var(--font-serif); font-style: italic; font-size: 32px; color: var(--color-text-inverse); margin-bottom: 16px;">V2 is the brand bet.</h3>
+        <p style="font-family: var(--font-serif); font-size: 18px; line-height: 1.7; color: var(--c-warm-grey); margin-bottom: 18px;">
+          The product page IS the brand story. Cross-sells live as
+          editorial footnotes inside each chapter — they don't read as
+          promotional. The cart drawer shifts the cross-sell from product
+          to content ("while you wait, watch this") because the buyer
+          has already committed by then.
+        </p>
+        <p style="font-family: var(--font-sans); font-size: 13px; color: var(--c-warm-grey); font-style: italic;">
+          Click <strong style="color: var(--color-accent-light);">Add to Order</strong> above to see the V2 cart drawer pattern.
+        </p>
+      </div>
+    </section>
+
+
+    <!-- ════════════════════════════════════════════════════════════
+         CART DRAWER — V2 pattern: content recommendations
+         ════════════════════════════════════════════════════════════ -->
+    <div class="cart-drawer__backdrop" id="cart-backdrop" onclick="closeCart()"></div>
+    <aside class="cart-drawer" id="cart-drawer">
+
+      <header class="cart-drawer__head">
+        <span class="cart-drawer__head-title">Added to Order</span>
+        <button class="cart-drawer__close" onclick="closeCart()" aria-label="Close">×</button>
+      </header>
+
+      <div class="cart-drawer__body">
+
+        <div class="cart-drawer__added">
+          <strong style="display: block; margin-bottom: 4px;">The Cut-Point Weft · Silky Straight</strong>
+          Casablanca 2/4 · 22" · 1 pack · <strong>$148</strong>
+        </div>
+
+        <div>
+          <div class="cart-drawer__content-head">While you wait</div>
+          <h3 class="cart-drawer__content-sub">Education that pairs with this product.</h3>
+
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+
+            <a href="#" class="cart-drawer__content-card">
+              <div class="cart-drawer__content-img">▶</div>
+              <div>
+                <span class="cart-drawer__content-cat">Master Class · 18 min</span>
+                <div class="cart-drawer__content-name">Multi-Tonal Blending — Tori Elyse</div>
+                <span class="cart-drawer__content-meta">Most-watched class for Cut-Point installers</span>
+              </div>
+            </a>
+
+            <a href="#" class="cart-drawer__content-card">
+              <div class="cart-drawer__content-img">▶</div>
+              <div>
+                <span class="cart-drawer__content-cat">Refresher · 12 min</span>
+                <div class="cart-drawer__content-name">Cut-Point Sectioning — From Foundations</div>
+                <span class="cart-drawer__content-meta">Module 05 · free in your Education library</span>
+              </div>
+            </a>
+
+            <a href="#" class="cart-drawer__content-card">
+              <div class="cart-drawer__content-img">▶</div>
+              <div>
+                <span class="cart-drawer__content-cat">From the Founder · 14 min</span>
+                <div class="cart-drawer__content-name">Sourcing Documentary — Pro Members Only</div>
+                <span class="cart-drawer__content-meta">Walk the facility with Dafina</span>
+              </div>
+            </a>
+
+          </div>
+        </div>
+
+        <a href="../educators/tori-elyse.html" style="text-decoration: none; padding: 14px 16px; background: var(--color-surface-soft); border-left: 3px solid var(--color-accent); display: block;">
+          <div style="font-family: var(--font-sans); font-size: 9px; font-weight: 700; letter-spacing: 0.32em; text-transform: uppercase; color: var(--color-accent); margin-bottom: 6px;">Got a question?</div>
+          <div style="font-family: var(--font-serif); font-style: italic; font-size: 17px; color: var(--color-text);">Drop it in next month's Ask Tori Anything →</div>
+        </a>
+
+      </div>
+
+      <footer class="cart-drawer__foot">
+        <div class="cart-drawer__total">
+          <span>Order subtotal</span>
+          <span class="cart-drawer__total-num">$148</span>
+        </div>
+        <a href="#" class="btn btn--primary btn--block">Continue to Checkout →</a>
+        <button onclick="closeCart()" style="margin-top: 10px; width: 100%; padding: 12px; background: transparent; border: none; font-family: var(--font-sans); font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-text-muted); cursor: pointer;">
+          Continue shopping
+        </button>
+      </footer>
+
+    </aside>
+
+  </main>
+
+  <div id="site-footer-mount"></div>
+
+  <script src="../js/nav.js"></script>
+  <script src="../js/toggle.js"></script>
+  <script>
+    function openCart() {
+      document.getElementById('cart-drawer').classList.add('is-open');
+      document.getElementById('cart-backdrop').classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeCart() {
+      document.getElementById('cart-drawer').classList.remove('is-open');
+      document.getElementById('cart-backdrop').classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+  </script>
+
+</body>
+</html>
